@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Phoebe\Product\Lists;
+
+use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Concerns\SdkModel;
+use Phoebe\Core\Concerns\SdkParams;
+use Phoebe\Core\Contracts\BaseModel;
+
+/**
+ * Get information on the most recently submitted checklists for a region.
+ *
+ * @see Phoebe\Services\Product\ListsService::retrieve()
+ *
+ * @phpstan-type ListRetrieveParamsShape = array{maxResults?: int}
+ */
+final class ListRetrieveParams implements BaseModel
+{
+    /** @use SdkModel<ListRetrieveParamsShape> */
+    use SdkModel;
+    use SdkParams;
+
+    /**
+     * Only fetch this number of checklists.
+     */
+    #[Api(optional: true)]
+    public ?int $maxResults;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     */
+    public static function with(?int $maxResults = null): self
+    {
+        $obj = new self;
+
+        null !== $maxResults && $obj->maxResults = $maxResults;
+
+        return $obj;
+    }
+
+    /**
+     * Only fetch this number of checklists.
+     */
+    public function withMaxResults(int $maxResults): self
+    {
+        $obj = clone $this;
+        $obj->maxResults = $maxResults;
+
+        return $obj;
+    }
+}

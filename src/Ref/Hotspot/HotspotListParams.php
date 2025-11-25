@@ -1,0 +1,87 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Phoebe\Ref\Hotspot;
+
+use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Concerns\SdkModel;
+use Phoebe\Core\Concerns\SdkParams;
+use Phoebe\Core\Contracts\BaseModel;
+use Phoebe\Ref\Hotspot\HotspotListParams\Fmt;
+
+/**
+ * Hotspots in a region.
+ *
+ * @see Phoebe\Services\Ref\HotspotService::list()
+ *
+ * @phpstan-type HotspotListParamsShape = array{
+ *   back?: int, fmt?: Fmt|value-of<Fmt>
+ * }
+ */
+final class HotspotListParams implements BaseModel
+{
+    /** @use SdkModel<HotspotListParamsShape> */
+    use SdkModel;
+    use SdkParams;
+
+    /**
+     * The number of days back to fetch hotspots.
+     */
+    #[Api(optional: true)]
+    public ?int $back;
+
+    /**
+     * Fetch the records in CSV or JSON format.
+     *
+     * @var value-of<Fmt>|null $fmt
+     */
+    #[Api(enum: Fmt::class, optional: true)]
+    public ?string $fmt;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Fmt|value-of<Fmt> $fmt
+     */
+    public static function with(?int $back = null, Fmt|string|null $fmt = null): self
+    {
+        $obj = new self;
+
+        null !== $back && $obj->back = $back;
+        null !== $fmt && $obj['fmt'] = $fmt;
+
+        return $obj;
+    }
+
+    /**
+     * The number of days back to fetch hotspots.
+     */
+    public function withBack(int $back): self
+    {
+        $obj = clone $this;
+        $obj->back = $back;
+
+        return $obj;
+    }
+
+    /**
+     * Fetch the records in CSV or JSON format.
+     *
+     * @param Fmt|value-of<Fmt> $fmt
+     */
+    public function withFmt(Fmt|string $fmt): self
+    {
+        $obj = clone $this;
+        $obj['fmt'] = $fmt;
+
+        return $obj;
+    }
+}
