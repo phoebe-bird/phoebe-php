@@ -28,7 +28,7 @@
     "sort-packages": true
   },
   "description": "Phoebe PHP SDK",
-  "name": "org-placeholder/phoebe",
+  "name": "phoebe-bird/phoebe",
   "require": {
     "php": "^8.1",
     "php-http/discovery": "^1",

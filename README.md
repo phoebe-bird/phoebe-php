@@ -30,7 +30,7 @@ To use this package, install via Composer by adding the following to your applic
     }
   ],
   "require": {
-    "org-placeholder/phoebe": "dev-main"
+    "phoebe-bird/phoebe": "dev-main"
   }
 }
 ```
