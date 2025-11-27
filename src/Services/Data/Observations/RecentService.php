@@ -50,7 +50,7 @@ final class RecentService implements RecentContract
      *
      * @param array{
      *   back?: int,
-     *   cat?: "species"|"slash"|"issf"|"spuh"|"hybrid"|"domestic"|"form"|"intergrade",
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,

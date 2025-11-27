@@ -29,7 +29,7 @@ final class HistoricalService implements HistoricalContract
      *   y: int,
      *   m: int,
      *   maxResults?: int,
-     *   sortKey?: "obs_dt"|"creation_dt",
+     *   sortKey?: 'obs_dt'|'creation_dt',
      * }|HistoricalRetrieveParams $params
      *
      * @return list<HistoricalGetResponseItem>

@@ -28,7 +28,7 @@ final class NotableService implements NotableContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   detail?: "simple"|"full",
+     *   detail?: 'simple'|'full',
      *   dist?: int,
      *   hotspot?: bool,
      *   maxResults?: int,

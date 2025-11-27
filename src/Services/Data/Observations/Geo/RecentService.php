@@ -46,12 +46,12 @@ final class RecentService implements RecentContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   cat?: "species"|"slash"|"issf"|"spuh"|"hybrid"|"domestic"|"form"|"intergrade",
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
      *   dist?: int,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
-     *   sort?: "date"|"species",
+     *   sort?: 'date'|'species',
      *   sppLocale?: string,
      * }|RecentListParams $params
      *

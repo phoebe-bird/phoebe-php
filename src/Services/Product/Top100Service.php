@@ -25,7 +25,7 @@ final class Top100Service implements Top100Contract
      * Get the top 100 contributors on a given date for a country or region.
      *
      * @param array{
-     *   regionCode: string, y: int, m: int, maxResults?: int, rankedBy?: "spp"|"cl"
+     *   regionCode: string, y: int, m: int, maxResults?: int, rankedBy?: 'spp'|'cl'
      * }|Top100RetrieveParams $params
      *
      * @return list<Top100GetResponseItem>

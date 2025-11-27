@@ -26,7 +26,7 @@ final class NotableService implements NotableContract
      *
      * @param array{
      *   back?: int,
-     *   detail?: "simple"|"full",
+     *   detail?: 'simple'|'full',
      *   hotspot?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
