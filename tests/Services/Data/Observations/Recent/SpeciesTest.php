@@ -33,7 +33,8 @@ final class SpeciesTest extends TestCase
             ['regionCode' => 'regionCode']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +42,18 @@ final class SpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->recent->species->retrieve(
             'speciesCode',
-            ['regionCode' => 'regionCode']
+            [
+                'regionCode' => 'regionCode',
+                'back' => 1,
+                'hotspot' => true,
+                'includeProvisional' => true,
+                'maxResults' => 1,
+                'r' => ['string'],
+                'sppLocale' => 'sppLocale',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

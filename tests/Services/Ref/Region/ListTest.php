@@ -33,7 +33,8 @@ final class ListTest extends TestCase
             ['regionType' => 'regionType']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +42,10 @@ final class ListTest extends TestCase
     {
         $result = $this->client->ref->region->list->list(
             'parentRegionCode',
-            ['regionType' => 'regionType']
+            ['regionType' => 'regionType', 'fmt' => 'csv']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Product\Checklist\ChecklistViewResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +31,7 @@ final class ChecklistTest extends TestCase
     {
         $result = $this->client->product->checklist->view('subId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChecklistViewResponse::class, $result);
     }
 }

@@ -33,7 +33,8 @@ final class HistoricTest extends TestCase
             ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +42,22 @@ final class HistoricTest extends TestCase
     {
         $result = $this->client->data->observations->recent->historic->list(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            [
+                'regionCode' => 'regionCode',
+                'y' => 0,
+                'm' => 1,
+                'cat' => 'species',
+                'detail' => 'simple',
+                'hotspot' => true,
+                'includeProvisional' => true,
+                'maxResults' => 1,
+                'r' => ['string'],
+                'rank' => 'mrec',
+                'sppLocale' => 'sppLocale',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

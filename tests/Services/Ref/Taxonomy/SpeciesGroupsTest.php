@@ -30,6 +30,7 @@ final class SpeciesGroupsTest extends TestCase
     {
         $result = $this->client->ref->taxonomy->speciesGroups->list('merlin', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }
