@@ -30,6 +30,7 @@ final class HotspotTest extends TestCase
     {
         $result = $this->client->ref->hotspot->list('regionCode', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

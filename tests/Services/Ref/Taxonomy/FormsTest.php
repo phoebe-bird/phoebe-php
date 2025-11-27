@@ -30,6 +30,7 @@ final class FormsTest extends TestCase
     {
         $result = $this->client->ref->taxonomy->forms->list('speciesCode');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

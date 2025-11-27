@@ -3,6 +3,7 @@
 namespace Tests\Services\Ref\Region;
 
 use Phoebe\Client;
+use Phoebe\Ref\Region\Info\InfoGetResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +31,7 @@ final class InfoTest extends TestCase
     {
         $result = $this->client->ref->region->info->retrieve('regionCode', []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InfoGetResponse::class, $result);
     }
 }

@@ -30,6 +30,7 @@ final class LocalesTest extends TestCase
     {
         $result = $this->client->ref->taxonomy->locales->list([]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

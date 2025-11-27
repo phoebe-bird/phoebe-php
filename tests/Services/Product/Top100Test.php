@@ -33,7 +33,8 @@ final class Top100Test extends TestCase
             ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +42,16 @@ final class Top100Test extends TestCase
     {
         $result = $this->client->product->top100->retrieve(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            [
+                'regionCode' => 'regionCode',
+                'y' => 0,
+                'm' => 1,
+                'maxResults' => 1,
+                'rankedBy' => 'spp',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

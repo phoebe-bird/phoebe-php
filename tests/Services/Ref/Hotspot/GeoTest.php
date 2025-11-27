@@ -32,16 +32,18 @@ final class GeoTest extends TestCase
             'lat' => -90, 'lng' => -180,
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
         $result = $this->client->ref->hotspot->geo->retrieve([
-            'lat' => -90, 'lng' => -180,
+            'lat' => -90, 'lng' => -180, 'back' => 1, 'dist' => 0, 'fmt' => 'csv',
         ]);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

@@ -33,7 +33,8 @@ final class GeoSpeciesTest extends TestCase
             ['lat' => -90, 'lng' => -180]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +42,19 @@ final class GeoSpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->nearest->geoSpecies->list(
             'speciesCode',
-            ['lat' => -90, 'lng' => -180]
+            [
+                'lat' => -90,
+                'lng' => -180,
+                'back' => 1,
+                'dist' => 0,
+                'hotspot' => true,
+                'includeProvisional' => true,
+                'maxResults' => 1,
+                'sppLocale' => 'sppLocale',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

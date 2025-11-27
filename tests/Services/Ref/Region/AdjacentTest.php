@@ -30,6 +30,7 @@ final class AdjacentTest extends TestCase
     {
         $result = $this->client->ref->region->adjacent->list('regionCode');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

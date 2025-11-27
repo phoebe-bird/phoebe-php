@@ -3,6 +3,7 @@
 namespace Tests\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Product\Stats\StatGetResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +34,8 @@ final class StatsTest extends TestCase
             ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(StatGetResponse::class, $result);
     }
 
     #[Test]
@@ -44,6 +46,7 @@ final class StatsTest extends TestCase
             ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(StatGetResponse::class, $result);
     }
 }
