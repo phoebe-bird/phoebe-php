@@ -26,7 +26,7 @@ final class EbirdService implements EbirdContract
      *
      * @param array{
      *   cat?: string,
-     *   fmt?: "csv"|"json",
+     *   fmt?: 'csv'|'json',
      *   locale?: string,
      *   species?: string,
      *   version?: string,

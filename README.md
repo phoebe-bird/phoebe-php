@@ -47,9 +47,9 @@ Parameters with a default value must be set by name.
 
 use Phoebe\Client;
 
-$client = new Client(apiKey: getenv("EBIRD_API_KEY") ?: "My API Key");
+$client = new Client(apiKey: getenv('EBIRD_API_KEY') ?: 'My API Key');
 
-$info = $client->ref->hotspot->info->retrieve("L99381");
+$info = $client->ref->hotspot->info->retrieve('L99381');
 
 var_dump($info->countryCode);
 ```
@@ -71,7 +71,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Phoebe\Core\Exceptions\APIConnectionException;
 
 try {
-  $info = $client->ref->hotspot->info->retrieve("L99381");
+  $info = $client->ref->hotspot->info->retrieve('L99381');
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -118,7 +118,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->ref->hotspot->info->retrieve(
-  "L99381", RequestOptions::with(maxRetries: 5)
+  'L99381', RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -138,11 +138,11 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Phoebe\RequestOptions;
 
 $info = $client->ref->hotspot->info->retrieve(
-  "L99381",
+  'L99381',
   RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
+    extraQueryParams: ['my_query_parameter' => 'value'],
+    extraBodyParams: ['my_body_parameter' => 'value'],
+    extraHeaders: ['my-header' => 'value'],
   ),
 );
 ```

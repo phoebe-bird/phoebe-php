@@ -25,7 +25,7 @@ final class GeoService implements GeoContract
      * Get the list of hotspots, within a radius of up to 50 kilometers, from a given set of coordinates.
      *
      * @param array{
-     *   lat: float, lng: float, back?: int, dist?: int, fmt?: "csv"|"json"
+     *   lat: float, lng: float, back?: int, dist?: int, fmt?: 'csv'|'json'
      * }|GeoRetrieveParams $params
      *
      * @return list<GeoGetResponseItem>

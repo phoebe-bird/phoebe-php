@@ -38,7 +38,7 @@ final class InfoService implements InfoContract
      *
      * @param array{
      *   delim?: string,
-     *   regionNameFormat?: "detailed"|"detailednoqual"|"full"|"namequal"|"nameonly"|"revdetailed",
+     *   regionNameFormat?: 'detailed'|'detailednoqual'|'full'|'namequal'|'nameonly'|'revdetailed',
      * }|InfoRetrieveParams $params
      *
      * @throws APIException

@@ -40,7 +40,7 @@ final class HotspotService implements HotspotContract
      *
      * Hotspots in a region
      *
-     * @param array{back?: int, fmt?: "csv"|"json"}|HotspotListParams $params
+     * @param array{back?: int, fmt?: 'csv'|'json'}|HotspotListParams $params
      *
      * @return list<HotspotListResponseItem>
      *

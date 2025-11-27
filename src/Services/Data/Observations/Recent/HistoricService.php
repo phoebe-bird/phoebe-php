@@ -29,13 +29,13 @@ final class HistoricService implements HistoricContract
      *   regionCode: string,
      *   y: int,
      *   m: int,
-     *   cat?: "species"|"slash"|"issf"|"spuh"|"hybrid"|"domestic"|"form"|"intergrade",
-     *   detail?: "simple"|"full",
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
+     *   detail?: 'simple'|'full',
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
-     *   rank?: "mrec"|"create",
+     *   rank?: 'mrec'|'create',
      *   sppLocale?: string,
      * }|HistoricListParams $params
      *
