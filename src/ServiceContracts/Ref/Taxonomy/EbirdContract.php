@@ -22,6 +22,6 @@ interface EbirdContract
      */
     public function retrieve(
         array|EbirdRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): array;
 }
