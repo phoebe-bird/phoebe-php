@@ -31,7 +31,7 @@ final class AdjacentService implements AdjacentContract
         string $regionCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/adjacent/%1$s', $regionCode],

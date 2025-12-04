@@ -59,7 +59,7 @@ final class HistoricService implements HistoricContract
         $m = $parsed['m'];
         unset($parsed['m']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['data/obs/%1$s/historic/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],

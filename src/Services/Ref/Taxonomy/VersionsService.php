@@ -29,7 +29,7 @@ final class VersionsService implements VersionsContract
      */
     public function list(?RequestOptions $requestOptions = null): array
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ref/taxonomy/versions',

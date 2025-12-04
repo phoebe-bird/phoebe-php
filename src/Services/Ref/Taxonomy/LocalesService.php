@@ -41,7 +41,7 @@ final class LocalesService implements LocalesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'ref/taxa-locales/ebird',

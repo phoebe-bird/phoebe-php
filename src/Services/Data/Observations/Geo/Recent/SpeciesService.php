@@ -57,7 +57,7 @@ final class SpeciesService implements SpeciesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['data/obs/geo/recent/%1$s', $speciesCode],

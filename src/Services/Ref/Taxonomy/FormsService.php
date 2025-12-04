@@ -30,7 +30,7 @@ final class FormsService implements FormsContract
         string $speciesCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/taxon/forms/%1$s', $speciesCode],
