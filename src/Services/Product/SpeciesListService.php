@@ -31,7 +31,7 @@ final class SpeciesListService implements SpeciesListContract
         string $regionCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['product/spplist/%1$s', $regionCode],

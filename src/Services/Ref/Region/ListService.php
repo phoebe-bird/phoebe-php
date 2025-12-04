@@ -42,7 +42,7 @@ final class ListService implements ListContract
         $regionType = $parsed['regionType'];
         unset($parsed['regionType']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/region/list/%1$s/%2$s', $regionType, $parentRegionCode],

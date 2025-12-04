@@ -28,7 +28,7 @@ final class InfoService implements InfoContract
         string $locID,
         ?RequestOptions $requestOptions = null
     ): InfoGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/hotspot/info/%1$s', $locID],

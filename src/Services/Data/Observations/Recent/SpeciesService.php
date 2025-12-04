@@ -57,7 +57,7 @@ final class SpeciesService implements SpeciesContract
         $regionCode = $parsed['regionCode'];
         unset($parsed['regionCode']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['data/obs/%1$s/recent/%2$s', $regionCode, $speciesCode],

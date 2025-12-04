@@ -53,7 +53,7 @@ final class InfoService implements InfoContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/region/info/%1$s', $regionCode],

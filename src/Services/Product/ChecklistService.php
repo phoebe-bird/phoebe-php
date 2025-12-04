@@ -29,7 +29,7 @@ final class ChecklistService implements ChecklistContract
         string $subID,
         ?RequestOptions $requestOptions = null
     ): ChecklistViewResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['product/checklist/view/%1$s', $subID],

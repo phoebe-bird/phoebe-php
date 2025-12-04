@@ -42,7 +42,7 @@ final class SpeciesGroupsService implements SpeciesGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['ref/sppgroup/%1$s', $speciesGrouping],
