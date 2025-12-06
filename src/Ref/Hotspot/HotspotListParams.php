@@ -55,7 +55,7 @@ final class HotspotListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $back && $obj->back = $back;
+        null !== $back && $obj['back'] = $back;
         null !== $fmt && $obj['fmt'] = $fmt;
 
         return $obj;
@@ -67,7 +67,7 @@ final class HotspotListParams implements BaseModel
     public function withBack(int $back): self
     {
         $obj = clone $this;
-        $obj->back = $back;
+        $obj['back'] = $back;
 
         return $obj;
     }

@@ -117,15 +117,15 @@ final class SpecieListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->lat = $lat;
-        $obj->lng = $lng;
+        $obj['lat'] = $lat;
+        $obj['lng'] = $lng;
 
-        null !== $back && $obj->back = $back;
-        null !== $dist && $obj->dist = $dist;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $obj['back'] = $back;
+        null !== $dist && $obj['dist'] = $dist;
+        null !== $hotspot && $obj['hotspot'] = $hotspot;
+        null !== $includeProvisional && $obj['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $obj['maxResults'] = $maxResults;
+        null !== $sppLocale && $obj['sppLocale'] = $sppLocale;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class SpecieListParams implements BaseModel
     public function withLat(float $lat): self
     {
         $obj = clone $this;
-        $obj->lat = $lat;
+        $obj['lat'] = $lat;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class SpecieListParams implements BaseModel
     public function withLng(float $lng): self
     {
         $obj = clone $this;
-        $obj->lng = $lng;
+        $obj['lng'] = $lng;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class SpecieListParams implements BaseModel
     public function withBack(int $back): self
     {
         $obj = clone $this;
-        $obj->back = $back;
+        $obj['back'] = $back;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class SpecieListParams implements BaseModel
     public function withDist(int $dist): self
     {
         $obj = clone $this;
-        $obj->dist = $dist;
+        $obj['dist'] = $dist;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class SpecieListParams implements BaseModel
     public function withHotspot(bool $hotspot): self
     {
         $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $obj['hotspot'] = $hotspot;
 
         return $obj;
     }
@@ -185,7 +185,7 @@ final class SpecieListParams implements BaseModel
     public function withIncludeProvisional(bool $includeProvisional): self
     {
         $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $obj['includeProvisional'] = $includeProvisional;
 
         return $obj;
     }
@@ -196,7 +196,7 @@ final class SpecieListParams implements BaseModel
     public function withMaxResults(int $maxResults): self
     {
         $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $obj['maxResults'] = $maxResults;
 
         return $obj;
     }
@@ -207,7 +207,7 @@ final class SpecieListParams implements BaseModel
     public function withSppLocale(string $sppLocale): self
     {
         $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $obj['sppLocale'] = $sppLocale;
 
         return $obj;
     }

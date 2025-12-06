@@ -99,11 +99,11 @@ final class Top100RetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $obj['regionCode'] = $regionCode;
+        $obj['y'] = $y;
+        $obj['m'] = $m;
 
-        null !== $maxResults && $obj->maxResults = $maxResults;
+        null !== $maxResults && $obj['maxResults'] = $maxResults;
         null !== $rankedBy && $obj['rankedBy'] = $rankedBy;
 
         return $obj;
@@ -112,7 +112,7 @@ final class Top100RetrieveParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Top100RetrieveParams implements BaseModel
     public function withY(int $y): self
     {
         $obj = clone $this;
-        $obj->y = $y;
+        $obj['y'] = $y;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class Top100RetrieveParams implements BaseModel
     public function withM(int $m): self
     {
         $obj = clone $this;
-        $obj->m = $m;
+        $obj['m'] = $m;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class Top100RetrieveParams implements BaseModel
     public function withMaxResults(int $maxResults): self
     {
         $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $obj['maxResults'] = $maxResults;
 
         return $obj;
     }

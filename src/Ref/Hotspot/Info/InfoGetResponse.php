@@ -100,19 +100,19 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $countryName && $obj->countryName = $countryName;
-        null !== $hierarchicalName && $obj->hierarchicalName = $hierarchicalName;
-        null !== $isHotspot && $obj->isHotspot = $isHotspot;
-        null !== $lat && $obj->lat = $lat;
-        null !== $latitude && $obj->latitude = $latitude;
-        null !== $lng && $obj->lng = $lng;
-        null !== $locId && $obj->locId = $locId;
-        null !== $locName && $obj->locName = $locName;
-        null !== $longitude && $obj->longitude = $longitude;
-        null !== $name && $obj->name = $name;
-        null !== $subnational1Code && $obj->subnational1Code = $subnational1Code;
-        null !== $subnational1Name && $obj->subnational1Name = $subnational1Name;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $countryName && $obj['countryName'] = $countryName;
+        null !== $hierarchicalName && $obj['hierarchicalName'] = $hierarchicalName;
+        null !== $isHotspot && $obj['isHotspot'] = $isHotspot;
+        null !== $lat && $obj['lat'] = $lat;
+        null !== $latitude && $obj['latitude'] = $latitude;
+        null !== $lng && $obj['lng'] = $lng;
+        null !== $locId && $obj['locId'] = $locId;
+        null !== $locName && $obj['locName'] = $locName;
+        null !== $longitude && $obj['longitude'] = $longitude;
+        null !== $name && $obj['name'] = $name;
+        null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
+        null !== $subnational1Name && $obj['subnational1Name'] = $subnational1Name;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withCountryName(string $countryName): self
     {
         $obj = clone $this;
-        $obj->countryName = $countryName;
+        $obj['countryName'] = $countryName;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withHierarchicalName(string $hierarchicalName): self
     {
         $obj = clone $this;
-        $obj->hierarchicalName = $hierarchicalName;
+        $obj['hierarchicalName'] = $hierarchicalName;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withIsHotspot(bool $isHotspot): self
     {
         $obj = clone $this;
-        $obj->isHotspot = $isHotspot;
+        $obj['isHotspot'] = $isHotspot;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLat(float $lat): self
     {
         $obj = clone $this;
-        $obj->lat = $lat;
+        $obj['lat'] = $lat;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLatitude(float $latitude): self
     {
         $obj = clone $this;
-        $obj->latitude = $latitude;
+        $obj['latitude'] = $latitude;
 
         return $obj;
     }
@@ -168,7 +168,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLng(float $lng): self
     {
         $obj = clone $this;
-        $obj->lng = $lng;
+        $obj['lng'] = $lng;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj->locId = $locID;
+        $obj['locId'] = $locID;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLocName(string $locName): self
     {
         $obj = clone $this;
-        $obj->locName = $locName;
+        $obj['locName'] = $locName;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withLongitude(float $longitude): self
     {
         $obj = clone $this;
-        $obj->longitude = $longitude;
+        $obj['longitude'] = $longitude;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withSubnational1Code(string $subnational1Code): self
     {
         $obj = clone $this;
-        $obj->subnational1Code = $subnational1Code;
+        $obj['subnational1Code'] = $subnational1Code;
 
         return $obj;
     }
@@ -216,7 +216,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withSubnational1Name(string $subnational1Name): self
     {
         $obj = clone $this;
-        $obj->subnational1Name = $subnational1Name;
+        $obj['subnational1Name'] = $subnational1Name;
 
         return $obj;
     }

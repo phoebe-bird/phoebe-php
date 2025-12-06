@@ -41,7 +41,7 @@ final class LocaleListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $Accept_Language && $obj->Accept_Language = $Accept_Language;
+        null !== $Accept_Language && $obj['Accept_Language'] = $Accept_Language;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class LocaleListParams implements BaseModel
     public function withAcceptLanguage(string $acceptLanguage): self
     {
         $obj = clone $this;
-        $obj->Accept_Language = $acceptLanguage;
+        $obj['Accept_Language'] = $acceptLanguage;
 
         return $obj;
     }

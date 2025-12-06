@@ -98,18 +98,18 @@ final class EbirdGetResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $bandingCodes && $obj->bandingCodes = $bandingCodes;
-        null !== $category && $obj->category = $category;
-        null !== $comName && $obj->comName = $comName;
-        null !== $comNameCodes && $obj->comNameCodes = $comNameCodes;
-        null !== $familyCode && $obj->familyCode = $familyCode;
-        null !== $familyComName && $obj->familyComName = $familyComName;
-        null !== $familySciName && $obj->familySciName = $familySciName;
-        null !== $order && $obj->order = $order;
-        null !== $sciName && $obj->sciName = $sciName;
-        null !== $sciNameCodes && $obj->sciNameCodes = $sciNameCodes;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
-        null !== $taxonOrder && $obj->taxonOrder = $taxonOrder;
+        null !== $bandingCodes && $obj['bandingCodes'] = $bandingCodes;
+        null !== $category && $obj['category'] = $category;
+        null !== $comName && $obj['comName'] = $comName;
+        null !== $comNameCodes && $obj['comNameCodes'] = $comNameCodes;
+        null !== $familyCode && $obj['familyCode'] = $familyCode;
+        null !== $familyComName && $obj['familyComName'] = $familyComName;
+        null !== $familySciName && $obj['familySciName'] = $familySciName;
+        null !== $order && $obj['order'] = $order;
+        null !== $sciName && $obj['sciName'] = $sciName;
+        null !== $sciNameCodes && $obj['sciNameCodes'] = $sciNameCodes;
+        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
+        null !== $taxonOrder && $obj['taxonOrder'] = $taxonOrder;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withBandingCodes(array $bandingCodes): self
     {
         $obj = clone $this;
-        $obj->bandingCodes = $bandingCodes;
+        $obj['bandingCodes'] = $bandingCodes;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withCategory(string $category): self
     {
         $obj = clone $this;
-        $obj->category = $category;
+        $obj['category'] = $category;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withComName(string $comName): self
     {
         $obj = clone $this;
-        $obj->comName = $comName;
+        $obj['comName'] = $comName;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withComNameCodes(array $comNameCodes): self
     {
         $obj = clone $this;
-        $obj->comNameCodes = $comNameCodes;
+        $obj['comNameCodes'] = $comNameCodes;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withFamilyCode(string $familyCode): self
     {
         $obj = clone $this;
-        $obj->familyCode = $familyCode;
+        $obj['familyCode'] = $familyCode;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withFamilyComName(string $familyComName): self
     {
         $obj = clone $this;
-        $obj->familyComName = $familyComName;
+        $obj['familyComName'] = $familyComName;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withFamilySciName(string $familySciName): self
     {
         $obj = clone $this;
-        $obj->familySciName = $familySciName;
+        $obj['familySciName'] = $familySciName;
 
         return $obj;
     }
@@ -179,7 +179,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withOrder(string $order): self
     {
         $obj = clone $this;
-        $obj->order = $order;
+        $obj['order'] = $order;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withSciName(string $sciName): self
     {
         $obj = clone $this;
-        $obj->sciName = $sciName;
+        $obj['sciName'] = $sciName;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withSciNameCodes(array $sciNameCodes): self
     {
         $obj = clone $this;
-        $obj->sciNameCodes = $sciNameCodes;
+        $obj['sciNameCodes'] = $sciNameCodes;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withSpeciesCode(string $speciesCode): self
     {
         $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $obj['speciesCode'] = $speciesCode;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class EbirdGetResponseItem implements BaseModel
     public function withTaxonOrder(int $taxonOrder): self
     {
         $obj = clone $this;
-        $obj->taxonOrder = $taxonOrder;
+        $obj['taxonOrder'] = $taxonOrder;
 
         return $obj;
     }

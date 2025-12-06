@@ -38,8 +38,8 @@ final class ListListResponseItem implements BaseModel
     {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $name && $obj->name = $name;
+        null !== $code && $obj['code'] = $code;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -47,7 +47,7 @@ final class ListListResponseItem implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -55,7 +55,7 @@ final class ListListResponseItem implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

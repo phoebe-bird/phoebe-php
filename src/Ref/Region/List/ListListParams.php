@@ -68,7 +68,7 @@ final class ListListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->regionType = $regionType;
+        $obj['regionType'] = $regionType;
 
         null !== $fmt && $obj['fmt'] = $fmt;
 
@@ -78,7 +78,7 @@ final class ListListParams implements BaseModel
     public function withRegionType(string $regionType): self
     {
         $obj = clone $this;
-        $obj->regionType = $regionType;
+        $obj['regionType'] = $regionType;
 
         return $obj;
     }
