@@ -45,7 +45,15 @@ final class Ob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ObsAux> $obsAux
+     * @param list<ObsAux|array{
+     *   auxCode?: string|null,
+     *   entryMethodCode?: string|null,
+     *   fieldName?: string|null,
+     *   obsId?: string|null,
+     *   speciesCode?: string|null,
+     *   subId?: string|null,
+     *   value?: string|null,
+     * }> $obsAux
      */
     public static function with(
         ?array $obsAux = null,
@@ -55,21 +63,29 @@ final class Ob implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $obsAux && $obj->obsAux = $obsAux;
-        null !== $obsDt && $obj->obsDt = $obsDt;
-        null !== $obsId && $obj->obsId = $obsId;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
+        null !== $obsAux && $obj['obsAux'] = $obsAux;
+        null !== $obsDt && $obj['obsDt'] = $obsDt;
+        null !== $obsId && $obj['obsId'] = $obsId;
+        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
 
         return $obj;
     }
 
     /**
-     * @param list<ObsAux> $obsAux
+     * @param list<ObsAux|array{
+     *   auxCode?: string|null,
+     *   entryMethodCode?: string|null,
+     *   fieldName?: string|null,
+     *   obsId?: string|null,
+     *   speciesCode?: string|null,
+     *   subId?: string|null,
+     *   value?: string|null,
+     * }> $obsAux
      */
     public function withObsAux(array $obsAux): self
     {
         $obj = clone $this;
-        $obj->obsAux = $obsAux;
+        $obj['obsAux'] = $obsAux;
 
         return $obj;
     }
@@ -77,7 +93,7 @@ final class Ob implements BaseModel
     public function withObsDt(string $obsDt): self
     {
         $obj = clone $this;
-        $obj->obsDt = $obsDt;
+        $obj['obsDt'] = $obsDt;
 
         return $obj;
     }
@@ -85,7 +101,7 @@ final class Ob implements BaseModel
     public function withObsID(string $obsID): self
     {
         $obj = clone $this;
-        $obj->obsId = $obsID;
+        $obj['obsId'] = $obsID;
 
         return $obj;
     }
@@ -93,7 +109,7 @@ final class Ob implements BaseModel
     public function withSpeciesCode(string $speciesCode): self
     {
         $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $obj['speciesCode'] = $speciesCode;
 
         return $obj;
     }

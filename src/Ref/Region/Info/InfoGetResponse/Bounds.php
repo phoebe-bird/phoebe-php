@@ -48,10 +48,10 @@ final class Bounds implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $maxX && $obj->maxX = $maxX;
-        null !== $maxY && $obj->maxY = $maxY;
-        null !== $minX && $obj->minX = $minX;
-        null !== $minY && $obj->minY = $minY;
+        null !== $maxX && $obj['maxX'] = $maxX;
+        null !== $maxY && $obj['maxY'] = $maxY;
+        null !== $minX && $obj['minX'] = $minX;
+        null !== $minY && $obj['minY'] = $minY;
 
         return $obj;
     }
@@ -59,7 +59,7 @@ final class Bounds implements BaseModel
     public function withMaxX(float $maxX): self
     {
         $obj = clone $this;
-        $obj->maxX = $maxX;
+        $obj['maxX'] = $maxX;
 
         return $obj;
     }
@@ -67,7 +67,7 @@ final class Bounds implements BaseModel
     public function withMaxY(float $maxY): self
     {
         $obj = clone $this;
-        $obj->maxY = $maxY;
+        $obj['maxY'] = $maxY;
 
         return $obj;
     }
@@ -75,7 +75,7 @@ final class Bounds implements BaseModel
     public function withMinX(float $minX): self
     {
         $obj = clone $this;
-        $obj->minX = $minX;
+        $obj['minX'] = $minX;
 
         return $obj;
     }
@@ -83,7 +83,7 @@ final class Bounds implements BaseModel
     public function withMinY(float $minY): self
     {
         $obj = clone $this;
-        $obj->minY = $minY;
+        $obj['minY'] = $minY;
 
         return $obj;
     }

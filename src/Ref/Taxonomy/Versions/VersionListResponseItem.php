@@ -40,8 +40,8 @@ final class VersionListResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $authorityVer && $obj->authorityVer = $authorityVer;
-        null !== $latest && $obj->latest = $latest;
+        null !== $authorityVer && $obj['authorityVer'] = $authorityVer;
+        null !== $latest && $obj['latest'] = $latest;
 
         return $obj;
     }
@@ -49,7 +49,7 @@ final class VersionListResponseItem implements BaseModel
     public function withAuthorityVer(float $authorityVer): self
     {
         $obj = clone $this;
-        $obj->authorityVer = $authorityVer;
+        $obj['authorityVer'] = $authorityVer;
 
         return $obj;
     }
@@ -57,7 +57,7 @@ final class VersionListResponseItem implements BaseModel
     public function withLatest(bool $latest): self
     {
         $obj = clone $this;
-        $obj->latest = $latest;
+        $obj['latest'] = $latest;
 
         return $obj;
     }

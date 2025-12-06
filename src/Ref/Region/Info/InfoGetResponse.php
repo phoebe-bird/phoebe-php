@@ -38,23 +38,32 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Bounds|array{
+     *   maxX?: float|null, maxY?: float|null, minX?: float|null, minY?: float|null
+     * } $bounds
      */
     public static function with(
-        ?Bounds $bounds = null,
+        Bounds|array|null $bounds = null,
         ?string $result = null
     ): self {
         $obj = new self;
 
-        null !== $bounds && $obj->bounds = $bounds;
-        null !== $result && $obj->result = $result;
+        null !== $bounds && $obj['bounds'] = $bounds;
+        null !== $result && $obj['result'] = $result;
 
         return $obj;
     }
 
-    public function withBounds(Bounds $bounds): self
+    /**
+     * @param Bounds|array{
+     *   maxX?: float|null, maxY?: float|null, minX?: float|null, minY?: float|null
+     * } $bounds
+     */
+    public function withBounds(Bounds|array $bounds): self
     {
         $obj = clone $this;
-        $obj->bounds = $bounds;
+        $obj['bounds'] = $bounds;
 
         return $obj;
     }
@@ -62,7 +71,7 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
     public function withResult(string $result): self
     {
         $obj = clone $this;
-        $obj->result = $result;
+        $obj['result'] = $result;
 
         return $obj;
     }

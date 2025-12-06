@@ -61,12 +61,12 @@ final class Top100GetResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $numCompleteChecklists && $obj->numCompleteChecklists = $numCompleteChecklists;
-        null !== $numSpecies && $obj->numSpecies = $numSpecies;
-        null !== $profileHandle && $obj->profileHandle = $profileHandle;
-        null !== $rowNum && $obj->rowNum = $rowNum;
-        null !== $userDisplayName && $obj->userDisplayName = $userDisplayName;
-        null !== $userId && $obj->userId = $userId;
+        null !== $numCompleteChecklists && $obj['numCompleteChecklists'] = $numCompleteChecklists;
+        null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
+        null !== $profileHandle && $obj['profileHandle'] = $profileHandle;
+        null !== $rowNum && $obj['rowNum'] = $rowNum;
+        null !== $userDisplayName && $obj['userDisplayName'] = $userDisplayName;
+        null !== $userId && $obj['userId'] = $userId;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withNumCompleteChecklists(int $numCompleteChecklists): self
     {
         $obj = clone $this;
-        $obj->numCompleteChecklists = $numCompleteChecklists;
+        $obj['numCompleteChecklists'] = $numCompleteChecklists;
 
         return $obj;
     }
@@ -82,7 +82,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withNumSpecies(int $numSpecies): self
     {
         $obj = clone $this;
-        $obj->numSpecies = $numSpecies;
+        $obj['numSpecies'] = $numSpecies;
 
         return $obj;
     }
@@ -90,7 +90,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withProfileHandle(string $profileHandle): self
     {
         $obj = clone $this;
-        $obj->profileHandle = $profileHandle;
+        $obj['profileHandle'] = $profileHandle;
 
         return $obj;
     }
@@ -98,7 +98,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withRowNum(int $rowNum): self
     {
         $obj = clone $this;
-        $obj->rowNum = $rowNum;
+        $obj['rowNum'] = $rowNum;
 
         return $obj;
     }
@@ -106,7 +106,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withUserDisplayName(string $userDisplayName): self
     {
         $obj = clone $this;
-        $obj->userDisplayName = $userDisplayName;
+        $obj['userDisplayName'] = $userDisplayName;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj->userId = $userID;
+        $obj['userId'] = $userID;
 
         return $obj;
     }

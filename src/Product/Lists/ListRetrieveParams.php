@@ -42,7 +42,7 @@ final class ListRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $maxResults && $obj->maxResults = $maxResults;
+        null !== $maxResults && $obj['maxResults'] = $maxResults;
 
         return $obj;
     }
@@ -53,7 +53,7 @@ final class ListRetrieveParams implements BaseModel
     public function withMaxResults(int $maxResults): self
     {
         $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $obj['maxResults'] = $maxResults;
 
         return $obj;
     }

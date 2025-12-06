@@ -111,22 +111,22 @@ final class Observation implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $comName && $obj->comName = $comName;
-        null !== $firstname && $obj->firstname = $firstname;
-        null !== $howMany && $obj->howMany = $howMany;
-        null !== $lastname && $obj->lastname = $lastname;
-        null !== $lat && $obj->lat = $lat;
-        null !== $lng && $obj->lng = $lng;
-        null !== $locationPrivate && $obj->locationPrivate = $locationPrivate;
-        null !== $locId && $obj->locId = $locId;
-        null !== $locName && $obj->locName = $locName;
-        null !== $obsDt && $obj->obsDt = $obsDt;
-        null !== $obsReviewed && $obj->obsReviewed = $obsReviewed;
-        null !== $obsValid && $obj->obsValid = $obsValid;
-        null !== $sciName && $obj->sciName = $sciName;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
-        null !== $subId && $obj->subId = $subId;
+        null !== $id && $obj['id'] = $id;
+        null !== $comName && $obj['comName'] = $comName;
+        null !== $firstname && $obj['firstname'] = $firstname;
+        null !== $howMany && $obj['howMany'] = $howMany;
+        null !== $lastname && $obj['lastname'] = $lastname;
+        null !== $lat && $obj['lat'] = $lat;
+        null !== $lng && $obj['lng'] = $lng;
+        null !== $locationPrivate && $obj['locationPrivate'] = $locationPrivate;
+        null !== $locId && $obj['locId'] = $locId;
+        null !== $locName && $obj['locName'] = $locName;
+        null !== $obsDt && $obj['obsDt'] = $obsDt;
+        null !== $obsReviewed && $obj['obsReviewed'] = $obsReviewed;
+        null !== $obsValid && $obj['obsValid'] = $obsValid;
+        null !== $sciName && $obj['sciName'] = $sciName;
+        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
+        null !== $subId && $obj['subId'] = $subId;
 
         return $obj;
     }
@@ -134,7 +134,7 @@ final class Observation implements BaseModel
     public function withID(int $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -142,7 +142,7 @@ final class Observation implements BaseModel
     public function withComName(string $comName): self
     {
         $obj = clone $this;
-        $obj->comName = $comName;
+        $obj['comName'] = $comName;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class Observation implements BaseModel
     public function withFirstname(string $firstname): self
     {
         $obj = clone $this;
-        $obj->firstname = $firstname;
+        $obj['firstname'] = $firstname;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class Observation implements BaseModel
     public function withHowMany(int $howMany): self
     {
         $obj = clone $this;
-        $obj->howMany = $howMany;
+        $obj['howMany'] = $howMany;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class Observation implements BaseModel
     public function withLastname(string $lastname): self
     {
         $obj = clone $this;
-        $obj->lastname = $lastname;
+        $obj['lastname'] = $lastname;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class Observation implements BaseModel
     public function withLat(float $lat): self
     {
         $obj = clone $this;
-        $obj->lat = $lat;
+        $obj['lat'] = $lat;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class Observation implements BaseModel
     public function withLng(float $lng): self
     {
         $obj = clone $this;
-        $obj->lng = $lng;
+        $obj['lng'] = $lng;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class Observation implements BaseModel
     public function withLocationPrivate(bool $locationPrivate): self
     {
         $obj = clone $this;
-        $obj->locationPrivate = $locationPrivate;
+        $obj['locationPrivate'] = $locationPrivate;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Observation implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj->locId = $locID;
+        $obj['locId'] = $locID;
 
         return $obj;
     }
@@ -206,7 +206,7 @@ final class Observation implements BaseModel
     public function withLocName(string $locName): self
     {
         $obj = clone $this;
-        $obj->locName = $locName;
+        $obj['locName'] = $locName;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class Observation implements BaseModel
     public function withObsDt(string $obsDt): self
     {
         $obj = clone $this;
-        $obj->obsDt = $obsDt;
+        $obj['obsDt'] = $obsDt;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class Observation implements BaseModel
     public function withObsReviewed(bool $obsReviewed): self
     {
         $obj = clone $this;
-        $obj->obsReviewed = $obsReviewed;
+        $obj['obsReviewed'] = $obsReviewed;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Observation implements BaseModel
     public function withObsValid(bool $obsValid): self
     {
         $obj = clone $this;
-        $obj->obsValid = $obsValid;
+        $obj['obsValid'] = $obsValid;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class Observation implements BaseModel
     public function withSciName(string $sciName): self
     {
         $obj = clone $this;
-        $obj->sciName = $sciName;
+        $obj['sciName'] = $sciName;
 
         return $obj;
     }
@@ -246,7 +246,7 @@ final class Observation implements BaseModel
     public function withSpeciesCode(string $speciesCode): self
     {
         $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $obj['speciesCode'] = $speciesCode;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Observation implements BaseModel
     public function withSubID(string $subID): self
     {
         $obj = clone $this;
-        $obj->subId = $subID;
+        $obj['subId'] = $subID;
 
         return $obj;
     }

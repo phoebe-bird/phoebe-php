@@ -70,7 +70,7 @@ final class InfoRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $delim && $obj->delim = $delim;
+        null !== $delim && $obj['delim'] = $delim;
         null !== $regionNameFormat && $obj['regionNameFormat'] = $regionNameFormat;
 
         return $obj;
@@ -82,7 +82,7 @@ final class InfoRetrieveParams implements BaseModel
     public function withDelim(string $delim): self
     {
         $obj = clone $this;
-        $obj->delim = $delim;
+        $obj['delim'] = $delim;
 
         return $obj;
     }

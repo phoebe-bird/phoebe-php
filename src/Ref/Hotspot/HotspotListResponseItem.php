@@ -76,15 +76,15 @@ final class HotspotListResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $lat && $obj->lat = $lat;
-        null !== $latestObsDt && $obj->latestObsDt = $latestObsDt;
-        null !== $lng && $obj->lng = $lng;
-        null !== $locId && $obj->locId = $locId;
-        null !== $locName && $obj->locName = $locName;
-        null !== $numSpeciesAllTime && $obj->numSpeciesAllTime = $numSpeciesAllTime;
-        null !== $subnational1Code && $obj->subnational1Code = $subnational1Code;
-        null !== $subnational2Code && $obj->subnational2Code = $subnational2Code;
+        null !== $countryCode && $obj['countryCode'] = $countryCode;
+        null !== $lat && $obj['lat'] = $lat;
+        null !== $latestObsDt && $obj['latestObsDt'] = $latestObsDt;
+        null !== $lng && $obj['lng'] = $lng;
+        null !== $locId && $obj['locId'] = $locId;
+        null !== $locName && $obj['locName'] = $locName;
+        null !== $numSpeciesAllTime && $obj['numSpeciesAllTime'] = $numSpeciesAllTime;
+        null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
+        null !== $subnational2Code && $obj['subnational2Code'] = $subnational2Code;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withLat(float $lat): self
     {
         $obj = clone $this;
-        $obj->lat = $lat;
+        $obj['lat'] = $lat;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withLatestObsDt(string $latestObsDt): self
     {
         $obj = clone $this;
-        $obj->latestObsDt = $latestObsDt;
+        $obj['latestObsDt'] = $latestObsDt;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withLng(float $lng): self
     {
         $obj = clone $this;
-        $obj->lng = $lng;
+        $obj['lng'] = $lng;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj->locId = $locID;
+        $obj['locId'] = $locID;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withLocName(string $locName): self
     {
         $obj = clone $this;
-        $obj->locName = $locName;
+        $obj['locName'] = $locName;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withNumSpeciesAllTime(int $numSpeciesAllTime): self
     {
         $obj = clone $this;
-        $obj->numSpeciesAllTime = $numSpeciesAllTime;
+        $obj['numSpeciesAllTime'] = $numSpeciesAllTime;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withSubnational1Code(string $subnational1Code): self
     {
         $obj = clone $this;
-        $obj->subnational1Code = $subnational1Code;
+        $obj['subnational1Code'] = $subnational1Code;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class HotspotListResponseItem implements BaseModel
     public function withSubnational2Code(string $subnational2Code): self
     {
         $obj = clone $this;
-        $obj->subnational2Code = $subnational2Code;
+        $obj['subnational2Code'] = $subnational2Code;
 
         return $obj;
     }

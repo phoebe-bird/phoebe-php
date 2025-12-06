@@ -62,9 +62,9 @@ final class StatRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $obj['regionCode'] = $regionCode;
+        $obj['y'] = $y;
+        $obj['m'] = $m;
 
         return $obj;
     }
@@ -72,7 +72,7 @@ final class StatRetrieveParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class StatRetrieveParams implements BaseModel
     public function withY(int $y): self
     {
         $obj = clone $this;
-        $obj->y = $y;
+        $obj['y'] = $y;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class StatRetrieveParams implements BaseModel
     public function withM(int $m): self
     {
         $obj = clone $this;
-        $obj->m = $m;
+        $obj['m'] = $m;
 
         return $obj;
     }

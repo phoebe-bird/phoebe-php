@@ -66,13 +66,13 @@ final class ObsAux implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $auxCode && $obj->auxCode = $auxCode;
-        null !== $entryMethodCode && $obj->entryMethodCode = $entryMethodCode;
-        null !== $fieldName && $obj->fieldName = $fieldName;
-        null !== $obsId && $obj->obsId = $obsId;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
-        null !== $subId && $obj->subId = $subId;
-        null !== $value && $obj->value = $value;
+        null !== $auxCode && $obj['auxCode'] = $auxCode;
+        null !== $entryMethodCode && $obj['entryMethodCode'] = $entryMethodCode;
+        null !== $fieldName && $obj['fieldName'] = $fieldName;
+        null !== $obsId && $obj['obsId'] = $obsId;
+        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
+        null !== $subId && $obj['subId'] = $subId;
+        null !== $value && $obj['value'] = $value;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class ObsAux implements BaseModel
     public function withAuxCode(string $auxCode): self
     {
         $obj = clone $this;
-        $obj->auxCode = $auxCode;
+        $obj['auxCode'] = $auxCode;
 
         return $obj;
     }
@@ -88,7 +88,7 @@ final class ObsAux implements BaseModel
     public function withEntryMethodCode(string $entryMethodCode): self
     {
         $obj = clone $this;
-        $obj->entryMethodCode = $entryMethodCode;
+        $obj['entryMethodCode'] = $entryMethodCode;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class ObsAux implements BaseModel
     public function withFieldName(string $fieldName): self
     {
         $obj = clone $this;
-        $obj->fieldName = $fieldName;
+        $obj['fieldName'] = $fieldName;
 
         return $obj;
     }
@@ -104,7 +104,7 @@ final class ObsAux implements BaseModel
     public function withObsID(string $obsID): self
     {
         $obj = clone $this;
-        $obj->obsId = $obsID;
+        $obj['obsId'] = $obsID;
 
         return $obj;
     }
@@ -112,7 +112,7 @@ final class ObsAux implements BaseModel
     public function withSpeciesCode(string $speciesCode): self
     {
         $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $obj['speciesCode'] = $speciesCode;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class ObsAux implements BaseModel
     public function withSubID(string $subID): self
     {
         $obj = clone $this;
-        $obj->subId = $subID;
+        $obj['subId'] = $subID;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class ObsAux implements BaseModel
     public function withValue(string $value): self
     {
         $obj = clone $this;
-        $obj->value = $value;
+        $obj['value'] = $value;
 
         return $obj;
     }

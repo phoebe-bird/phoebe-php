@@ -48,9 +48,9 @@ final class StatGetResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $numChecklists && $obj->numChecklists = $numChecklists;
-        null !== $numContributors && $obj->numContributors = $numContributors;
-        null !== $numSpecies && $obj->numSpecies = $numSpecies;
+        null !== $numChecklists && $obj['numChecklists'] = $numChecklists;
+        null !== $numContributors && $obj['numContributors'] = $numContributors;
+        null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
 
         return $obj;
     }
@@ -58,7 +58,7 @@ final class StatGetResponse implements BaseModel, ResponseConverter
     public function withNumChecklists(int $numChecklists): self
     {
         $obj = clone $this;
-        $obj->numChecklists = $numChecklists;
+        $obj['numChecklists'] = $numChecklists;
 
         return $obj;
     }
@@ -66,7 +66,7 @@ final class StatGetResponse implements BaseModel, ResponseConverter
     public function withNumContributors(int $numContributors): self
     {
         $obj = clone $this;
-        $obj->numContributors = $numContributors;
+        $obj['numContributors'] = $numContributors;
 
         return $obj;
     }
@@ -74,7 +74,7 @@ final class StatGetResponse implements BaseModel, ResponseConverter
     public function withNumSpecies(int $numSpecies): self
     {
         $obj = clone $this;
-        $obj->numSpecies = $numSpecies;
+        $obj['numSpecies'] = $numSpecies;
 
         return $obj;
     }

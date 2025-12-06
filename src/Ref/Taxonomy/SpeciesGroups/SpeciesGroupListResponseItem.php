@@ -50,9 +50,9 @@ final class SpeciesGroupListResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $groupName && $obj->groupName = $groupName;
-        null !== $groupOrder && $obj->groupOrder = $groupOrder;
-        null !== $taxonOrderBounds && $obj->taxonOrderBounds = $taxonOrderBounds;
+        null !== $groupName && $obj['groupName'] = $groupName;
+        null !== $groupOrder && $obj['groupOrder'] = $groupOrder;
+        null !== $taxonOrderBounds && $obj['taxonOrderBounds'] = $taxonOrderBounds;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class SpeciesGroupListResponseItem implements BaseModel
     public function withGroupName(string $groupName): self
     {
         $obj = clone $this;
-        $obj->groupName = $groupName;
+        $obj['groupName'] = $groupName;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class SpeciesGroupListResponseItem implements BaseModel
     public function withGroupOrder(int $groupOrder): self
     {
         $obj = clone $this;
-        $obj->groupOrder = $groupOrder;
+        $obj['groupOrder'] = $groupOrder;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class SpeciesGroupListResponseItem implements BaseModel
     public function withTaxonOrderBounds(array $taxonOrderBounds): self
     {
         $obj = clone $this;
-        $obj->taxonOrderBounds = $taxonOrderBounds;
+        $obj['taxonOrderBounds'] = $taxonOrderBounds;
 
         return $obj;
     }

@@ -44,9 +44,9 @@ final class LocaleListResponseItem implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $lastUpdated && $obj->lastUpdated = $lastUpdated;
-        null !== $name && $obj->name = $name;
+        null !== $code && $obj['code'] = $code;
+        null !== $lastUpdated && $obj['lastUpdated'] = $lastUpdated;
+        null !== $name && $obj['name'] = $name;
 
         return $obj;
     }
@@ -54,7 +54,7 @@ final class LocaleListResponseItem implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -62,7 +62,7 @@ final class LocaleListResponseItem implements BaseModel
     public function withLastUpdated(string $lastUpdated): self
     {
         $obj = clone $this;
-        $obj->lastUpdated = $lastUpdated;
+        $obj['lastUpdated'] = $lastUpdated;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class LocaleListResponseItem implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }

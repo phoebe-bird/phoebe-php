@@ -115,14 +115,14 @@ final class SpecieRetrieveParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->regionCode = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
-        null !== $back && $obj->back = $back;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $r && $obj->r = $r;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $obj['back'] = $back;
+        null !== $hotspot && $obj['hotspot'] = $hotspot;
+        null !== $includeProvisional && $obj['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $obj['maxResults'] = $maxResults;
+        null !== $r && $obj['r'] = $r;
+        null !== $sppLocale && $obj['sppLocale'] = $sppLocale;
 
         return $obj;
     }
@@ -130,7 +130,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withRegionCode(string $regionCode): self
     {
         $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $obj['regionCode'] = $regionCode;
 
         return $obj;
     }
@@ -141,7 +141,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withBack(int $back): self
     {
         $obj = clone $this;
-        $obj->back = $back;
+        $obj['back'] = $back;
 
         return $obj;
     }
@@ -152,7 +152,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withHotspot(bool $hotspot): self
     {
         $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $obj['hotspot'] = $hotspot;
 
         return $obj;
     }
@@ -163,7 +163,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withIncludeProvisional(bool $includeProvisional): self
     {
         $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $obj['includeProvisional'] = $includeProvisional;
 
         return $obj;
     }
@@ -174,7 +174,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withMaxResults(int $maxResults): self
     {
         $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $obj['maxResults'] = $maxResults;
 
         return $obj;
     }
@@ -187,7 +187,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withR(array $r): self
     {
         $obj = clone $this;
-        $obj->r = $r;
+        $obj['r'] = $r;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class SpecieRetrieveParams implements BaseModel
     public function withSppLocale(string $sppLocale): self
     {
         $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $obj['sppLocale'] = $sppLocale;
 
         return $obj;
     }
