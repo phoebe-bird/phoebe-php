@@ -13,7 +13,7 @@ use Phoebe\Product\Lists\ListGetResponseItem\Ob\ObsAux;
  * @phpstan-type ObShape = array{
  *   obsAux?: list<ObsAux>|null,
  *   obsDt?: string|null,
- *   obsId?: string|null,
+ *   obsID?: string|null,
  *   speciesCode?: string|null,
  * }
  */
@@ -29,8 +29,8 @@ final class Ob implements BaseModel
     #[Optional]
     public ?string $obsDt;
 
-    #[Optional]
-    public ?string $obsId;
+    #[Optional('obsId')]
+    public ?string $obsID;
 
     #[Optional]
     public ?string $speciesCode;
@@ -49,23 +49,23 @@ final class Ob implements BaseModel
      *   auxCode?: string|null,
      *   entryMethodCode?: string|null,
      *   fieldName?: string|null,
-     *   obsId?: string|null,
+     *   obsID?: string|null,
      *   speciesCode?: string|null,
-     *   subId?: string|null,
+     *   subID?: string|null,
      *   value?: string|null,
      * }> $obsAux
      */
     public static function with(
         ?array $obsAux = null,
         ?string $obsDt = null,
-        ?string $obsId = null,
+        ?string $obsID = null,
         ?string $speciesCode = null,
     ): self {
         $obj = new self;
 
         null !== $obsAux && $obj['obsAux'] = $obsAux;
         null !== $obsDt && $obj['obsDt'] = $obsDt;
-        null !== $obsId && $obj['obsId'] = $obsId;
+        null !== $obsID && $obj['obsID'] = $obsID;
         null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
 
         return $obj;
@@ -76,9 +76,9 @@ final class Ob implements BaseModel
      *   auxCode?: string|null,
      *   entryMethodCode?: string|null,
      *   fieldName?: string|null,
-     *   obsId?: string|null,
+     *   obsID?: string|null,
      *   speciesCode?: string|null,
-     *   subId?: string|null,
+     *   subID?: string|null,
      *   value?: string|null,
      * }> $obsAux
      */
@@ -101,7 +101,7 @@ final class Ob implements BaseModel
     public function withObsID(string $obsID): self
     {
         $obj = clone $this;
-        $obj['obsId'] = $obsID;
+        $obj['obsID'] = $obsID;
 
         return $obj;
     }

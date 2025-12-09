@@ -18,14 +18,14 @@ use Phoebe\Core\Contracts\BaseModel;
  *   lat?: float|null,
  *   lng?: float|null,
  *   locationPrivate?: bool|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   locName?: string|null,
  *   obsDt?: string|null,
  *   obsReviewed?: bool|null,
  *   obsValid?: bool|null,
  *   sciName?: string|null,
  *   speciesCode?: string|null,
- *   subId?: string|null,
+ *   subID?: string|null,
  * }
  */
 final class Observation implements BaseModel
@@ -57,8 +57,8 @@ final class Observation implements BaseModel
     #[Optional]
     public ?bool $locationPrivate;
 
-    #[Optional]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
     #[Optional]
     public ?string $locName;
@@ -78,8 +78,8 @@ final class Observation implements BaseModel
     #[Optional]
     public ?string $speciesCode;
 
-    #[Optional]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
     public function __construct()
     {
@@ -100,14 +100,14 @@ final class Observation implements BaseModel
         ?float $lat = null,
         ?float $lng = null,
         ?bool $locationPrivate = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?string $locName = null,
         ?string $obsDt = null,
         ?bool $obsReviewed = null,
         ?bool $obsValid = null,
         ?string $sciName = null,
         ?string $speciesCode = null,
-        ?string $subId = null,
+        ?string $subID = null,
     ): self {
         $obj = new self;
 
@@ -119,14 +119,14 @@ final class Observation implements BaseModel
         null !== $lat && $obj['lat'] = $lat;
         null !== $lng && $obj['lng'] = $lng;
         null !== $locationPrivate && $obj['locationPrivate'] = $locationPrivate;
-        null !== $locId && $obj['locId'] = $locId;
+        null !== $locID && $obj['locID'] = $locID;
         null !== $locName && $obj['locName'] = $locName;
         null !== $obsDt && $obj['obsDt'] = $obsDt;
         null !== $obsReviewed && $obj['obsReviewed'] = $obsReviewed;
         null !== $obsValid && $obj['obsValid'] = $obsValid;
         null !== $sciName && $obj['sciName'] = $sciName;
         null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
-        null !== $subId && $obj['subId'] = $subId;
+        null !== $subID && $obj['subID'] = $subID;
 
         return $obj;
     }
@@ -198,7 +198,7 @@ final class Observation implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj['locId'] = $locID;
+        $obj['locID'] = $locID;
 
         return $obj;
     }
@@ -254,7 +254,7 @@ final class Observation implements BaseModel
     public function withSubID(string $subID): self
     {
         $obj = clone $this;
-        $obj['subId'] = $subID;
+        $obj['subID'] = $subID;
 
         return $obj;
     }

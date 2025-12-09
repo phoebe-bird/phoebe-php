@@ -15,7 +15,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *   profileHandle?: string|null,
  *   rowNum?: int|null,
  *   userDisplayName?: string|null,
- *   userId?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Top100GetResponseItem implements BaseModel
@@ -38,8 +38,8 @@ final class Top100GetResponseItem implements BaseModel
     #[Optional]
     public ?string $userDisplayName;
 
-    #[Optional]
-    public ?string $userId;
+    #[Optional('userId')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -57,7 +57,7 @@ final class Top100GetResponseItem implements BaseModel
         ?string $profileHandle = null,
         ?int $rowNum = null,
         ?string $userDisplayName = null,
-        ?string $userId = null,
+        ?string $userID = null,
     ): self {
         $obj = new self;
 
@@ -66,7 +66,7 @@ final class Top100GetResponseItem implements BaseModel
         null !== $profileHandle && $obj['profileHandle'] = $profileHandle;
         null !== $rowNum && $obj['rowNum'] = $rowNum;
         null !== $userDisplayName && $obj['userDisplayName'] = $userDisplayName;
-        null !== $userId && $obj['userId'] = $userId;
+        null !== $userID && $obj['userID'] = $userID;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class Top100GetResponseItem implements BaseModel
     public function withUserID(string $userID): self
     {
         $obj = clone $this;
-        $obj['userId'] = $userID;
+        $obj['userID'] = $userID;
 
         return $obj;
     }

@@ -13,9 +13,9 @@ use Phoebe\Core\Contracts\BaseModel;
  *   auxCode?: string|null,
  *   entryMethodCode?: string|null,
  *   fieldName?: string|null,
- *   obsId?: string|null,
+ *   obsID?: string|null,
  *   speciesCode?: string|null,
- *   subId?: string|null,
+ *   subID?: string|null,
  *   value?: string|null,
  * }
  */
@@ -33,14 +33,14 @@ final class ObsAux implements BaseModel
     #[Optional]
     public ?string $fieldName;
 
-    #[Optional]
-    public ?string $obsId;
+    #[Optional('obsId')]
+    public ?string $obsID;
 
     #[Optional]
     public ?string $speciesCode;
 
-    #[Optional]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
     #[Optional]
     public ?string $value;
@@ -59,9 +59,9 @@ final class ObsAux implements BaseModel
         ?string $auxCode = null,
         ?string $entryMethodCode = null,
         ?string $fieldName = null,
-        ?string $obsId = null,
+        ?string $obsID = null,
         ?string $speciesCode = null,
-        ?string $subId = null,
+        ?string $subID = null,
         ?string $value = null,
     ): self {
         $obj = new self;
@@ -69,9 +69,9 @@ final class ObsAux implements BaseModel
         null !== $auxCode && $obj['auxCode'] = $auxCode;
         null !== $entryMethodCode && $obj['entryMethodCode'] = $entryMethodCode;
         null !== $fieldName && $obj['fieldName'] = $fieldName;
-        null !== $obsId && $obj['obsId'] = $obsId;
+        null !== $obsID && $obj['obsID'] = $obsID;
         null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
-        null !== $subId && $obj['subId'] = $subId;
+        null !== $subID && $obj['subID'] = $subID;
         null !== $value && $obj['value'] = $value;
 
         return $obj;
@@ -104,7 +104,7 @@ final class ObsAux implements BaseModel
     public function withObsID(string $obsID): self
     {
         $obj = clone $this;
-        $obj['obsId'] = $obsID;
+        $obj['obsID'] = $obsID;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class ObsAux implements BaseModel
     public function withSubID(string $subID): self
     {
         $obj = clone $this;
-        $obj['subId'] = $subID;
+        $obj['subID'] = $subID;
 
         return $obj;
     }

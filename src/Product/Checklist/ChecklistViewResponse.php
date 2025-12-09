@@ -14,22 +14,22 @@ use Phoebe\Product\Checklist\ChecklistViewResponse\Ob\ObsAux;
 /**
  * @phpstan-type ChecklistViewResponseShape = array{
  *   allObsReported?: bool|null,
- *   checklistId?: string|null,
+ *   checklistID?: string|null,
  *   creationDt?: string|null,
  *   durationHrs?: float|null,
  *   isoObsDate?: string|null,
  *   lastEditedDt?: string|null,
  *   loc?: Loc|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   numObservers?: int|null,
  *   numSpecies?: int|null,
  *   obs?: list<Ob>|null,
  *   obsDt?: string|null,
  *   obsTime?: string|null,
  *   obsTimeValid?: bool|null,
- *   projId?: string|null,
- *   protocolId?: string|null,
- *   subId?: string|null,
+ *   projID?: string|null,
+ *   protocolID?: string|null,
+ *   subID?: string|null,
  *   submissionMethodCode?: string|null,
  *   subnational1Code?: string|null,
  *   userDisplayName?: string|null,
@@ -43,8 +43,8 @@ final class ChecklistViewResponse implements BaseModel
     #[Optional]
     public ?bool $allObsReported;
 
-    #[Optional]
-    public ?string $checklistId;
+    #[Optional('checklistId')]
+    public ?string $checklistID;
 
     #[Optional]
     public ?string $creationDt;
@@ -61,8 +61,8 @@ final class ChecklistViewResponse implements BaseModel
     #[Optional]
     public ?Loc $loc;
 
-    #[Optional]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
     #[Optional]
     public ?int $numObservers;
@@ -83,14 +83,14 @@ final class ChecklistViewResponse implements BaseModel
     #[Optional]
     public ?bool $obsTimeValid;
 
-    #[Optional]
-    public ?string $projId;
+    #[Optional('projId')]
+    public ?string $projID;
 
-    #[Optional]
-    public ?string $protocolId;
+    #[Optional('protocolId')]
+    public ?string $protocolID;
 
-    #[Optional]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
     #[Optional]
     public ?string $submissionMethodCode;
@@ -119,7 +119,7 @@ final class ChecklistViewResponse implements BaseModel
      *   lat?: float|null,
      *   latitude?: float|null,
      *   lng?: float|null,
-     *   locId?: string|null,
+     *   locID?: string|null,
      *   locName?: string|null,
      *   longitude?: float|null,
      *   name?: string|null,
@@ -129,28 +129,28 @@ final class ChecklistViewResponse implements BaseModel
      * @param list<Ob|array{
      *   obsAux?: list<ObsAux>|null,
      *   obsDt?: string|null,
-     *   obsId?: string|null,
+     *   obsID?: string|null,
      *   speciesCode?: string|null,
      * }> $obs
      */
     public static function with(
         ?bool $allObsReported = null,
-        ?string $checklistId = null,
+        ?string $checklistID = null,
         ?string $creationDt = null,
         ?float $durationHrs = null,
         ?string $isoObsDate = null,
         ?string $lastEditedDt = null,
         Loc|array|null $loc = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?int $numObservers = null,
         ?int $numSpecies = null,
         ?array $obs = null,
         ?string $obsDt = null,
         ?string $obsTime = null,
         ?bool $obsTimeValid = null,
-        ?string $projId = null,
-        ?string $protocolId = null,
-        ?string $subId = null,
+        ?string $projID = null,
+        ?string $protocolID = null,
+        ?string $subID = null,
         ?string $submissionMethodCode = null,
         ?string $subnational1Code = null,
         ?string $userDisplayName = null,
@@ -158,22 +158,22 @@ final class ChecklistViewResponse implements BaseModel
         $obj = new self;
 
         null !== $allObsReported && $obj['allObsReported'] = $allObsReported;
-        null !== $checklistId && $obj['checklistId'] = $checklistId;
+        null !== $checklistID && $obj['checklistID'] = $checklistID;
         null !== $creationDt && $obj['creationDt'] = $creationDt;
         null !== $durationHrs && $obj['durationHrs'] = $durationHrs;
         null !== $isoObsDate && $obj['isoObsDate'] = $isoObsDate;
         null !== $lastEditedDt && $obj['lastEditedDt'] = $lastEditedDt;
         null !== $loc && $obj['loc'] = $loc;
-        null !== $locId && $obj['locId'] = $locId;
+        null !== $locID && $obj['locID'] = $locID;
         null !== $numObservers && $obj['numObservers'] = $numObservers;
         null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
         null !== $obs && $obj['obs'] = $obs;
         null !== $obsDt && $obj['obsDt'] = $obsDt;
         null !== $obsTime && $obj['obsTime'] = $obsTime;
         null !== $obsTimeValid && $obj['obsTimeValid'] = $obsTimeValid;
-        null !== $projId && $obj['projId'] = $projId;
-        null !== $protocolId && $obj['protocolId'] = $protocolId;
-        null !== $subId && $obj['subId'] = $subId;
+        null !== $projID && $obj['projID'] = $projID;
+        null !== $protocolID && $obj['protocolID'] = $protocolID;
+        null !== $subID && $obj['subID'] = $subID;
         null !== $submissionMethodCode && $obj['submissionMethodCode'] = $submissionMethodCode;
         null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
         null !== $userDisplayName && $obj['userDisplayName'] = $userDisplayName;
@@ -192,7 +192,7 @@ final class ChecklistViewResponse implements BaseModel
     public function withChecklistID(string $checklistID): self
     {
         $obj = clone $this;
-        $obj['checklistId'] = $checklistID;
+        $obj['checklistID'] = $checklistID;
 
         return $obj;
     }
@@ -238,7 +238,7 @@ final class ChecklistViewResponse implements BaseModel
      *   lat?: float|null,
      *   latitude?: float|null,
      *   lng?: float|null,
-     *   locId?: string|null,
+     *   locID?: string|null,
      *   locName?: string|null,
      *   longitude?: float|null,
      *   name?: string|null,
@@ -257,7 +257,7 @@ final class ChecklistViewResponse implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj['locId'] = $locID;
+        $obj['locID'] = $locID;
 
         return $obj;
     }
@@ -282,7 +282,7 @@ final class ChecklistViewResponse implements BaseModel
      * @param list<Ob|array{
      *   obsAux?: list<ObsAux>|null,
      *   obsDt?: string|null,
-     *   obsId?: string|null,
+     *   obsID?: string|null,
      *   speciesCode?: string|null,
      * }> $obs
      */
@@ -321,7 +321,7 @@ final class ChecklistViewResponse implements BaseModel
     public function withProjID(string $projID): self
     {
         $obj = clone $this;
-        $obj['projId'] = $projID;
+        $obj['projID'] = $projID;
 
         return $obj;
     }
@@ -329,7 +329,7 @@ final class ChecklistViewResponse implements BaseModel
     public function withProtocolID(string $protocolID): self
     {
         $obj = clone $this;
-        $obj['protocolId'] = $protocolID;
+        $obj['protocolID'] = $protocolID;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class ChecklistViewResponse implements BaseModel
     public function withSubID(string $subID): self
     {
         $obj = clone $this;
-        $obj['subId'] = $subID;
+        $obj['subID'] = $subID;
 
         return $obj;
     }

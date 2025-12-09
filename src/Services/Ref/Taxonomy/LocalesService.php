@@ -8,6 +8,7 @@ use Phoebe\Client;
 use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListParams;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
@@ -27,7 +28,7 @@ final class LocalesService implements LocalesContract
      *
      * NOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.
      *
-     * @param array{Accept_Language?: string}|LocaleListParams $params
+     * @param array{acceptLanguage?: string}|LocaleListParams $params
      *
      * @return list<LocaleListResponseItem>
      *
@@ -46,7 +47,10 @@ final class LocalesService implements LocalesContract
         $response = $this->client->request(
             method: 'get',
             path: 'ref/taxa-locales/ebird',
-            headers: $parsed,
+            headers: Util::array_transform_keys(
+                $parsed,
+                ['acceptLanguage' => 'Accept-Language']
+            ),
             options: $options,
             convert: new ListOf(LocaleListResponseItem::class),
         );

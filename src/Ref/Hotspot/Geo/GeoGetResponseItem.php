@@ -14,7 +14,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *   lat?: float|null,
  *   latestObsDt?: string|null,
  *   lng?: float|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   locName?: string|null,
  *   numSpeciesAllTime?: int|null,
  *   subnational1Code?: string|null,
@@ -38,8 +38,8 @@ final class GeoGetResponseItem implements BaseModel
     #[Optional]
     public ?float $lng;
 
-    #[Optional]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
     #[Optional]
     public ?string $locName;
@@ -68,7 +68,7 @@ final class GeoGetResponseItem implements BaseModel
         ?float $lat = null,
         ?string $latestObsDt = null,
         ?float $lng = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?string $locName = null,
         ?int $numSpeciesAllTime = null,
         ?string $subnational1Code = null,
@@ -80,7 +80,7 @@ final class GeoGetResponseItem implements BaseModel
         null !== $lat && $obj['lat'] = $lat;
         null !== $latestObsDt && $obj['latestObsDt'] = $latestObsDt;
         null !== $lng && $obj['lng'] = $lng;
-        null !== $locId && $obj['locId'] = $locId;
+        null !== $locID && $obj['locID'] = $locID;
         null !== $locName && $obj['locName'] = $locName;
         null !== $numSpeciesAllTime && $obj['numSpeciesAllTime'] = $numSpeciesAllTime;
         null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
@@ -124,7 +124,7 @@ final class GeoGetResponseItem implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj['locId'] = $locID;
+        $obj['locID'] = $locID;
 
         return $obj;
     }
