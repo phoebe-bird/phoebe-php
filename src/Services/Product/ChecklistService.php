@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Checklist\ChecklistViewResponse;
 use Phoebe\RequestOptions;
@@ -29,12 +30,14 @@ final class ChecklistService implements ChecklistContract
         string $subID,
         ?RequestOptions $requestOptions = null
     ): ChecklistViewResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ChecklistViewResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/checklist/view/%1$s', $subID],
             options: $requestOptions,
             convert: ChecklistViewResponse::class,
         );
+
+        return $response->parse();
     }
 }

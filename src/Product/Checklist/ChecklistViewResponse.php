@@ -6,9 +6,7 @@ namespace Phoebe\Product\Checklist;
 
 use Phoebe\Core\Attributes\Api;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Loc;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Ob;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Ob\ObsAux;
@@ -37,12 +35,10 @@ use Phoebe\Product\Checklist\ChecklistViewResponse\Ob\ObsAux;
  *   userDisplayName?: string|null,
  * }
  */
-final class ChecklistViewResponse implements BaseModel, ResponseConverter
+final class ChecklistViewResponse implements BaseModel
 {
     /** @use SdkModel<ChecklistViewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?bool $allObsReported;

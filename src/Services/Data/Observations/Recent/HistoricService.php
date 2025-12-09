@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
@@ -59,13 +60,15 @@ final class HistoricService implements HistoricContract
         $m = $parsed['m'];
         unset($parsed['m']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<Observation>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['data/obs/%1$s/historic/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
             query: $parsed,
             options: $options,
             convert: new ListOf(Observation::class),
         );
+
+        return $response->parse();
     }
 }

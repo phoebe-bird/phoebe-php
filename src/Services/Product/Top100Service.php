@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Top100\Top100GetResponseItem;
@@ -48,13 +49,15 @@ final class Top100Service implements Top100Contract
         $m = $parsed['m'];
         unset($parsed['m']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<Top100GetResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/top100/%1$s/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
             query: $parsed,
             options: $options,
             convert: new ListOf(Top100GetResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

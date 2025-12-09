@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Taxonomy\Versions\VersionListResponseItem;
@@ -29,12 +30,14 @@ final class VersionsService implements VersionsContract
      */
     public function list(?RequestOptions $requestOptions = null): array
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<VersionListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ref/taxonomy/versions',
             options: $requestOptions,
             convert: new ListOf(VersionListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

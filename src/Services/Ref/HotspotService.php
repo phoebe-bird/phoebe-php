@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\HotspotListParams;
@@ -56,13 +57,15 @@ final class HotspotService implements HotspotContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<HotspotListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/hotspot/%1$s', $regionCode],
             query: $parsed,
             options: $options,
             convert: new ListOf(HotspotListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

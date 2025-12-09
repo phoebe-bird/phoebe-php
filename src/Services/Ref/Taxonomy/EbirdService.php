@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Taxonomy\Ebird\EbirdGetResponseItem;
@@ -45,13 +46,15 @@ final class EbirdService implements EbirdContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<EbirdGetResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ref/taxonomy/ebird',
             query: $parsed,
             options: $options,
             convert: new ListOf(EbirdGetResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

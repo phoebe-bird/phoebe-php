@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Hotspot;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\Geo\GeoGetResponseItem;
@@ -41,13 +42,15 @@ final class GeoService implements GeoContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<GeoGetResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ref/hotspot/geo',
             query: $parsed,
             options: $options,
             convert: new ListOf(GeoGetResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

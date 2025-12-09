@@ -6,9 +6,7 @@ namespace Phoebe\Ref\Region\Info;
 
 use Phoebe\Core\Attributes\Api;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 use Phoebe\Ref\Region\Info\InfoGetResponse\Bounds;
 
 /**
@@ -16,12 +14,10 @@ use Phoebe\Ref\Region\Info\InfoGetResponse\Bounds;
  *   bounds?: Bounds|null, result?: string|null
  * }
  */
-final class InfoGetResponse implements BaseModel, ResponseConverter
+final class InfoGetResponse implements BaseModel
 {
     /** @use SdkModel<InfoGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?Bounds $bounds;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Geo;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Geo\Recent\RecentListParams;
@@ -68,13 +69,15 @@ final class RecentService implements RecentContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<Observation>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'data/obs/geo/recent',
             query: $parsed,
             options: $options,
             convert: new ListOf(Observation::class),
         );
+
+        return $response->parse();
     }
 }

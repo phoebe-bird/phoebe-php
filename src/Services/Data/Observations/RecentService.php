@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
@@ -72,13 +73,15 @@ final class RecentService implements RecentContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<Observation>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['data/obs/%1$s/recent', $regionCode],
             query: $parsed,
             options: $options,
             convert: new ListOf(Observation::class),
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
@@ -30,12 +31,14 @@ final class FormsService implements FormsContract
         string $speciesCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<string>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/taxon/forms/%1$s', $speciesCode],
             options: $requestOptions,
             convert: new ListOf('string'),
         );
+
+        return $response->parse();
     }
 }

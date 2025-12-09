@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\Adjacent\AdjacentListResponseItem;
@@ -31,12 +32,14 @@ final class AdjacentService implements AdjacentContract
         string $regionCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<AdjacentListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/adjacent/%1$s', $regionCode],
             options: $requestOptions,
             convert: new ListOf(AdjacentListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

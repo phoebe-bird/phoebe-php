@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Hotspot;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\Info\InfoGetResponse;
 use Phoebe\RequestOptions;
@@ -28,12 +29,14 @@ final class InfoService implements InfoContract
         string $locID,
         ?RequestOptions $requestOptions = null
     ): InfoGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InfoGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/hotspot/info/%1$s', $locID],
             options: $requestOptions,
             convert: InfoGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

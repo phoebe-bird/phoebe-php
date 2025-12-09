@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Taxonomy\SpeciesGroups\SpeciesGroupListParams;
@@ -42,13 +43,15 @@ final class SpeciesGroupsService implements SpeciesGroupsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<SpeciesGroupListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/sppgroup/%1$s', $speciesGrouping],
             query: $parsed,
             options: $options,
             convert: new ListOf(SpeciesGroupListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }
