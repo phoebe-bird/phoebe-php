@@ -17,7 +17,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *   lat?: float|null,
  *   latitude?: float|null,
  *   lng?: float|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   locName?: string|null,
  *   longitude?: float|null,
  *   name?: string|null,
@@ -51,8 +51,8 @@ final class Loc implements BaseModel
     #[Optional]
     public ?float $lng;
 
-    #[Optional]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
     #[Optional]
     public ?string $locName;
@@ -87,7 +87,7 @@ final class Loc implements BaseModel
         ?float $lat = null,
         ?float $latitude = null,
         ?float $lng = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?string $locName = null,
         ?float $longitude = null,
         ?string $name = null,
@@ -103,7 +103,7 @@ final class Loc implements BaseModel
         null !== $lat && $obj['lat'] = $lat;
         null !== $latitude && $obj['latitude'] = $latitude;
         null !== $lng && $obj['lng'] = $lng;
-        null !== $locId && $obj['locId'] = $locId;
+        null !== $locID && $obj['locID'] = $locID;
         null !== $locName && $obj['locName'] = $locName;
         null !== $longitude && $obj['longitude'] = $longitude;
         null !== $name && $obj['name'] = $name;
@@ -172,7 +172,7 @@ final class Loc implements BaseModel
     public function withLocID(string $locID): self
     {
         $obj = clone $this;
-        $obj['locId'] = $locID;
+        $obj['locID'] = $locID;
 
         return $obj;
     }
