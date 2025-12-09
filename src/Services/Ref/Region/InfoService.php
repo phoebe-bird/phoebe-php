@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\Info\InfoGetResponse;
 use Phoebe\Ref\Region\Info\InfoRetrieveParams;
@@ -53,13 +54,15 @@ final class InfoService implements InfoContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<InfoGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/region/info/%1$s', $regionCode],
             query: $parsed,
             options: $options,
             convert: InfoGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

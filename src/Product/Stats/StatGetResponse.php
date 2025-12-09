@@ -6,21 +6,17 @@ namespace Phoebe\Product\Stats;
 
 use Phoebe\Core\Attributes\Api;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type StatGetResponseShape = array{
  *   numChecklists?: int|null, numContributors?: int|null, numSpecies?: int|null
  * }
  */
-final class StatGetResponse implements BaseModel, ResponseConverter
+final class StatGetResponse implements BaseModel
 {
     /** @use SdkModel<StatGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?int $numChecklists;

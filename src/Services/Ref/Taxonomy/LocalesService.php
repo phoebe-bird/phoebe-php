@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListParams;
@@ -41,13 +42,15 @@ final class LocalesService implements LocalesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<LocaleListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'ref/taxa-locales/ebird',
             headers: $parsed,
             options: $options,
             convert: new ListOf(LocaleListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

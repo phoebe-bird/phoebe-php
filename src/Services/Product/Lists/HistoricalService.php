@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product\Lists;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
@@ -52,13 +53,15 @@ final class HistoricalService implements HistoricalContract
         $m = $parsed['m'];
         unset($parsed['m']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<HistoricalGetResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/lists/%1$s/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
             query: $parsed,
             options: $options,
             convert: new ListOf(HistoricalGetResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

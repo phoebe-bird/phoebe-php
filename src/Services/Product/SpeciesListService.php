@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
@@ -31,12 +32,14 @@ final class SpeciesListService implements SpeciesListContract
         string $regionCode,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<string>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/spplist/%1$s', $regionCode],
             options: $requestOptions,
             convert: new ListOf('string'),
         );
+
+        return $response->parse();
     }
 }

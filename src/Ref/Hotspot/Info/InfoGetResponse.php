@@ -6,9 +6,7 @@ namespace Phoebe\Ref\Hotspot\Info;
 
 use Phoebe\Core\Attributes\Api;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type InfoGetResponseShape = array{
@@ -27,12 +25,10 @@ use Phoebe\Core\Conversion\Contracts\ResponseConverter;
  *   subnational1Name?: string|null,
  * }
  */
-final class InfoGetResponse implements BaseModel, ResponseConverter
+final class InfoGetResponse implements BaseModel
 {
     /** @use SdkModel<InfoGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $countryCode;

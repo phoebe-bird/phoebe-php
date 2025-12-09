@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Stats\StatGetResponse;
 use Phoebe\Product\Stats\StatRetrieveParams;
@@ -44,12 +45,14 @@ final class StatsService implements StatsContract
         $m = $parsed['m'];
         unset($parsed['m']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<StatGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/stats/%1$s/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
             options: $options,
             convert: StatGetResponse::class,
         );
+
+        return $response->parse();
     }
 }

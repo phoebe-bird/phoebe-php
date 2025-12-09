@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Lists\ListGetResponseItem;
@@ -49,13 +50,15 @@ final class ListsService implements ListsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<ListGetResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['product/lists/%1$s', $regionCode],
             query: $parsed,
             options: $options,
             convert: new ListOf(ListGetResponseItem::class),
         );
+
+        return $response->parse();
     }
 }

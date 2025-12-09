@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
+use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\List\ListListParams;
@@ -42,13 +43,15 @@ final class ListService implements ListContract
         $regionType = $parsed['regionType'];
         unset($parsed['regionType']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<ListListResponseItem>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['ref/region/list/%1$s/%2$s', $regionType, $parentRegionCode],
             query: $parsed,
             options: $options,
             convert: new ListOf(ListListResponseItem::class),
         );
+
+        return $response->parse();
     }
 }
