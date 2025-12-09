@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Recent\Historic;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -38,13 +39,13 @@ final class HistoricListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
@@ -52,7 +53,7 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Cat>|null $cat
      */
-    #[Api(enum: Cat::class, optional: true)]
+    #[Optional(enum: Cat::class)]
     public ?string $cat;
 
     /**
@@ -60,25 +61,25 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Detail>|null $detail
      */
-    #[Api(enum: Detail::class, optional: true)]
+    #[Optional(enum: Detail::class)]
     public ?string $detail;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -86,7 +87,7 @@ final class HistoricListParams implements BaseModel
      *
      * @var list<string>|null $r
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $r;
 
     /**
@@ -94,13 +95,13 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Rank>|null $rank
      */
-    #[Api(enum: Rank::class, optional: true)]
+    #[Optional(enum: Rank::class)]
     public ?string $rank;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**

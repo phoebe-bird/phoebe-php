@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\Versions;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class VersionListResponseItem implements BaseModel
     /** @use SdkModel<VersionListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $authorityVer;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $latest;
 
     public function __construct()

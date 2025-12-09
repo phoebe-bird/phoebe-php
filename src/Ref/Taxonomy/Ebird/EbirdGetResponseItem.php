@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\Ebird;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -30,42 +30,42 @@ final class EbirdGetResponseItem implements BaseModel
     use SdkModel;
 
     /** @var list<string>|null $bandingCodes */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $bandingCodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $category;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comName;
 
     /** @var list<string>|null $comNameCodes */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $comNameCodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $familyCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $familyComName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $familySciName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $order;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sciName;
 
     /** @var list<string>|null $sciNameCodes */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $sciNameCodes;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $taxonOrder;
 
     public function __construct()

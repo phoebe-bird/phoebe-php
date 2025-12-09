@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -33,52 +33,52 @@ final class Observation implements BaseModel
     /** @use SdkModel<ObservationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $firstname;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $howMany;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastname;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lat;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lng;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $locationPrivate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsReviewed;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsValid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sciName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subId;
 
     public function __construct()

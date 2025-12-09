@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\Historical;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -29,19 +30,19 @@ final class HistoricalRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
      * Only fetch this number of checklists.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -49,7 +50,7 @@ final class HistoricalRetrieveParams implements BaseModel
      *
      * @var value-of<SortKey>|null $sortKey
      */
-    #[Api(enum: SortKey::class, optional: true)]
+    #[Optional(enum: SortKey::class)]
     public ?string $sortKey;
 
     /**

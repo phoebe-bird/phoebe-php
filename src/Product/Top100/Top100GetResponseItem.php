@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Top100;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -23,22 +23,22 @@ final class Top100GetResponseItem implements BaseModel
     /** @use SdkModel<Top100GetResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numCompleteChecklists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpecies;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profileHandle;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $rowNum;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $userDisplayName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $userId;
 
     public function __construct()

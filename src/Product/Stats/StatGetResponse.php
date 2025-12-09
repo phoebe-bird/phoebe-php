@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Stats;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,13 +18,13 @@ final class StatGetResponse implements BaseModel
     /** @use SdkModel<StatGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numChecklists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numContributors;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpecies;
 
     public function __construct()

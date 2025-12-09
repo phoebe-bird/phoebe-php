@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem\Ob\ObsAux;
@@ -23,16 +23,16 @@ final class Ob implements BaseModel
     use SdkModel;
 
     /** @var list<ObsAux>|null $obsAux */
-    #[Api(list: ObsAux::class, optional: true)]
+    #[Optional(list: ObsAux::class)]
     public ?array $obsAux;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
     public function __construct()

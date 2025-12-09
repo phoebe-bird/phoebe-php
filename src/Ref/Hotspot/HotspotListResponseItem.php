@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Hotspot;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -26,31 +26,31 @@ final class HotspotListResponseItem implements BaseModel
     /** @use SdkModel<HotspotListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $countryCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lat;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $latestObsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lng;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpeciesAllTime;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational1Code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational2Code;
 
     public function __construct()

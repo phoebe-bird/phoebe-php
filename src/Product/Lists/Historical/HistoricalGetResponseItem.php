@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\Historical;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem\Loc;
@@ -40,65 +40,65 @@ final class HistoricalGetResponseItem implements BaseModel
     /** @use SdkModel<HistoricalGetResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $allObsReported;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $checklistId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $creationDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $durationHrs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isoObsDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastEditedDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Loc $loc;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numObservers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpecies;
 
     /** @var list<Ob>|null $obs */
-    #[Api(list: Ob::class, optional: true)]
+    #[Optional(list: Ob::class)]
     public ?array $obs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsTime;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsTimeValid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $projId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $protocolId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $submissionMethodCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational1Code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $userDisplayName;
 
     public function __construct()

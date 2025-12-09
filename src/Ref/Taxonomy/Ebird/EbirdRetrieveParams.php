@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\Ebird;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -32,7 +32,7 @@ final class EbirdRetrieveParams implements BaseModel
     /**
      * Only fetch records from these taxonomic categories.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cat;
 
     /**
@@ -40,25 +40,25 @@ final class EbirdRetrieveParams implements BaseModel
      *
      * @var value-of<Fmt>|null $fmt
      */
-    #[Api(enum: Fmt::class, optional: true)]
+    #[Optional(enum: Fmt::class)]
     public ?string $fmt;
 
     /**
      * Use this language for common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locale;
 
     /**
      * Only fetch records for these species.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $species;
 
     /**
      * Fetch a specific version of the taxonomy.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $version;
 
     public function __construct()
