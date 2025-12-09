@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Hotspot;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -28,7 +28,7 @@ final class HotspotListParams implements BaseModel
     /**
      * The number of days back to fetch hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
@@ -36,7 +36,7 @@ final class HotspotListParams implements BaseModel
      *
      * @var value-of<Fmt>|null $fmt
      */
-    #[Api(enum: Fmt::class, optional: true)]
+    #[Optional(enum: Fmt::class)]
     public ?string $fmt;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Adjacent;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class AdjacentListResponseItem implements BaseModel
     /** @use SdkModel<AdjacentListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()

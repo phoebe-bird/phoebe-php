@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Top100;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -41,19 +42,19 @@ final class Top100RetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
      * Only fetch this number of contributors.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -61,7 +62,7 @@ final class Top100RetrieveParams implements BaseModel
      *
      * @var value-of<RankedBy>|null $rankedBy
      */
-    #[Api(enum: RankedBy::class, optional: true)]
+    #[Optional(enum: RankedBy::class)]
     public ?string $rankedBy;
 
     /**

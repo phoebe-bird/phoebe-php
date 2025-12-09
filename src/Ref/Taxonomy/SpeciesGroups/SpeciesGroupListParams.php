@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\SpeciesGroups;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class SpeciesGroupListParams implements BaseModel
     /**
      * Locale for species group names. English names are returned for any non-listed locale or any non-translated group name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $groupNameLocale;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info\InfoGetResponse;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,16 +18,16 @@ final class Bounds implements BaseModel
     /** @use SdkModel<BoundsShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $maxX;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $maxY;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $minX;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $minY;
 
     public function __construct()

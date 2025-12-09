@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\SpeciesGroups;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Core\Conversion\ListOf;
@@ -21,14 +21,14 @@ final class SpeciesGroupListResponseItem implements BaseModel
     /** @use SdkModel<SpeciesGroupListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $groupName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $groupOrder;
 
     /** @var list<list<float>>|null $taxonOrderBounds */
-    #[Api(list: new ListOf('float'), optional: true)]
+    #[Optional(list: new ListOf('float'))]
     public ?array $taxonOrderBounds;
 
     public function __construct()

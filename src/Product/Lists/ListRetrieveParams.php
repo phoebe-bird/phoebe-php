@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ final class ListRetrieveParams implements BaseModel
     /**
      * Only fetch this number of checklists.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     public function __construct()

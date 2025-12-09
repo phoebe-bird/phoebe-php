@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Ref\Region\Info\InfoGetResponse\Bounds;
@@ -19,10 +19,10 @@ final class InfoGetResponse implements BaseModel
     /** @use SdkModel<InfoGetResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Bounds $bounds;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()

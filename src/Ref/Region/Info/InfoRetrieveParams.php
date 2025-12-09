@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -41,7 +41,7 @@ final class InfoRetrieveParams implements BaseModel
     /**
      * The characters used to separate elements in the name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delim;
 
     /**
@@ -49,7 +49,7 @@ final class InfoRetrieveParams implements BaseModel
      *
      * @var value-of<RegionNameFormat>|null $regionNameFormat
      */
-    #[Api(enum: RegionNameFormat::class, optional: true)]
+    #[Optional(enum: RegionNameFormat::class)]
     public ?string $regionNameFormat;
 
     public function __construct()

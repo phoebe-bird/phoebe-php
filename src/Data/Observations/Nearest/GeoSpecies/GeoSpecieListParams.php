@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Nearest\GeoSpecies;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -31,46 +32,46 @@ final class GeoSpecieListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public float $lat;
 
-    #[Api]
+    #[Required]
     public float $lng;
 
     /**
      * The number of days back to fetch observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
      * Only fetch observations within this distance of the provided lat/lng.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $dist;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch up to this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**

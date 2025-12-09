@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\ListGetResponseItem\Ob;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class ObsAux implements BaseModel
     /** @use SdkModel<ObsAuxShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $auxCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $entryMethodCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fieldName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subId;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()
