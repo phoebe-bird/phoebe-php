@@ -9,6 +9,8 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Geo\Recent\RecentListParams;
+use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Cat;
+use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\RecentContract;
@@ -47,12 +49,12 @@ final class RecentService implements RecentContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
      *   dist?: int,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
-     *   sort?: 'date'|'species',
+     *   sort?: 'date'|'species'|Sort,
      *   sppLocale?: string,
      * }|RecentListParams $params
      *

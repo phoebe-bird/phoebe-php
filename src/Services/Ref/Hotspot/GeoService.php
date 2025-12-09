@@ -10,6 +10,7 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\Geo\GeoGetResponseItem;
 use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams;
+use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\GeoContract;
 
@@ -26,7 +27,7 @@ final class GeoService implements GeoContract
      * Get the list of hotspots, within a radius of up to 50 kilometers, from a given set of coordinates.
      *
      * @param array{
-     *   lat: float, lng: float, back?: int, dist?: int, fmt?: 'csv'|'json'
+     *   lat: float, lng: float, back?: int, dist?: int, fmt?: 'csv'|'json'|Fmt
      * }|GeoRetrieveParams $params
      *
      * @return list<GeoGetResponseItem>

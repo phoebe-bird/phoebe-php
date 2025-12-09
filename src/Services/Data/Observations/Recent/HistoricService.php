@@ -10,6 +10,9 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Historic\HistoricListParams;
+use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Cat;
+use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Detail;
+use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Rank;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\HistoricContract;
 
@@ -30,13 +33,13 @@ final class HistoricService implements HistoricContract
      *   regionCode: string,
      *   y: int,
      *   m: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
-     *   detail?: 'simple'|'full',
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
+     *   detail?: 'simple'|'full'|Detail,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
-     *   rank?: 'mrec'|'create',
+     *   rank?: 'mrec'|'create'|Rank,
      *   sppLocale?: string,
      * }|HistoricListParams $params
      *

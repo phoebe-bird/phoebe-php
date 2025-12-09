@@ -10,6 +10,7 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams;
+use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\Lists\HistoricalContract;
 
@@ -30,7 +31,7 @@ final class HistoricalService implements HistoricalContract
      *   y: int,
      *   m: int,
      *   maxResults?: int,
-     *   sortKey?: 'obs_dt'|'creation_dt',
+     *   sortKey?: 'obs_dt'|'creation_dt'|SortKey,
      * }|HistoricalRetrieveParams $params
      *
      * @return list<HistoricalGetResponseItem>

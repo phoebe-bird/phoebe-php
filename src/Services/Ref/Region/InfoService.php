@@ -9,6 +9,7 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\Info\InfoGetResponse;
 use Phoebe\Ref\Region\Info\InfoRetrieveParams;
+use Phoebe\Ref\Region\Info\InfoRetrieveParams\RegionNameFormat;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\InfoContract;
 
@@ -39,7 +40,7 @@ final class InfoService implements InfoContract
      *
      * @param array{
      *   delim?: string,
-     *   regionNameFormat?: 'detailed'|'detailednoqual'|'full'|'namequal'|'nameonly'|'revdetailed',
+     *   regionNameFormat?: 'detailed'|'detailednoqual'|'full'|'namequal'|'nameonly'|'revdetailed'|RegionNameFormat,
      * }|InfoRetrieveParams $params
      *
      * @throws APIException

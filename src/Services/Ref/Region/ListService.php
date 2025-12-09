@@ -9,6 +9,7 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\List\ListListParams;
+use Phoebe\Ref\Region\List\ListListParams\Fmt;
 use Phoebe\Ref\Region\List\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListContract;
@@ -25,7 +26,7 @@ final class ListService implements ListContract
      *
      * Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.
      *
-     * @param array{regionType: string, fmt?: 'csv'|'json'}|ListListParams $params
+     * @param array{regionType: string, fmt?: 'csv'|'json'|Fmt}|ListListParams $params
      *
      * @return list<ListListResponseItem>
      *

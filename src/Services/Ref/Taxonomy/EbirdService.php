@@ -10,6 +10,7 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Taxonomy\Ebird\EbirdGetResponseItem;
 use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams;
+use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\EbirdContract;
 
@@ -27,7 +28,7 @@ final class EbirdService implements EbirdContract
      *
      * @param array{
      *   cat?: string,
-     *   fmt?: 'csv'|'json',
+     *   fmt?: 'csv'|'json'|Fmt,
      *   locale?: string,
      *   species?: string,
      *   version?: string,

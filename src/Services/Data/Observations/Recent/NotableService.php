@@ -10,6 +10,7 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Notable\NotableListParams;
+use Phoebe\Data\Observations\Recent\Notable\NotableListParams\Detail;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\NotableContract;
 
@@ -27,7 +28,7 @@ final class NotableService implements NotableContract
      *
      * @param array{
      *   back?: int,
-     *   detail?: 'simple'|'full',
+     *   detail?: 'simple'|'full'|Detail,
      *   hotspot?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
