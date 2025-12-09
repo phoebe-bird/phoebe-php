@@ -10,6 +10,7 @@ use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\RecentListParams;
+use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\RecentContract;
 use Phoebe\Services\Data\Observations\Recent\HistoricService;
@@ -51,7 +52,7 @@ final class RecentService implements RecentContract
      *
      * @param array{
      *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade',
+     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,

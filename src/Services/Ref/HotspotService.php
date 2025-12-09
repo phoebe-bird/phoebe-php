@@ -9,6 +9,7 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\HotspotListParams;
+use Phoebe\Ref\Hotspot\HotspotListParams\Fmt;
 use Phoebe\Ref\Hotspot\HotspotListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\HotspotContract;
@@ -41,7 +42,7 @@ final class HotspotService implements HotspotContract
      *
      * Hotspots in a region
      *
-     * @param array{back?: int, fmt?: 'csv'|'json'}|HotspotListParams $params
+     * @param array{back?: int, fmt?: 'csv'|'json'|Fmt}|HotspotListParams $params
      *
      * @return list<HotspotListResponseItem>
      *

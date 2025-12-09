@@ -9,6 +9,7 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams;
+use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams\Detail;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\NotableContract;
@@ -29,7 +30,7 @@ final class NotableService implements NotableContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   detail?: 'simple'|'full',
+     *   detail?: 'simple'|'full'|Detail,
      *   dist?: int,
      *   hotspot?: bool,
      *   maxResults?: int,
