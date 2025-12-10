@@ -28,7 +28,7 @@ final class ListsTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        $result = $this->client->product->lists->retrieve('regionCode', []);
+        $result = $this->client->product->lists->retrieve('regionCode');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

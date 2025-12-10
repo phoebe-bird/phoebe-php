@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Stats\StatGetResponse;
-use Phoebe\Product\Stats\StatRetrieveParams;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\StatsContract;
 
 final class StatsService implements StatsContract
 {
     /**
+     * @api
+     */
+    public StatsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new StatsRawService($client);
+    }
 
     /**
      * @api
@@ -25,33 +31,24 @@ final class StatsService implements StatsContract
      * Get a summary of the number of checklist submitted, species seen and contributors on a given date for a country or region.
      * #### Notes The results are updated every 15 minutes.
      *
-     * @param array{regionCode: string, y: int, m: int}|StatRetrieveParams $params
+     * @param int $d the day in the month
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $y the year, from 1800 to the present
+     * @param int $m the month, from 1-12
      *
      * @throws APIException
      */
     public function retrieve(
         int $d,
-        array|StatRetrieveParams $params,
+        string $regionCode,
+        int $y,
+        int $m,
         ?RequestOptions $requestOptions = null,
     ): StatGetResponse {
-        [$parsed, $options] = StatRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $regionCode = $parsed['regionCode'];
-        unset($parsed['regionCode']);
-        $y = $parsed['y'];
-        unset($parsed['y']);
-        $m = $parsed['m'];
-        unset($parsed['m']);
+        $params = ['regionCode' => $regionCode, 'y' => $y, 'm' => $m];
 
-        /** @var BaseResponse<StatGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['product/stats/%1$s/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
-            options: $options,
-            convert: StatGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($d, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

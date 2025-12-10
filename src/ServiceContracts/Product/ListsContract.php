@@ -6,7 +6,6 @@ namespace Phoebe\ServiceContracts\Product;
 
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Lists\ListGetResponseItem;
-use Phoebe\Product\Lists\ListRetrieveParams;
 use Phoebe\RequestOptions;
 
 interface ListsContract
@@ -14,7 +13,8 @@ interface ListsContract
     /**
      * @api
      *
-     * @param array<mixed>|ListRetrieveParams $params
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $maxResults only fetch this number of checklists
      *
      * @return list<ListGetResponseItem>
      *
@@ -22,7 +22,7 @@ interface ListsContract
      */
     public function retrieve(
         string $regionCode,
-        array|ListRetrieveParams $params,
+        int $maxResults = 10,
         ?RequestOptions $requestOptions = null,
     ): array;
 }

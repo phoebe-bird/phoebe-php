@@ -13,6 +13,8 @@ interface ChecklistContract
     /**
      * @api
      *
+     * @param string $subID the checklist identifier
+     *
      * @throws APIException
      */
     public function view(

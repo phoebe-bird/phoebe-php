@@ -28,9 +28,10 @@ final class RecentTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        $result = $this->client->data->observations->geo->recent->list([
-            'lat' => -90, 'lng' => -180,
-        ]);
+        $result = $this->client->data->observations->geo->recent->list(
+            lat: -90,
+            lng: -180
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -39,18 +40,18 @@ final class RecentTest extends TestCase
     #[Test]
     public function testListWithOptionalParams(): void
     {
-        $result = $this->client->data->observations->geo->recent->list([
-            'lat' => -90,
-            'lng' => -180,
-            'back' => 1,
-            'cat' => 'species',
-            'dist' => 0,
-            'hotspot' => true,
-            'includeProvisional' => true,
-            'maxResults' => 1,
-            'sort' => 'date',
-            'sppLocale' => 'sppLocale',
-        ]);
+        $result = $this->client->data->observations->geo->recent->list(
+            lat: -90,
+            lng: -180,
+            back: 1,
+            cat: 'species',
+            dist: 0,
+            hotspot: true,
+            includeProvisional: true,
+            maxResults: 1,
+            sort: 'date',
+            sppLocale: 'sppLocale',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

@@ -28,9 +28,7 @@ final class GeoTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        $result = $this->client->ref->hotspot->geo->retrieve([
-            'lat' => -90, 'lng' => -180,
-        ]);
+        $result = $this->client->ref->hotspot->geo->retrieve(lat: -90, lng: -180);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -39,9 +37,13 @@ final class GeoTest extends TestCase
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        $result = $this->client->ref->hotspot->geo->retrieve([
-            'lat' => -90, 'lng' => -180, 'back' => 1, 'dist' => 0, 'fmt' => 'csv',
-        ]);
+        $result = $this->client->ref->hotspot->geo->retrieve(
+            lat: -90,
+            lng: -180,
+            back: 1,
+            dist: 0,
+            fmt: 'csv'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

@@ -30,7 +30,7 @@ final class SpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->recent->species->retrieve(
             'speciesCode',
-            ['regionCode' => 'regionCode']
+            regionCode: 'regionCode'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,15 +42,13 @@ final class SpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->recent->species->retrieve(
             'speciesCode',
-            [
-                'regionCode' => 'regionCode',
-                'back' => 1,
-                'hotspot' => true,
-                'includeProvisional' => true,
-                'maxResults' => 1,
-                'r' => ['string'],
-                'sppLocale' => 'sppLocale',
-            ],
+            regionCode: 'regionCode',
+            back: 1,
+            hotspot: true,
+            includeProvisional: true,
+            maxResults: 1,
+            r: ['string'],
+            sppLocale: 'sppLocale',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

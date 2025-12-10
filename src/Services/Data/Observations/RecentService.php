@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
-use Phoebe\Data\Observations\Recent\RecentListParams;
 use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\RecentContract;
@@ -19,6 +16,11 @@ use Phoebe\Services\Data\Observations\Recent\SpeciesService;
 
 final class RecentService implements RecentContract
 {
+    /**
+     * @api
+     */
+    public RecentRawService $raw;
+
     /**
      * @api
      */
@@ -39,6 +41,7 @@ final class RecentService implements RecentContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RecentRawService($client);
         $this->notable = new NotableService($client);
         $this->species = new SpeciesService($client);
         $this->historic = new HistoricService($client);
@@ -50,15 +53,14 @@ final class RecentService implements RecentContract
      * Get the list of recent observations (up to 30 days ago) of birds seen
      * in a country, state, county, or location. Results include only the most recent observation for each species in the region specified.
      *
-     * @param array{
-     *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   r?: list<string>,
-     *   sppLocale?: string,
-     * }|RecentListParams $params
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $back the number of days back to fetch observations
+     * @param 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat $cat Only fetch observations from these taxonomic categories
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional Include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch this number of observations
+     * @param list<string> $r Fetch observations from up to 10 locations
+     * @param string $sppLocale Use this language for species common names
      *
      * @return list<Observation>
      *
@@ -66,22 +68,29 @@ final class RecentService implements RecentContract
      */
     public function list(
         string $regionCode,
-        array|RecentListParams $params,
+        int $back = 14,
+        string|Cat|null $cat = null,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        ?array $r = null,
+        string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = RecentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'back' => $back,
+            'cat' => $cat,
+            'hotspot' => $hotspot,
+            'includeProvisional' => $includeProvisional,
+            'maxResults' => $maxResults,
+            'r' => $r,
+            'sppLocale' => $sppLocale,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<Observation>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['data/obs/%1$s/recent', $regionCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($regionCode, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

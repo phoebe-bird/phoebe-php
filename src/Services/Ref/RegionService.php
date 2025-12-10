@@ -15,6 +15,11 @@ final class RegionService implements RegionContract
     /**
      * @api
      */
+    public RegionRawService $raw;
+
+    /**
+     * @api
+     */
     public AdjacentService $adjacent;
 
     /**
@@ -32,6 +37,7 @@ final class RegionService implements RegionContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RegionRawService($client);
         $this->adjacent = new AdjacentService($client);
         $this->info = new InfoService($client);
         $this->list = new ListService($client);

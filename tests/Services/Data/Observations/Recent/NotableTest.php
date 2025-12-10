@@ -29,8 +29,7 @@ final class NotableTest extends TestCase
     public function testList(): void
     {
         $result = $this->client->data->observations->recent->notable->list(
-            'regionCode',
-            []
+            'regionCode'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

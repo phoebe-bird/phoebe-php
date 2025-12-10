@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Core\Util;
-use Phoebe\Ref\Taxonomy\Locales\LocaleListParams;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesContract;
@@ -17,9 +13,17 @@ use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesContract;
 final class LocalesService implements LocalesContract
 {
     /**
+     * @api
+     */
+    public LocalesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LocalesRawService($client);
+    }
 
     /**
      * @api
@@ -28,32 +32,20 @@ final class LocalesService implements LocalesContract
      *
      * NOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.
      *
-     * @param array{acceptLanguage?: string}|LocaleListParams $params
-     *
      * @return list<LocaleListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        array|LocaleListParams $params,
+        ?string $acceptLanguage = null,
         ?RequestOptions $requestOptions = null
     ): array {
-        [$parsed, $options] = LocaleListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['acceptLanguage' => $acceptLanguage];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<LocaleListResponseItem>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ref/taxa-locales/ebird',
-            headers: Util::array_transform_keys(
-                $parsed,
-                ['acceptLanguage' => 'Accept-Language']
-            ),
-            options: $options,
-            convert: new ListOf(LocaleListResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

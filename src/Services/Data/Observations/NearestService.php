@@ -13,6 +13,11 @@ final class NearestService implements NearestContract
     /**
      * @api
      */
+    public NearestRawService $raw;
+
+    /**
+     * @api
+     */
     public GeoSpeciesService $geoSpecies;
 
     /**
@@ -20,6 +25,7 @@ final class NearestService implements NearestContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new NearestRawService($client);
         $this->geoSpecies = new GeoSpeciesService($client);
     }
 }

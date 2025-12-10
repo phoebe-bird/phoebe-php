@@ -28,7 +28,7 @@ final class SpeciesGroupsTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        $result = $this->client->ref->taxonomy->speciesGroups->list('merlin', []);
+        $result = $this->client->ref->taxonomy->speciesGroups->list('merlin');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

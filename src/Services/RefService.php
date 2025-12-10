@@ -15,6 +15,11 @@ final class RefService implements RefContract
     /**
      * @api
      */
+    public RefRawService $raw;
+
+    /**
+     * @api
+     */
     public RegionService $region;
 
     /**
@@ -32,6 +37,7 @@ final class RefService implements RefContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RefRawService($client);
         $this->region = new RegionService($client);
         $this->hotspot = new HotspotService($client);
         $this->taxonomy = new TaxonomyService($client);

@@ -17,6 +17,11 @@ final class TaxonomyService implements TaxonomyContract
     /**
      * @api
      */
+    public TaxonomyRawService $raw;
+
+    /**
+     * @api
+     */
     public EbirdService $ebird;
 
     /**
@@ -44,6 +49,7 @@ final class TaxonomyService implements TaxonomyContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TaxonomyRawService($client);
         $this->ebird = new EbirdService($client);
         $this->forms = new FormsService($client);
         $this->locales = new LocalesService($client);

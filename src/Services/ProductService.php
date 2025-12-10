@@ -17,6 +17,11 @@ final class ProductService implements ProductContract
     /**
      * @api
      */
+    public ProductRawService $raw;
+
+    /**
+     * @api
+     */
     public ListsService $lists;
 
     /**
@@ -44,6 +49,7 @@ final class ProductService implements ProductContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ProductRawService($client);
         $this->lists = new ListsService($client);
         $this->top100 = new Top100Service($client);
         $this->stats = new StatsService($client);

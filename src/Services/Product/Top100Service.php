@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Top100\Top100GetResponseItem;
-use Phoebe\Product\Top100\Top100RetrieveParams;
 use Phoebe\Product\Top100\Top100RetrieveParams\RankedBy;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\Top100Contract;
@@ -17,22 +14,29 @@ use Phoebe\ServiceContracts\Product\Top100Contract;
 final class Top100Service implements Top100Contract
 {
     /**
+     * @api
+     */
+    public Top100RawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new Top100RawService($client);
+    }
 
     /**
      * @api
      *
      * Get the top 100 contributors on a given date for a country or region.
      *
-     * @param array{
-     *   regionCode: string,
-     *   y: int,
-     *   m: int,
-     *   maxResults?: int,
-     *   rankedBy?: 'spp'|'cl'|RankedBy,
-     * }|Top100RetrieveParams $params
+     * @param int $d path param: The day in the month
+     * @param string $regionCode path param: The country, subnational1, or location code
+     * @param int $y path param: The year, from 1800 to the present
+     * @param int $m path param: The month, from 1-12
+     * @param int $maxResults query param: Only fetch this number of contributors
+     * @param 'spp'|'cl'|RankedBy $rankedBy query param: Order by number of complete checklists (cl) or by number of species seen (spp)
      *
      * @return list<Top100GetResponseItem>
      *
@@ -40,28 +44,25 @@ final class Top100Service implements Top100Contract
      */
     public function retrieve(
         int $d,
-        array|Top100RetrieveParams $params,
+        string $regionCode,
+        int $y,
+        int $m,
+        int $maxResults = 100,
+        string|RankedBy $rankedBy = 'spp',
         ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = Top100RetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $regionCode = $parsed['regionCode'];
-        unset($parsed['regionCode']);
-        $y = $parsed['y'];
-        unset($parsed['y']);
-        $m = $parsed['m'];
-        unset($parsed['m']);
+        $params = [
+            'regionCode' => $regionCode,
+            'y' => $y,
+            'm' => $m,
+            'maxResults' => $maxResults,
+            'rankedBy' => $rankedBy,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<Top100GetResponseItem>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['product/top100/%1$s/%2$s/%3$s/%4$s', $regionCode, $y, $m, $d],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Top100GetResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($d, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
