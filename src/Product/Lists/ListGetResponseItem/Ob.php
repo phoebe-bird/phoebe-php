@@ -61,14 +61,14 @@ final class Ob implements BaseModel
         ?string $obsID = null,
         ?string $speciesCode = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $obsAux && $obj['obsAux'] = $obsAux;
-        null !== $obsDt && $obj['obsDt'] = $obsDt;
-        null !== $obsID && $obj['obsID'] = $obsID;
-        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
+        null !== $obsAux && $self['obsAux'] = $obsAux;
+        null !== $obsDt && $self['obsDt'] = $obsDt;
+        null !== $obsID && $self['obsID'] = $obsID;
+        null !== $speciesCode && $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,33 +84,33 @@ final class Ob implements BaseModel
      */
     public function withObsAux(array $obsAux): self
     {
-        $obj = clone $this;
-        $obj['obsAux'] = $obsAux;
+        $self = clone $this;
+        $self['obsAux'] = $obsAux;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsDt(string $obsDt): self
     {
-        $obj = clone $this;
-        $obj['obsDt'] = $obsDt;
+        $self = clone $this;
+        $self['obsDt'] = $obsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsID(string $obsID): self
     {
-        $obj = clone $this;
-        $obj['obsID'] = $obsID;
+        $self = clone $this;
+        $self['obsID'] = $obsID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSpeciesCode(string $speciesCode): self
     {
-        $obj = clone $this;
-        $obj['speciesCode'] = $speciesCode;
+        $self = clone $this;
+        $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 }

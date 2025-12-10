@@ -96,22 +96,22 @@ final class EbirdGetResponseItem implements BaseModel
         ?string $speciesCode = null,
         ?int $taxonOrder = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bandingCodes && $obj['bandingCodes'] = $bandingCodes;
-        null !== $category && $obj['category'] = $category;
-        null !== $comName && $obj['comName'] = $comName;
-        null !== $comNameCodes && $obj['comNameCodes'] = $comNameCodes;
-        null !== $familyCode && $obj['familyCode'] = $familyCode;
-        null !== $familyComName && $obj['familyComName'] = $familyComName;
-        null !== $familySciName && $obj['familySciName'] = $familySciName;
-        null !== $order && $obj['order'] = $order;
-        null !== $sciName && $obj['sciName'] = $sciName;
-        null !== $sciNameCodes && $obj['sciNameCodes'] = $sciNameCodes;
-        null !== $speciesCode && $obj['speciesCode'] = $speciesCode;
-        null !== $taxonOrder && $obj['taxonOrder'] = $taxonOrder;
+        null !== $bandingCodes && $self['bandingCodes'] = $bandingCodes;
+        null !== $category && $self['category'] = $category;
+        null !== $comName && $self['comName'] = $comName;
+        null !== $comNameCodes && $self['comNameCodes'] = $comNameCodes;
+        null !== $familyCode && $self['familyCode'] = $familyCode;
+        null !== $familyComName && $self['familyComName'] = $familyComName;
+        null !== $familySciName && $self['familySciName'] = $familySciName;
+        null !== $order && $self['order'] = $order;
+        null !== $sciName && $self['sciName'] = $sciName;
+        null !== $sciNameCodes && $self['sciNameCodes'] = $sciNameCodes;
+        null !== $speciesCode && $self['speciesCode'] = $speciesCode;
+        null !== $taxonOrder && $self['taxonOrder'] = $taxonOrder;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,26 +119,26 @@ final class EbirdGetResponseItem implements BaseModel
      */
     public function withBandingCodes(array $bandingCodes): self
     {
-        $obj = clone $this;
-        $obj['bandingCodes'] = $bandingCodes;
+        $self = clone $this;
+        $self['bandingCodes'] = $bandingCodes;
 
-        return $obj;
+        return $self;
     }
 
     public function withCategory(string $category): self
     {
-        $obj = clone $this;
-        $obj['category'] = $category;
+        $self = clone $this;
+        $self['category'] = $category;
 
-        return $obj;
+        return $self;
     }
 
     public function withComName(string $comName): self
     {
-        $obj = clone $this;
-        $obj['comName'] = $comName;
+        $self = clone $this;
+        $self['comName'] = $comName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,50 +146,50 @@ final class EbirdGetResponseItem implements BaseModel
      */
     public function withComNameCodes(array $comNameCodes): self
     {
-        $obj = clone $this;
-        $obj['comNameCodes'] = $comNameCodes;
+        $self = clone $this;
+        $self['comNameCodes'] = $comNameCodes;
 
-        return $obj;
+        return $self;
     }
 
     public function withFamilyCode(string $familyCode): self
     {
-        $obj = clone $this;
-        $obj['familyCode'] = $familyCode;
+        $self = clone $this;
+        $self['familyCode'] = $familyCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withFamilyComName(string $familyComName): self
     {
-        $obj = clone $this;
-        $obj['familyComName'] = $familyComName;
+        $self = clone $this;
+        $self['familyComName'] = $familyComName;
 
-        return $obj;
+        return $self;
     }
 
     public function withFamilySciName(string $familySciName): self
     {
-        $obj = clone $this;
-        $obj['familySciName'] = $familySciName;
+        $self = clone $this;
+        $self['familySciName'] = $familySciName;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrder(string $order): self
     {
-        $obj = clone $this;
-        $obj['order'] = $order;
+        $self = clone $this;
+        $self['order'] = $order;
 
-        return $obj;
+        return $self;
     }
 
     public function withSciName(string $sciName): self
     {
-        $obj = clone $this;
-        $obj['sciName'] = $sciName;
+        $self = clone $this;
+        $self['sciName'] = $sciName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,25 +197,25 @@ final class EbirdGetResponseItem implements BaseModel
      */
     public function withSciNameCodes(array $sciNameCodes): self
     {
-        $obj = clone $this;
-        $obj['sciNameCodes'] = $sciNameCodes;
+        $self = clone $this;
+        $self['sciNameCodes'] = $sciNameCodes;
 
-        return $obj;
+        return $self;
     }
 
     public function withSpeciesCode(string $speciesCode): self
     {
-        $obj = clone $this;
-        $obj['speciesCode'] = $speciesCode;
+        $self = clone $this;
+        $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaxonOrder(int $taxonOrder): self
     {
-        $obj = clone $this;
-        $obj['taxonOrder'] = $taxonOrder;
+        $self = clone $this;
+        $self['taxonOrder'] = $taxonOrder;
 
-        return $obj;
+        return $self;
     }
 }

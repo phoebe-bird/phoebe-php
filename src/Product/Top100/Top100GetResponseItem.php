@@ -59,63 +59,63 @@ final class Top100GetResponseItem implements BaseModel
         ?string $userDisplayName = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numCompleteChecklists && $obj['numCompleteChecklists'] = $numCompleteChecklists;
-        null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
-        null !== $profileHandle && $obj['profileHandle'] = $profileHandle;
-        null !== $rowNum && $obj['rowNum'] = $rowNum;
-        null !== $userDisplayName && $obj['userDisplayName'] = $userDisplayName;
-        null !== $userID && $obj['userID'] = $userID;
+        null !== $numCompleteChecklists && $self['numCompleteChecklists'] = $numCompleteChecklists;
+        null !== $numSpecies && $self['numSpecies'] = $numSpecies;
+        null !== $profileHandle && $self['profileHandle'] = $profileHandle;
+        null !== $rowNum && $self['rowNum'] = $rowNum;
+        null !== $userDisplayName && $self['userDisplayName'] = $userDisplayName;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumCompleteChecklists(int $numCompleteChecklists): self
     {
-        $obj = clone $this;
-        $obj['numCompleteChecklists'] = $numCompleteChecklists;
+        $self = clone $this;
+        $self['numCompleteChecklists'] = $numCompleteChecklists;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpecies(int $numSpecies): self
     {
-        $obj = clone $this;
-        $obj['numSpecies'] = $numSpecies;
+        $self = clone $this;
+        $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileHandle(string $profileHandle): self
     {
-        $obj = clone $this;
-        $obj['profileHandle'] = $profileHandle;
+        $self = clone $this;
+        $self['profileHandle'] = $profileHandle;
 
-        return $obj;
+        return $self;
     }
 
     public function withRowNum(int $rowNum): self
     {
-        $obj = clone $this;
-        $obj['rowNum'] = $rowNum;
+        $self = clone $this;
+        $self['rowNum'] = $rowNum;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserDisplayName(string $userDisplayName): self
     {
-        $obj = clone $this;
-        $obj['userDisplayName'] = $userDisplayName;
+        $self = clone $this;
+        $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj['userID'] = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

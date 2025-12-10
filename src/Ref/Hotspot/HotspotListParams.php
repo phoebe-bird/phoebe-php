@@ -53,12 +53,12 @@ final class HotspotListParams implements BaseModel
      */
     public static function with(?int $back = null, Fmt|string|null $fmt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $back && $obj['back'] = $back;
-        null !== $fmt && $obj['fmt'] = $fmt;
+        null !== $back && $self['back'] = $back;
+        null !== $fmt && $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class HotspotListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj['back'] = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,9 +79,9 @@ final class HotspotListParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 }

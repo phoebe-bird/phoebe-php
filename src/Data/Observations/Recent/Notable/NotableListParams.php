@@ -91,16 +91,16 @@ final class NotableListParams implements BaseModel
         ?array $r = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $back && $obj['back'] = $back;
-        null !== $detail && $obj['detail'] = $detail;
-        null !== $hotspot && $obj['hotspot'] = $hotspot;
-        null !== $maxResults && $obj['maxResults'] = $maxResults;
-        null !== $r && $obj['r'] = $r;
-        null !== $sppLocale && $obj['sppLocale'] = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class NotableListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj['back'] = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class NotableListParams implements BaseModel
      */
     public function withDetail(Detail|string $detail): self
     {
-        $obj = clone $this;
-        $obj['detail'] = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class NotableListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj['hotspot'] = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class NotableListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj['maxResults'] = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class NotableListParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj['r'] = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,9 +167,9 @@ final class NotableListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj['sppLocale'] = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }
