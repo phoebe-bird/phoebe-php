@@ -30,7 +30,8 @@ final class GeoSpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->nearest->geoSpecies->list(
             'speciesCode',
-            ['lat' => -90, 'lng' => -180]
+            lat: -90,
+            lng: -180
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,16 +43,14 @@ final class GeoSpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->nearest->geoSpecies->list(
             'speciesCode',
-            [
-                'lat' => -90,
-                'lng' => -180,
-                'back' => 1,
-                'dist' => 0,
-                'hotspot' => true,
-                'includeProvisional' => true,
-                'maxResults' => 1,
-                'sppLocale' => 'sppLocale',
-            ],
+            lat: -90,
+            lng: -180,
+            back: 1,
+            dist: 0,
+            hotspot: true,
+            includeProvisional: true,
+            maxResults: 1,
+            sppLocale: 'sppLocale',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

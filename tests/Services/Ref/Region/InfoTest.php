@@ -29,7 +29,7 @@ final class InfoTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        $result = $this->client->ref->region->info->retrieve('regionCode', []);
+        $result = $this->client->ref->region->info->retrieve('regionCode');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(InfoGetResponse::class, $result);

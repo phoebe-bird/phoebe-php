@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Checklist\ChecklistViewResponse;
 use Phoebe\RequestOptions;
@@ -14,9 +13,17 @@ use Phoebe\ServiceContracts\Product\ChecklistContract;
 final class ChecklistService implements ChecklistContract
 {
     /**
+     * @api
+     */
+    public ChecklistRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ChecklistRawService($client);
+    }
 
     /**
      * @api
@@ -24,19 +31,16 @@ final class ChecklistService implements ChecklistContract
      * Get the details and observations of a checklist.
      * #### Notes Do NOT use this to download large amounts of data. You will be banned if you do. In the fields for each observation, the following fields are duplicates or obsolete and will be removed at a future date: *howManyAtleast*, *howManyAtmost*, *hideFlags*, *projId*, *subId*, *subnational1Code* and *present*.
      *
+     * @param string $subID the checklist identifier
+     *
      * @throws APIException
      */
     public function view(
         string $subID,
         ?RequestOptions $requestOptions = null
     ): ChecklistViewResponse {
-        /** @var BaseResponse<ChecklistViewResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['product/checklist/view/%1$s', $subID],
-            options: $requestOptions,
-            convert: ChecklistViewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->view($subID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

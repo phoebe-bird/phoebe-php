@@ -30,7 +30,9 @@ final class HistoricalTest extends TestCase
     {
         $result = $this->client->product->lists->historical->retrieve(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,13 +44,11 @@ final class HistoricalTest extends TestCase
     {
         $result = $this->client->product->lists->historical->retrieve(
             1,
-            [
-                'regionCode' => 'regionCode',
-                'y' => 0,
-                'm' => 1,
-                'maxResults' => 1,
-                'sortKey' => 'obs_dt',
-            ],
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1,
+            maxResults: 1,
+            sortKey: 'obs_dt'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -13,6 +13,8 @@ interface InfoContract
     /**
      * @api
      *
+     * @param string $locID the location code
+     *
      * @throws APIException
      */
     public function retrieve(

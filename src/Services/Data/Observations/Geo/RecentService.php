@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Geo;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Data\Observations\Geo\Recent\RecentListParams;
 use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Cat;
 use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
 use Phoebe\Data\Observations\Observation;
@@ -19,6 +16,11 @@ use Phoebe\Services\Data\Observations\Geo\Recent\SpeciesService;
 
 final class RecentService implements RecentContract
 {
+    /**
+     * @api
+     */
+    public RecentRawService $raw;
+
     /**
      * @api
      */
@@ -34,6 +36,7 @@ final class RecentService implements RecentContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RecentRawService($client);
         $this->species = new SpeciesService($client);
         $this->notable = new NotableService($client);
     }
@@ -45,40 +48,49 @@ final class RecentService implements RecentContract
      * at locations within a radius of up to 50 kilometers, from a given set
      * of coordinates. Results include only the most recent observation for each species in the region specified.
      *
-     * @param array{
-     *   lat: float,
-     *   lng: float,
-     *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
-     *   dist?: int,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   sort?: 'date'|'species'|Sort,
-     *   sppLocale?: string,
-     * }|RecentListParams $params
+     * @param int $back the number of days back to fetch observations
+     * @param 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat $cat Only fetch observations from these taxonomic categories
+     * @param int $dist the search radius from the given position, in kilometers
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch this number of observations
+     * @param 'date'|'species'|Sort $sort sort observations by taxonomy or by date, most recent first
+     * @param string $sppLocale Use this language for species common names
      *
      * @return list<Observation>
      *
      * @throws APIException
      */
     public function list(
-        array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null
+        float $lat,
+        float $lng,
+        int $back = 14,
+        string|Cat|null $cat = null,
+        int $dist = 25,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        string|Sort $sort = 'date',
+        string $sppLocale = 'en',
+        ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = RecentListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'lat' => $lat,
+            'lng' => $lng,
+            'back' => $back,
+            'cat' => $cat,
+            'dist' => $dist,
+            'hotspot' => $hotspot,
+            'includeProvisional' => $includeProvisional,
+            'maxResults' => $maxResults,
+            'sort' => $sort,
+            'sppLocale' => $sppLocale,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<Observation>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'data/obs/geo/recent',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

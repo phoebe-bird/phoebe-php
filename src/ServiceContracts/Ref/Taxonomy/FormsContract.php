@@ -12,6 +12,8 @@ interface FormsContract
     /**
      * @api
      *
+     * @param string $speciesCode the eBird species code
+     *
      * @return list<string>
      *
      * @throws APIException

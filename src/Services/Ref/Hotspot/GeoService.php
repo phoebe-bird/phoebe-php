@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Hotspot;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Hotspot\Geo\GeoGetResponseItem;
-use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams;
 use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\GeoContract;
@@ -17,40 +14,51 @@ use Phoebe\ServiceContracts\Ref\Hotspot\GeoContract;
 final class GeoService implements GeoContract
 {
     /**
+     * @api
+     */
+    public GeoRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GeoRawService($client);
+    }
 
     /**
      * @api
      *
      * Get the list of hotspots, within a radius of up to 50 kilometers, from a given set of coordinates.
      *
-     * @param array{
-     *   lat: float, lng: float, back?: int, dist?: int, fmt?: 'csv'|'json'|Fmt
-     * }|GeoRetrieveParams $params
+     * @param int $back the number of days back to fetch hotspots
+     * @param int $dist the search radius from the given position, in kilometers
+     * @param 'csv'|'json'|Fmt $fmt fetch the records in CSV or JSON format
      *
      * @return list<GeoGetResponseItem>
      *
      * @throws APIException
      */
     public function retrieve(
-        array|GeoRetrieveParams $params,
-        ?RequestOptions $requestOptions = null
+        float $lat,
+        float $lng,
+        ?int $back = null,
+        int $dist = 25,
+        string|Fmt $fmt = 'json',
+        ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = GeoRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'lat' => $lat,
+            'lng' => $lng,
+            'back' => $back,
+            'dist' => $dist,
+            'fmt' => $fmt,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<GeoGetResponseItem>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'ref/hotspot/geo',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(GeoGetResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

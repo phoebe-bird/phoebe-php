@@ -30,7 +30,7 @@ final class ListTest extends TestCase
     {
         $result = $this->client->ref->region->list->list(
             'parentRegionCode',
-            ['regionType' => 'regionType']
+            regionType: 'regionType'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,7 +42,8 @@ final class ListTest extends TestCase
     {
         $result = $this->client->ref->region->list->list(
             'parentRegionCode',
-            ['regionType' => 'regionType', 'fmt' => 'csv']
+            regionType: 'regionType',
+            fmt: 'csv'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

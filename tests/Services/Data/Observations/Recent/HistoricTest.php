@@ -30,7 +30,9 @@ final class HistoricTest extends TestCase
     {
         $result = $this->client->data->observations->recent->historic->list(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,19 +44,17 @@ final class HistoricTest extends TestCase
     {
         $result = $this->client->data->observations->recent->historic->list(
             1,
-            [
-                'regionCode' => 'regionCode',
-                'y' => 0,
-                'm' => 1,
-                'cat' => 'species',
-                'detail' => 'simple',
-                'hotspot' => true,
-                'includeProvisional' => true,
-                'maxResults' => 1,
-                'r' => ['string'],
-                'rank' => 'mrec',
-                'sppLocale' => 'sppLocale',
-            ],
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1,
+            cat: 'species',
+            detail: 'simple',
+            hotspot: true,
+            includeProvisional: true,
+            maxResults: 1,
+            r: ['string'],
+            rank: 'mrec',
+            sppLocale: 'sppLocale',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -28,7 +28,7 @@ final class RecentTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        $result = $this->client->data->observations->recent->list('regionCode', []);
+        $result = $this->client->data->observations->recent->list('regionCode');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

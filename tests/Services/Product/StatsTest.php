@@ -31,7 +31,9 @@ final class StatsTest extends TestCase
     {
         $result = $this->client->product->stats->retrieve(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -43,7 +45,9 @@ final class StatsTest extends TestCase
     {
         $result = $this->client->product->stats->retrieve(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

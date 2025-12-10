@@ -13,6 +13,11 @@ final class DataService implements DataContract
     /**
      * @api
      */
+    public DataRawService $raw;
+
+    /**
+     * @api
+     */
     public ObservationsService $observations;
 
     /**
@@ -20,6 +25,7 @@ final class DataService implements DataContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new DataRawService($client);
         $this->observations = new ObservationsService($client);
     }
 }

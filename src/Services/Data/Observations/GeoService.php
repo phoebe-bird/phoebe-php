@@ -13,6 +13,11 @@ final class GeoService implements GeoContract
     /**
      * @api
      */
+    public GeoRawService $raw;
+
+    /**
+     * @api
+     */
     public RecentService $recent;
 
     /**
@@ -20,6 +25,7 @@ final class GeoService implements GeoContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new GeoRawService($client);
         $this->recent = new RecentService($client);
     }
 }

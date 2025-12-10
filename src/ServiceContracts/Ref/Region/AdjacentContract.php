@@ -13,6 +13,8 @@ interface AdjacentContract
     /**
      * @api
      *
+     * @param string $regionCode the country, subnational1 or subnational2 code
+     *
      * @return list<AdjacentListResponseItem>
      *
      * @throws APIException

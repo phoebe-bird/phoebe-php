@@ -6,7 +6,6 @@ namespace Phoebe\ServiceContracts\Product;
 
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Stats\StatGetResponse;
-use Phoebe\Product\Stats\StatRetrieveParams;
 use Phoebe\RequestOptions;
 
 interface StatsContract
@@ -14,13 +13,18 @@ interface StatsContract
     /**
      * @api
      *
-     * @param array<mixed>|StatRetrieveParams $params
+     * @param int $d the day in the month
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $y the year, from 1800 to the present
+     * @param int $m the month, from 1-12
      *
      * @throws APIException
      */
     public function retrieve(
         int $d,
-        array|StatRetrieveParams $params,
+        string $regionCode,
+        int $y,
+        int $m,
         ?RequestOptions $requestOptions = null,
     ): StatGetResponse;
 }

@@ -12,6 +12,8 @@ interface SpeciesListContract
     /**
      * @api
      *
+     * @param string $regionCode Any location, USFWS region, subnational2, subnational1, country, or custom region code
+     *
      * @return list<string>
      *
      * @throws APIException

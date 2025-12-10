@@ -28,7 +28,7 @@ final class EbirdTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        $result = $this->client->ref->taxonomy->ebird->retrieve([]);
+        $result = $this->client->ref->taxonomy->ebird->retrieve();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

@@ -30,7 +30,9 @@ final class Top100Test extends TestCase
     {
         $result = $this->client->product->top100->retrieve(
             1,
-            ['regionCode' => 'regionCode', 'y' => 0, 'm' => 1]
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -42,13 +44,11 @@ final class Top100Test extends TestCase
     {
         $result = $this->client->product->top100->retrieve(
             1,
-            [
-                'regionCode' => 'regionCode',
-                'y' => 0,
-                'm' => 1,
-                'maxResults' => 1,
-                'rankedBy' => 'spp',
-            ],
+            regionCode: 'regionCode',
+            y: 0,
+            m: 1,
+            maxResults: 1,
+            rankedBy: 'spp'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

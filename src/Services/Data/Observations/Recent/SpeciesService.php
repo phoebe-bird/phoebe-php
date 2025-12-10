@@ -5,20 +5,25 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
-use Phoebe\Data\Observations\Recent\Species\SpecieRetrieveParams;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\SpeciesContract;
 
 final class SpeciesService implements SpeciesContract
 {
     /**
+     * @api
+     */
+    public SpeciesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SpeciesRawService($client);
+    }
 
     /**
      * @api
@@ -32,15 +37,14 @@ final class SpeciesService implements SpeciesContract
      *
      * When using the *r* query parameter set the *regionCode* URL parameter to an empty string.
      *
-     * @param array{
-     *   regionCode: string,
-     *   back?: int,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   r?: list<string>,
-     *   sppLocale?: string,
-     * }|SpecieRetrieveParams $params
+     * @param string $speciesCode path param: The eBird species code
+     * @param string $regionCode path param: The country, subnational1, subnational2 or location code
+     * @param int $back query param: The number of days back to fetch observations
+     * @param bool $hotspot Query param: Only fetch observations from hotspots
+     * @param bool $includeProvisional query param: Include observations which have not yet been reviewed
+     * @param int $maxResults Query param: Only fetch this number of observations
+     * @param list<string> $r Query param: Fetch observations from up to 10 locations
+     * @param string $sppLocale Query param: Use this language for species common names
      *
      * @return list<Observation>
      *
@@ -48,24 +52,29 @@ final class SpeciesService implements SpeciesContract
      */
     public function retrieve(
         string $speciesCode,
-        array|SpecieRetrieveParams $params,
+        string $regionCode,
+        int $back = 14,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        ?array $r = null,
+        string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = SpecieRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $regionCode = $parsed['regionCode'];
-        unset($parsed['regionCode']);
+        $params = [
+            'regionCode' => $regionCode,
+            'back' => $back,
+            'hotspot' => $hotspot,
+            'includeProvisional' => $includeProvisional,
+            'maxResults' => $maxResults,
+            'r' => $r,
+            'sppLocale' => $sppLocale,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<Observation>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['data/obs/%1$s/recent/%2$s', $regionCode, $speciesCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($speciesCode, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

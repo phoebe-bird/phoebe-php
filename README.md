@@ -75,7 +75,7 @@ try {
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -118,7 +118,7 @@ $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
 $result = $client->ref->hotspot->info->retrieve(
-  'L99381', RequestOptions::with(maxRetries: 5)
+  'L99381', requestOptions: RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -139,7 +139,7 @@ use Phoebe\RequestOptions;
 
 $info = $client->ref->hotspot->info->retrieve(
   'L99381',
-  RequestOptions::with(
+  requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],
     extraHeaders: ['my-header' => 'value'],

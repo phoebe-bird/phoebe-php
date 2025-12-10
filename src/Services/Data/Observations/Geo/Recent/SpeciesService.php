@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Geo\Recent;
 
 use Phoebe\Client;
-use Phoebe\Core\Contracts\BaseResponse;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Data\Observations\Geo\Recent\Species\SpecieListParams;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\SpeciesContract;
@@ -16,9 +13,17 @@ use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\SpeciesContract;
 final class SpeciesService implements SpeciesContract
 {
     /**
+     * @api
+     */
+    public SpeciesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SpeciesRawService($client);
+    }
 
     /**
      * @api
@@ -33,16 +38,13 @@ final class SpeciesService implements SpeciesContract
      * #### Notes
      * The species code is typically a 6-letter code, e.g. horlar for Horned Lark. You can get complete set of species code from the GET eBird Taxonomy end-point.
      *
-     * @param array{
-     *   lat: float,
-     *   lng: float,
-     *   back?: int,
-     *   dist?: int,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   sppLocale?: string,
-     * }|SpecieListParams $params
+     * @param string $speciesCode the eBird species code
+     * @param int $back the number of days back to fetch observations
+     * @param int $dist the search radius from the given position, in kilometers
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch this number of observations
+     * @param string $sppLocale Use this language for species common names
      *
      * @return list<Observation>
      *
@@ -50,22 +52,31 @@ final class SpeciesService implements SpeciesContract
      */
     public function list(
         string $speciesCode,
-        array|SpecieListParams $params,
+        float $lat,
+        float $lng,
+        int $back = 14,
+        int $dist = 25,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        [$parsed, $options] = SpecieListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'lat' => $lat,
+            'lng' => $lng,
+            'back' => $back,
+            'dist' => $dist,
+            'hotspot' => $hotspot,
+            'includeProvisional' => $includeProvisional,
+            'maxResults' => $maxResults,
+            'sppLocale' => $sppLocale,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<list<Observation>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['data/obs/geo/recent/%1$s', $speciesCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($speciesCode, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

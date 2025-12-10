@@ -28,9 +28,10 @@ final class NotableTest extends TestCase
     #[Test]
     public function testList(): void
     {
-        $result = $this->client->data->observations->geo->recent->notable->list([
-            'lat' => -90, 'lng' => -180,
-        ]);
+        $result = $this->client->data->observations->geo->recent->notable->list(
+            lat: -90,
+            lng: -180
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
@@ -39,16 +40,16 @@ final class NotableTest extends TestCase
     #[Test]
     public function testListWithOptionalParams(): void
     {
-        $result = $this->client->data->observations->geo->recent->notable->list([
-            'lat' => -90,
-            'lng' => -180,
-            'back' => 1,
-            'detail' => 'simple',
-            'dist' => 0,
-            'hotspot' => true,
-            'maxResults' => 1,
-            'sppLocale' => 'sppLocale',
-        ]);
+        $result = $this->client->data->observations->geo->recent->notable->list(
+            lat: -90,
+            lng: -180,
+            back: 1,
+            detail: 'simple',
+            dist: 0,
+            hotspot: true,
+            maxResults: 1,
+            sppLocale: 'sppLocale',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);
