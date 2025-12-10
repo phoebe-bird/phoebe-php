@@ -155,78 +155,78 @@ final class HistoricalGetResponseItem implements BaseModel
         ?string $subnational1Code = null,
         ?string $userDisplayName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $allObsReported && $obj['allObsReported'] = $allObsReported;
-        null !== $checklistID && $obj['checklistID'] = $checklistID;
-        null !== $creationDt && $obj['creationDt'] = $creationDt;
-        null !== $durationHrs && $obj['durationHrs'] = $durationHrs;
-        null !== $isoObsDate && $obj['isoObsDate'] = $isoObsDate;
-        null !== $lastEditedDt && $obj['lastEditedDt'] = $lastEditedDt;
-        null !== $loc && $obj['loc'] = $loc;
-        null !== $locID && $obj['locID'] = $locID;
-        null !== $numObservers && $obj['numObservers'] = $numObservers;
-        null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
-        null !== $obs && $obj['obs'] = $obs;
-        null !== $obsDt && $obj['obsDt'] = $obsDt;
-        null !== $obsTime && $obj['obsTime'] = $obsTime;
-        null !== $obsTimeValid && $obj['obsTimeValid'] = $obsTimeValid;
-        null !== $projID && $obj['projID'] = $projID;
-        null !== $protocolID && $obj['protocolID'] = $protocolID;
-        null !== $subID && $obj['subID'] = $subID;
-        null !== $submissionMethodCode && $obj['submissionMethodCode'] = $submissionMethodCode;
-        null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
-        null !== $userDisplayName && $obj['userDisplayName'] = $userDisplayName;
+        null !== $allObsReported && $self['allObsReported'] = $allObsReported;
+        null !== $checklistID && $self['checklistID'] = $checklistID;
+        null !== $creationDt && $self['creationDt'] = $creationDt;
+        null !== $durationHrs && $self['durationHrs'] = $durationHrs;
+        null !== $isoObsDate && $self['isoObsDate'] = $isoObsDate;
+        null !== $lastEditedDt && $self['lastEditedDt'] = $lastEditedDt;
+        null !== $loc && $self['loc'] = $loc;
+        null !== $locID && $self['locID'] = $locID;
+        null !== $numObservers && $self['numObservers'] = $numObservers;
+        null !== $numSpecies && $self['numSpecies'] = $numSpecies;
+        null !== $obs && $self['obs'] = $obs;
+        null !== $obsDt && $self['obsDt'] = $obsDt;
+        null !== $obsTime && $self['obsTime'] = $obsTime;
+        null !== $obsTimeValid && $self['obsTimeValid'] = $obsTimeValid;
+        null !== $projID && $self['projID'] = $projID;
+        null !== $protocolID && $self['protocolID'] = $protocolID;
+        null !== $subID && $self['subID'] = $subID;
+        null !== $submissionMethodCode && $self['submissionMethodCode'] = $submissionMethodCode;
+        null !== $subnational1Code && $self['subnational1Code'] = $subnational1Code;
+        null !== $userDisplayName && $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     public function withAllObsReported(bool $allObsReported): self
     {
-        $obj = clone $this;
-        $obj['allObsReported'] = $allObsReported;
+        $self = clone $this;
+        $self['allObsReported'] = $allObsReported;
 
-        return $obj;
+        return $self;
     }
 
     public function withChecklistID(string $checklistID): self
     {
-        $obj = clone $this;
-        $obj['checklistID'] = $checklistID;
+        $self = clone $this;
+        $self['checklistID'] = $checklistID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreationDt(string $creationDt): self
     {
-        $obj = clone $this;
-        $obj['creationDt'] = $creationDt;
+        $self = clone $this;
+        $self['creationDt'] = $creationDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDurationHrs(float $durationHrs): self
     {
-        $obj = clone $this;
-        $obj['durationHrs'] = $durationHrs;
+        $self = clone $this;
+        $self['durationHrs'] = $durationHrs;
 
-        return $obj;
+        return $self;
     }
 
     public function withISOObsDate(string $isoObsDate): self
     {
-        $obj = clone $this;
-        $obj['isoObsDate'] = $isoObsDate;
+        $self = clone $this;
+        $self['isoObsDate'] = $isoObsDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastEditedDt(string $lastEditedDt): self
     {
-        $obj = clone $this;
-        $obj['lastEditedDt'] = $lastEditedDt;
+        $self = clone $this;
+        $self['lastEditedDt'] = $lastEditedDt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,34 +248,34 @@ final class HistoricalGetResponseItem implements BaseModel
      */
     public function withLoc(Loc|array $loc): self
     {
-        $obj = clone $this;
-        $obj['loc'] = $loc;
+        $self = clone $this;
+        $self['loc'] = $loc;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocID(string $locID): self
     {
-        $obj = clone $this;
-        $obj['locID'] = $locID;
+        $self = clone $this;
+        $self['locID'] = $locID;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumObservers(int $numObservers): self
     {
-        $obj = clone $this;
-        $obj['numObservers'] = $numObservers;
+        $self = clone $this;
+        $self['numObservers'] = $numObservers;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpecies(int $numSpecies): self
     {
-        $obj = clone $this;
-        $obj['numSpecies'] = $numSpecies;
+        $self = clone $this;
+        $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,81 +288,81 @@ final class HistoricalGetResponseItem implements BaseModel
      */
     public function withObs(array $obs): self
     {
-        $obj = clone $this;
-        $obj['obs'] = $obs;
+        $self = clone $this;
+        $self['obs'] = $obs;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsDt(string $obsDt): self
     {
-        $obj = clone $this;
-        $obj['obsDt'] = $obsDt;
+        $self = clone $this;
+        $self['obsDt'] = $obsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsTime(string $obsTime): self
     {
-        $obj = clone $this;
-        $obj['obsTime'] = $obsTime;
+        $self = clone $this;
+        $self['obsTime'] = $obsTime;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsTimeValid(bool $obsTimeValid): self
     {
-        $obj = clone $this;
-        $obj['obsTimeValid'] = $obsTimeValid;
+        $self = clone $this;
+        $self['obsTimeValid'] = $obsTimeValid;
 
-        return $obj;
+        return $self;
     }
 
     public function withProjID(string $projID): self
     {
-        $obj = clone $this;
-        $obj['projID'] = $projID;
+        $self = clone $this;
+        $self['projID'] = $projID;
 
-        return $obj;
+        return $self;
     }
 
     public function withProtocolID(string $protocolID): self
     {
-        $obj = clone $this;
-        $obj['protocolID'] = $protocolID;
+        $self = clone $this;
+        $self['protocolID'] = $protocolID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubID(string $subID): self
     {
-        $obj = clone $this;
-        $obj['subID'] = $subID;
+        $self = clone $this;
+        $self['subID'] = $subID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubmissionMethodCode(string $submissionMethodCode): self
     {
-        $obj = clone $this;
-        $obj['submissionMethodCode'] = $submissionMethodCode;
+        $self = clone $this;
+        $self['submissionMethodCode'] = $submissionMethodCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational1Code(string $subnational1Code): self
     {
-        $obj = clone $this;
-        $obj['subnational1Code'] = $subnational1Code;
+        $self = clone $this;
+        $self['subnational1Code'] = $subnational1Code;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserDisplayName(string $userDisplayName): self
     {
-        $obj = clone $this;
-        $obj['userDisplayName'] = $userDisplayName;
+        $self = clone $this;
+        $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 }

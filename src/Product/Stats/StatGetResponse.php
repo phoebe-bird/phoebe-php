@@ -42,36 +42,36 @@ final class StatGetResponse implements BaseModel
         ?int $numContributors = null,
         ?int $numSpecies = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numChecklists && $obj['numChecklists'] = $numChecklists;
-        null !== $numContributors && $obj['numContributors'] = $numContributors;
-        null !== $numSpecies && $obj['numSpecies'] = $numSpecies;
+        null !== $numChecklists && $self['numChecklists'] = $numChecklists;
+        null !== $numContributors && $self['numContributors'] = $numContributors;
+        null !== $numSpecies && $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumChecklists(int $numChecklists): self
     {
-        $obj = clone $this;
-        $obj['numChecklists'] = $numChecklists;
+        $self = clone $this;
+        $self['numChecklists'] = $numChecklists;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumContributors(int $numContributors): self
     {
-        $obj = clone $this;
-        $obj['numContributors'] = $numContributors;
+        $self = clone $this;
+        $self['numContributors'] = $numContributors;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpecies(int $numSpecies): self
     {
-        $obj = clone $this;
-        $obj['numSpecies'] = $numSpecies;
+        $self = clone $this;
+        $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 }

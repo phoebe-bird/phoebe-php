@@ -74,90 +74,90 @@ final class GeoGetResponseItem implements BaseModel
         ?string $subnational1Code = null,
         ?string $subnational2Code = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $lat && $obj['lat'] = $lat;
-        null !== $latestObsDt && $obj['latestObsDt'] = $latestObsDt;
-        null !== $lng && $obj['lng'] = $lng;
-        null !== $locID && $obj['locID'] = $locID;
-        null !== $locName && $obj['locName'] = $locName;
-        null !== $numSpeciesAllTime && $obj['numSpeciesAllTime'] = $numSpeciesAllTime;
-        null !== $subnational1Code && $obj['subnational1Code'] = $subnational1Code;
-        null !== $subnational2Code && $obj['subnational2Code'] = $subnational2Code;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $lat && $self['lat'] = $lat;
+        null !== $latestObsDt && $self['latestObsDt'] = $latestObsDt;
+        null !== $lng && $self['lng'] = $lng;
+        null !== $locID && $self['locID'] = $locID;
+        null !== $locName && $self['locName'] = $locName;
+        null !== $numSpeciesAllTime && $self['numSpeciesAllTime'] = $numSpeciesAllTime;
+        null !== $subnational1Code && $self['subnational1Code'] = $subnational1Code;
+        null !== $subnational2Code && $self['subnational2Code'] = $subnational2Code;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj['lat'] = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLatestObsDt(string $latestObsDt): self
     {
-        $obj = clone $this;
-        $obj['latestObsDt'] = $latestObsDt;
+        $self = clone $this;
+        $self['latestObsDt'] = $latestObsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj['lng'] = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocID(string $locID): self
     {
-        $obj = clone $this;
-        $obj['locID'] = $locID;
+        $self = clone $this;
+        $self['locID'] = $locID;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocName(string $locName): self
     {
-        $obj = clone $this;
-        $obj['locName'] = $locName;
+        $self = clone $this;
+        $self['locName'] = $locName;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpeciesAllTime(int $numSpeciesAllTime): self
     {
-        $obj = clone $this;
-        $obj['numSpeciesAllTime'] = $numSpeciesAllTime;
+        $self = clone $this;
+        $self['numSpeciesAllTime'] = $numSpeciesAllTime;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational1Code(string $subnational1Code): self
     {
-        $obj = clone $this;
-        $obj['subnational1Code'] = $subnational1Code;
+        $self = clone $this;
+        $self['subnational1Code'] = $subnational1Code;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational2Code(string $subnational2Code): self
     {
-        $obj = clone $this;
-        $obj['subnational2Code'] = $subnational2Code;
+        $self = clone $this;
+        $self['subnational2Code'] = $subnational2Code;
 
-        return $obj;
+        return $self;
     }
 }

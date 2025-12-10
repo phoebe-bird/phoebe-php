@@ -40,11 +40,11 @@ final class SpeciesGroupListParams implements BaseModel
      */
     public static function with(?string $groupNameLocale = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $groupNameLocale && $obj['groupNameLocale'] = $groupNameLocale;
+        null !== $groupNameLocale && $self['groupNameLocale'] = $groupNameLocale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class SpeciesGroupListParams implements BaseModel
      */
     public function withGroupNameLocale(string $groupNameLocale): self
     {
-        $obj = clone $this;
-        $obj['groupNameLocale'] = $groupNameLocale;
+        $self = clone $this;
+        $self['groupNameLocale'] = $groupNameLocale;
 
-        return $obj;
+        return $self;
     }
 }

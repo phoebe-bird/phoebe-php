@@ -38,27 +38,27 @@ final class VersionListResponseItem implements BaseModel
         ?float $authorityVer = null,
         ?bool $latest = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorityVer && $obj['authorityVer'] = $authorityVer;
-        null !== $latest && $obj['latest'] = $latest;
+        null !== $authorityVer && $self['authorityVer'] = $authorityVer;
+        null !== $latest && $self['latest'] = $latest;
 
-        return $obj;
+        return $self;
     }
 
     public function withAuthorityVer(float $authorityVer): self
     {
-        $obj = clone $this;
-        $obj['authorityVer'] = $authorityVer;
+        $self = clone $this;
+        $self['authorityVer'] = $authorityVer;
 
-        return $obj;
+        return $self;
     }
 
     public function withLatest(bool $latest): self
     {
-        $obj = clone $this;
-        $obj['latest'] = $latest;
+        $self = clone $this;
+        $self['latest'] = $latest;
 
-        return $obj;
+        return $self;
     }
 }

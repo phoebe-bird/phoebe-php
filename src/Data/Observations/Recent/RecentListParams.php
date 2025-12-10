@@ -100,17 +100,17 @@ final class RecentListParams implements BaseModel
         ?array $r = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $back && $obj['back'] = $back;
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $hotspot && $obj['hotspot'] = $hotspot;
-        null !== $includeProvisional && $obj['includeProvisional'] = $includeProvisional;
-        null !== $maxResults && $obj['maxResults'] = $maxResults;
-        null !== $r && $obj['r'] = $r;
-        null !== $sppLocale && $obj['sppLocale'] = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class RecentListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj['back'] = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class RecentListParams implements BaseModel
      */
     public function withCat(Cat|string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class RecentListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj['hotspot'] = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class RecentListParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj['includeProvisional'] = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class RecentListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj['maxResults'] = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class RecentListParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj['r'] = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,9 +188,9 @@ final class RecentListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj['sppLocale'] = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

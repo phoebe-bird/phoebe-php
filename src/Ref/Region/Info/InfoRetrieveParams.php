@@ -68,12 +68,12 @@ final class InfoRetrieveParams implements BaseModel
         ?string $delim = null,
         RegionNameFormat|string|null $regionNameFormat = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $delim && $obj['delim'] = $delim;
-        null !== $regionNameFormat && $obj['regionNameFormat'] = $regionNameFormat;
+        null !== $delim && $self['delim'] = $delim;
+        null !== $regionNameFormat && $self['regionNameFormat'] = $regionNameFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class InfoRetrieveParams implements BaseModel
      */
     public function withDelim(string $delim): self
     {
-        $obj = clone $this;
-        $obj['delim'] = $delim;
+        $self = clone $this;
+        $self['delim'] = $delim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +95,9 @@ final class InfoRetrieveParams implements BaseModel
     public function withRegionNameFormat(
         RegionNameFormat|string $regionNameFormat
     ): self {
-        $obj = clone $this;
-        $obj['regionNameFormat'] = $regionNameFormat;
+        $self = clone $this;
+        $self['regionNameFormat'] = $regionNameFormat;
 
-        return $obj;
+        return $self;
     }
 }

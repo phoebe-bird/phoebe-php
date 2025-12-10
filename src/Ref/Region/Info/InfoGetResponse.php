@@ -43,12 +43,12 @@ final class InfoGetResponse implements BaseModel
         Bounds|array|null $bounds = null,
         ?string $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bounds && $obj['bounds'] = $bounds;
-        null !== $result && $obj['result'] = $result;
+        null !== $bounds && $self['bounds'] = $bounds;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,17 +58,17 @@ final class InfoGetResponse implements BaseModel
      */
     public function withBounds(Bounds|array $bounds): self
     {
-        $obj = clone $this;
-        $obj['bounds'] = $bounds;
+        $self = clone $this;
+        $self['bounds'] = $bounds;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

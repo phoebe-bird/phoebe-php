@@ -98,40 +98,40 @@ final class Top100RetrieveParams implements BaseModel
         ?int $maxResults = null,
         RankedBy|string|null $rankedBy = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['regionCode'] = $regionCode;
-        $obj['y'] = $y;
-        $obj['m'] = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        null !== $maxResults && $obj['maxResults'] = $maxResults;
-        null !== $rankedBy && $obj['rankedBy'] = $rankedBy;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $rankedBy && $self['rankedBy'] = $rankedBy;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj['y'] = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj['m'] = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Top100RetrieveParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj['maxResults'] = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class Top100RetrieveParams implements BaseModel
      */
     public function withRankedBy(RankedBy|string $rankedBy): self
     {
-        $obj = clone $this;
-        $obj['rankedBy'] = $rankedBy;
+        $self = clone $this;
+        $self['rankedBy'] = $rankedBy;
 
-        return $obj;
+        return $self;
     }
 }

@@ -146,46 +146,46 @@ final class HistoricListParams implements BaseModel
         Rank|string|null $rank = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['regionCode'] = $regionCode;
-        $obj['y'] = $y;
-        $obj['m'] = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $detail && $obj['detail'] = $detail;
-        null !== $hotspot && $obj['hotspot'] = $hotspot;
-        null !== $includeProvisional && $obj['includeProvisional'] = $includeProvisional;
-        null !== $maxResults && $obj['maxResults'] = $maxResults;
-        null !== $r && $obj['r'] = $r;
-        null !== $rank && $obj['rank'] = $rank;
-        null !== $sppLocale && $obj['sppLocale'] = $sppLocale;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $rank && $self['rank'] = $rank;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj['regionCode'] = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj['y'] = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj['m'] = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +195,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withCat(Cat|string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withDetail(Detail|string $detail): self
     {
-        $obj = clone $this;
-        $obj['detail'] = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj['hotspot'] = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj['includeProvisional'] = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -241,10 +241,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj['maxResults'] = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj['r'] = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withRank(Rank|string $rank): self
     {
-        $obj = clone $this;
-        $obj['rank'] = $rank;
+        $self = clone $this;
+        $self['rank'] = $rank;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,9 +278,9 @@ final class HistoricListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj['sppLocale'] = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

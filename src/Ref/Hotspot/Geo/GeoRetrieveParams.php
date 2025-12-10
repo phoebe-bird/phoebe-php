@@ -85,32 +85,32 @@ final class GeoRetrieveParams implements BaseModel
         ?int $dist = null,
         Fmt|string|null $fmt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['lat'] = $lat;
-        $obj['lng'] = $lng;
+        $self['lat'] = $lat;
+        $self['lng'] = $lng;
 
-        null !== $back && $obj['back'] = $back;
-        null !== $dist && $obj['dist'] = $dist;
-        null !== $fmt && $obj['fmt'] = $fmt;
+        null !== $back && $self['back'] = $back;
+        null !== $dist && $self['dist'] = $dist;
+        null !== $fmt && $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj['lat'] = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj['lng'] = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj['back'] = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +129,10 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withDist(int $dist): self
     {
-        $obj = clone $this;
-        $obj['dist'] = $dist;
+        $self = clone $this;
+        $self['dist'] = $dist;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,9 +142,9 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 }

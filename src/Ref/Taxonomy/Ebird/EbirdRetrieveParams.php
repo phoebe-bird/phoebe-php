@@ -80,15 +80,15 @@ final class EbirdRetrieveParams implements BaseModel
         ?string $species = null,
         ?string $version = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $fmt && $obj['fmt'] = $fmt;
-        null !== $locale && $obj['locale'] = $locale;
-        null !== $species && $obj['species'] = $species;
-        null !== $version && $obj['version'] = $version;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $fmt && $self['fmt'] = $fmt;
+        null !== $locale && $self['locale'] = $locale;
+        null !== $species && $self['species'] = $species;
+        null !== $version && $self['version'] = $version;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class EbirdRetrieveParams implements BaseModel
      */
     public function withCat(string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class EbirdRetrieveParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class EbirdRetrieveParams implements BaseModel
      */
     public function withLocale(string $locale): self
     {
-        $obj = clone $this;
-        $obj['locale'] = $locale;
+        $self = clone $this;
+        $self['locale'] = $locale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class EbirdRetrieveParams implements BaseModel
      */
     public function withSpecies(string $species): self
     {
-        $obj = clone $this;
-        $obj['species'] = $species;
+        $self = clone $this;
+        $self['species'] = $species;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,9 +142,9 @@ final class EbirdRetrieveParams implements BaseModel
      */
     public function withVersion(string $version): self
     {
-        $obj = clone $this;
-        $obj['version'] = $version;
+        $self = clone $this;
+        $self['version'] = $version;
 
-        return $obj;
+        return $self;
     }
 }
