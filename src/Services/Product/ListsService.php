@@ -6,6 +6,7 @@ namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Product\Lists\ListGetResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\ListsContract;
@@ -49,9 +50,7 @@ final class ListsService implements ListsContract
         int $maxResults = 10,
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['maxResults' => $maxResults];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['maxResults' => $maxResults]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($regionCode, params: $params, requestOptions: $requestOptions);

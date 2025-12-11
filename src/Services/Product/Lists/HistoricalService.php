@@ -6,6 +6,7 @@ namespace Phoebe\Services\Product\Lists;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
 use Phoebe\RequestOptions;
@@ -51,15 +52,15 @@ final class HistoricalService implements HistoricalContract
         string|SortKey $sortKey = 'obs_dt',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'regionCode' => $regionCode,
-            'y' => $y,
-            'm' => $m,
-            'maxResults' => $maxResults,
-            'sortKey' => $sortKey,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'regionCode' => $regionCode,
+                'y' => $y,
+                'm' => $m,
+                'maxResults' => $maxResults,
+                'sortKey' => $sortKey,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($d, params: $params, requestOptions: $requestOptions);

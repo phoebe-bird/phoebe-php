@@ -6,6 +6,7 @@ namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Product\Stats\StatGetResponse;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\StatsContract;
@@ -45,7 +46,9 @@ final class StatsService implements StatsContract
         int $m,
         ?RequestOptions $requestOptions = null,
     ): StatGetResponse {
-        $params = ['regionCode' => $regionCode, 'y' => $y, 'm' => $m];
+        $params = Util::removeNulls(
+            ['regionCode' => $regionCode, 'y' => $y, 'm' => $m]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($d, params: $params, requestOptions: $requestOptions);

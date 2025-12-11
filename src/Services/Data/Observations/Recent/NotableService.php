@@ -6,6 +6,7 @@ namespace Phoebe\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Notable\NotableListParams\Detail;
 use Phoebe\RequestOptions;
@@ -53,16 +54,16 @@ final class NotableService implements NotableContract
         string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'back' => $back,
-            'detail' => $detail,
-            'hotspot' => $hotspot,
-            'maxResults' => $maxResults,
-            'r' => $r,
-            'sppLocale' => $sppLocale,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'back' => $back,
+                'detail' => $detail,
+                'hotspot' => $hotspot,
+                'maxResults' => $maxResults,
+                'r' => $r,
+                'sppLocale' => $sppLocale,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($regionCode, params: $params, requestOptions: $requestOptions);

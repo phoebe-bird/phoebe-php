@@ -6,6 +6,7 @@ namespace Phoebe\Services\Data\Observations;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
 use Phoebe\RequestOptions;
@@ -77,17 +78,17 @@ final class RecentService implements RecentContract
         string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'back' => $back,
-            'cat' => $cat,
-            'hotspot' => $hotspot,
-            'includeProvisional' => $includeProvisional,
-            'maxResults' => $maxResults,
-            'r' => $r,
-            'sppLocale' => $sppLocale,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'back' => $back,
+                'cat' => $cat,
+                'hotspot' => $hotspot,
+                'includeProvisional' => $includeProvisional,
+                'maxResults' => $maxResults,
+                'r' => $r,
+                'sppLocale' => $sppLocale,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($regionCode, params: $params, requestOptions: $requestOptions);
