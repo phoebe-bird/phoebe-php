@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Taxonomy\SpeciesGroups\SpeciesGroupListParams\SpeciesGrouping;
 use Phoebe\Ref\Taxonomy\SpeciesGroups\SpeciesGroupListResponseItem;
 use Phoebe\RequestOptions;
@@ -43,9 +44,7 @@ final class SpeciesGroupsService implements SpeciesGroupsContract
         string $groupNameLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['groupNameLocale' => $groupNameLocale];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['groupNameLocale' => $groupNameLocale]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($speciesGrouping, params: $params, requestOptions: $requestOptions);

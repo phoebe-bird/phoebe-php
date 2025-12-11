@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref\Hotspot;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Hotspot\Geo\GeoGetResponseItem;
 use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
@@ -47,15 +48,15 @@ final class GeoService implements GeoContract
         string|Fmt $fmt = 'json',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'lat' => $lat,
-            'lng' => $lng,
-            'back' => $back,
-            'dist' => $dist,
-            'fmt' => $fmt,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'back' => $back,
+                'dist' => $dist,
+                'fmt' => $fmt,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);

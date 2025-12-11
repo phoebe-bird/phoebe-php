@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Hotspot\HotspotListParams\Fmt;
 use Phoebe\Ref\Hotspot\HotspotListResponseItem;
 use Phoebe\RequestOptions;
@@ -59,9 +60,7 @@ final class HotspotService implements HotspotContract
         string|Fmt $fmt = 'json',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['back' => $back, 'fmt' => $fmt];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['back' => $back, 'fmt' => $fmt]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($regionCode, params: $params, requestOptions: $requestOptions);

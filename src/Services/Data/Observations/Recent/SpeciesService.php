@@ -6,6 +6,7 @@ namespace Phoebe\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\SpeciesContract;
@@ -61,17 +62,17 @@ final class SpeciesService implements SpeciesContract
         string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'regionCode' => $regionCode,
-            'back' => $back,
-            'hotspot' => $hotspot,
-            'includeProvisional' => $includeProvisional,
-            'maxResults' => $maxResults,
-            'r' => $r,
-            'sppLocale' => $sppLocale,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'regionCode' => $regionCode,
+                'back' => $back,
+                'hotspot' => $hotspot,
+                'includeProvisional' => $includeProvisional,
+                'maxResults' => $maxResults,
+                'r' => $r,
+                'sppLocale' => $sppLocale,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($speciesCode, params: $params, requestOptions: $requestOptions);

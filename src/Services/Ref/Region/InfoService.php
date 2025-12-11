@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Region\Info\InfoGetResponse;
 use Phoebe\Ref\Region\Info\InfoRetrieveParams\RegionNameFormat;
 use Phoebe\RequestOptions;
@@ -56,9 +57,9 @@ final class InfoService implements InfoContract
         string|RegionNameFormat $regionNameFormat = 'full',
         ?RequestOptions $requestOptions = null,
     ): InfoGetResponse {
-        $params = ['delim' => $delim, 'regionNameFormat' => $regionNameFormat];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['delim' => $delim, 'regionNameFormat' => $regionNameFormat]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($regionCode, params: $params, requestOptions: $requestOptions);

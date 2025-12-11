@@ -6,6 +6,7 @@ namespace Phoebe\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Cat;
 use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Detail;
@@ -66,21 +67,21 @@ final class HistoricService implements HistoricContract
         string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'regionCode' => $regionCode,
-            'y' => $y,
-            'm' => $m,
-            'cat' => $cat,
-            'detail' => $detail,
-            'hotspot' => $hotspot,
-            'includeProvisional' => $includeProvisional,
-            'maxResults' => $maxResults,
-            'r' => $r,
-            'rank' => $rank,
-            'sppLocale' => $sppLocale,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'regionCode' => $regionCode,
+                'y' => $y,
+                'm' => $m,
+                'cat' => $cat,
+                'detail' => $detail,
+                'hotspot' => $hotspot,
+                'includeProvisional' => $includeProvisional,
+                'maxResults' => $maxResults,
+                'r' => $r,
+                'rank' => $rank,
+                'sppLocale' => $sppLocale,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($d, params: $params, requestOptions: $requestOptions);

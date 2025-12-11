@@ -6,6 +6,7 @@ namespace Phoebe\Services\Data\Observations\Geo\Recent;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams\Detail;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
@@ -53,18 +54,18 @@ final class NotableService implements NotableContract
         string $sppLocale = 'en',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = [
-            'lat' => $lat,
-            'lng' => $lng,
-            'back' => $back,
-            'detail' => $detail,
-            'dist' => $dist,
-            'hotspot' => $hotspot,
-            'maxResults' => $maxResults,
-            'sppLocale' => $sppLocale,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'back' => $back,
+                'detail' => $detail,
+                'dist' => $dist,
+                'hotspot' => $hotspot,
+                'maxResults' => $maxResults,
+                'sppLocale' => $sppLocale,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

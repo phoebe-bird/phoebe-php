@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Region\List\ListListParams\Fmt;
 use Phoebe\Ref\Region\List\ListListResponseItem;
 use Phoebe\RequestOptions;
@@ -45,9 +46,7 @@ final class ListService implements ListContract
         string|Fmt $fmt = 'json',
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['regionType' => $regionType, 'fmt' => $fmt];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['regionType' => $regionType, 'fmt' => $fmt]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($parentRegionCode, params: $params, requestOptions: $requestOptions);

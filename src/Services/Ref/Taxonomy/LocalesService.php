@@ -6,6 +6,7 @@ namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesContract;
@@ -40,9 +41,7 @@ final class LocalesService implements LocalesContract
         ?string $acceptLanguage = null,
         ?RequestOptions $requestOptions = null
     ): array {
-        $params = ['acceptLanguage' => $acceptLanguage];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['acceptLanguage' => $acceptLanguage]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
