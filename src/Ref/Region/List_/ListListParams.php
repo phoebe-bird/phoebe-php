@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phoebe\Ref\Region\List;
+namespace Phoebe\Ref\Region\List_;
 
 use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Ref\Region\List\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
 
 /**
  * Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.

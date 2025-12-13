@@ -8,9 +8,9 @@ use Phoebe\Client;
 use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Ref\Region\List\ListListParams;
-use Phoebe\Ref\Region\List\ListListParams\Fmt;
-use Phoebe\Ref\Region\List\ListListResponseItem;
+use Phoebe\Ref\Region\List_\ListListParams;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListRawContract;
 
