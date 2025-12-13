@@ -7,8 +7,8 @@ namespace Phoebe\Services\Ref\Region;
 use Phoebe\Client;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Core\Util;
-use Phoebe\Ref\Region\List\ListListParams\Fmt;
-use Phoebe\Ref\Region\List\ListListResponseItem;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListContract;
 

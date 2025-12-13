@@ -6,8 +6,8 @@ namespace Phoebe\ServiceContracts\Ref\Region;
 
 use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Ref\Region\List\ListListParams;
-use Phoebe\Ref\Region\List\ListListResponseItem;
+use Phoebe\Ref\Region\List_\ListListParams;
+use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 
 interface ListRawContract

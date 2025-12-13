@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Phoebe\ServiceContracts\Ref\Region;
 
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Ref\Region\List\ListListParams\Fmt;
-use Phoebe\Ref\Region\List\ListListResponseItem;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 
 interface ListContract

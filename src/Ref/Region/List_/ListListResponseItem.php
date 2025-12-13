@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phoebe\Ref\Region\List;
+namespace Phoebe\Ref\Region\List_;
 
 use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
