@@ -16,7 +16,7 @@ interface HistoricRawContract
      * @api
      *
      * @param int $d Path param:
-     * @param array<mixed>|HistoricListParams $params
+     * @param array<string,mixed>|HistoricListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

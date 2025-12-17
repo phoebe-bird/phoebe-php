@@ -32,8 +32,8 @@ use Phoebe\Product\Top100\Top100RetrieveParams\RankedBy;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   maxResults?: int,
- *   rankedBy?: RankedBy|value-of<RankedBy>,
+ *   maxResults?: int|null,
+ *   rankedBy?: null|RankedBy|value-of<RankedBy>,
  * }
  */
 final class Top100RetrieveParams implements BaseModel

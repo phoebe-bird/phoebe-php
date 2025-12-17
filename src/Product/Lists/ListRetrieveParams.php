@@ -14,7 +14,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Product\ListsService::retrieve()
  *
- * @phpstan-type ListRetrieveParamsShape = array{maxResults?: int}
+ * @phpstan-type ListRetrieveParamsShape = array{maxResults?: int|null}
  */
 final class ListRetrieveParams implements BaseModel
 {

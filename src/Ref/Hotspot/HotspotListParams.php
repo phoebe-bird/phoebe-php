@@ -16,7 +16,7 @@ use Phoebe\Ref\Hotspot\HotspotListParams\Fmt;
  * @see Phoebe\Services\Ref\HotspotService::list()
  *
  * @phpstan-type HotspotListParamsShape = array{
- *   back?: int, fmt?: Fmt|value-of<Fmt>
+ *   back?: int|null, fmt?: null|Fmt|value-of<Fmt>
  * }
  */
 final class HotspotListParams implements BaseModel

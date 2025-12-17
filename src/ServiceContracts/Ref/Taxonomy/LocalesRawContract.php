@@ -15,7 +15,7 @@ interface LocalesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|LocaleListParams $params
+     * @param array<string,mixed>|LocaleListParams $params
      *
      * @return BaseResponse<list<LocaleListResponseItem>>
      *

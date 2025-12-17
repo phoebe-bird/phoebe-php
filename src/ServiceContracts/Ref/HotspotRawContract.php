@@ -16,7 +16,7 @@ interface HotspotRawContract
      * @api
      *
      * @param string $regionCode the country, subnational1 or subnational2 code
-     * @param array<mixed>|HotspotListParams $params
+     * @param array<string,mixed>|HotspotListParams $params
      *
      * @return BaseResponse<list<HotspotListResponseItem>>
      *

@@ -22,14 +22,14 @@ use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
  * @phpstan-type RecentListParamsShape = array{
  *   lat: float,
  *   lng: float,
- *   back?: int,
- *   cat?: Cat|value-of<Cat>,
- *   dist?: int,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   sort?: Sort|value-of<Sort>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   dist?: int|null,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   sort?: null|Sort|value-of<Sort>,
+ *   sppLocale?: string|null,
  * }
  */
 final class RecentListParams implements BaseModel

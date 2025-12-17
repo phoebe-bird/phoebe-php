@@ -29,7 +29,8 @@ use Phoebe\Ref\Region\Info\InfoRetrieveParams\RegionNameFormat;
  * @see Phoebe\Services\Ref\Region\InfoService::retrieve()
  *
  * @phpstan-type InfoRetrieveParamsShape = array{
- *   delim?: string, regionNameFormat?: RegionNameFormat|value-of<RegionNameFormat>
+ *   delim?: string|null,
+ *   regionNameFormat?: null|RegionNameFormat|value-of<RegionNameFormat>,
  * }
  */
 final class InfoRetrieveParams implements BaseModel

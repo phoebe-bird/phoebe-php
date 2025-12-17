@@ -17,7 +17,11 @@ use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
  * @see Phoebe\Services\Ref\Hotspot\GeoService::retrieve()
  *
  * @phpstan-type GeoRetrieveParamsShape = array{
- *   lat: float, lng: float, back?: int, dist?: int, fmt?: Fmt|value-of<Fmt>
+ *   lat: float,
+ *   lng: float,
+ *   back?: int|null,
+ *   dist?: int|null,
+ *   fmt?: null|Fmt|value-of<Fmt>,
  * }
  */
 final class GeoRetrieveParams implements BaseModel

@@ -16,7 +16,7 @@ interface RecentRawContract
      * @api
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
-     * @param array<mixed>|RecentListParams $params
+     * @param array<string,mixed>|RecentListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

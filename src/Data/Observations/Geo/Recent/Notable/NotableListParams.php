@@ -19,12 +19,12 @@ use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams\Detail;
  * @phpstan-type NotableListParamsShape = array{
  *   lat: float,
  *   lng: float,
- *   back?: int,
- *   detail?: Detail|value-of<Detail>,
- *   dist?: int,
- *   hotspot?: bool,
- *   maxResults?: int,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   detail?: null|Detail|value-of<Detail>,
+ *   dist?: int|null,
+ *   hotspot?: bool|null,
+ *   maxResults?: int|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class NotableListParams implements BaseModel

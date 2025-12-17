@@ -18,12 +18,12 @@ use Phoebe\Core\Contracts\BaseModel;
  * @phpstan-type GeoSpecieListParamsShape = array{
  *   lat: float,
  *   lng: float,
- *   back?: int,
- *   dist?: int,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   dist?: int|null,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class GeoSpecieListParams implements BaseModel

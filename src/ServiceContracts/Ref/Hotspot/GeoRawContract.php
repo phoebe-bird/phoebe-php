@@ -15,7 +15,7 @@ interface GeoRawContract
     /**
      * @api
      *
-     * @param array<mixed>|GeoRetrieveParams $params
+     * @param array<string,mixed>|GeoRetrieveParams $params
      *
      * @return BaseResponse<list<GeoGetResponseItem>>
      *

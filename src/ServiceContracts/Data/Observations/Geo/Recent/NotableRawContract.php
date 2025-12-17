@@ -15,7 +15,7 @@ interface NotableRawContract
     /**
      * @api
      *
-     * @param array<mixed>|NotableListParams $params
+     * @param array<string,mixed>|NotableListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

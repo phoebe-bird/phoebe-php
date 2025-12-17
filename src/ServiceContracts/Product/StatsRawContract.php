@@ -16,7 +16,7 @@ interface StatsRawContract
      * @api
      *
      * @param int $d the day in the month
-     * @param array<mixed>|StatRetrieveParams $params
+     * @param array<string,mixed>|StatRetrieveParams $params
      *
      * @return BaseResponse<StatGetResponse>
      *

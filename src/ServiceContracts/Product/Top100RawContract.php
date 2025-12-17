@@ -16,7 +16,7 @@ interface Top100RawContract
      * @api
      *
      * @param int $d path param: The day in the month
-     * @param array<mixed>|Top100RetrieveParams $params
+     * @param array<string,mixed>|Top100RetrieveParams $params
      *
      * @return BaseResponse<list<Top100GetResponseItem>>
      *

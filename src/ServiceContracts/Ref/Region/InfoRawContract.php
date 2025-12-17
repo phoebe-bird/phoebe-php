@@ -16,7 +16,7 @@ interface InfoRawContract
      * @api
      *
      * @param string $regionCode The major region, country, subnational1 or subnational2 code, or locId
-     * @param array<mixed>|InfoRetrieveParams $params
+     * @param array<string,mixed>|InfoRetrieveParams $params
      *
      * @return BaseResponse<InfoGetResponse>
      *

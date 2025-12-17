@@ -16,12 +16,12 @@ use Phoebe\Data\Observations\Recent\Notable\NotableListParams\Detail;
  * @see Phoebe\Services\Data\Observations\Recent\NotableService::list()
  *
  * @phpstan-type NotableListParamsShape = array{
- *   back?: int,
- *   detail?: Detail|value-of<Detail>,
- *   hotspot?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   detail?: null|Detail|value-of<Detail>,
+ *   hotspot?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class NotableListParams implements BaseModel
