@@ -23,14 +23,14 @@ use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Rank;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   cat?: Cat|value-of<Cat>,
- *   detail?: Detail|value-of<Detail>,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   rank?: Rank|value-of<Rank>,
- *   sppLocale?: string,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   detail?: null|Detail|value-of<Detail>,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   rank?: null|Rank|value-of<Rank>,
+ *   sppLocale?: string|null,
  * }
  */
 final class HistoricListParams implements BaseModel

@@ -16,7 +16,7 @@ interface ListRawContract
      * @api
      *
      * @param string $parentRegionCode path param: The country or subnational1 code, or 'world'
-     * @param array<mixed>|ListListParams $params
+     * @param array<string,mixed>|ListListParams $params
      *
      * @return BaseResponse<list<ListListResponseItem>>
      *

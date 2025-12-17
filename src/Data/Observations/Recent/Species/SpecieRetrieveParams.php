@@ -24,12 +24,12 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @phpstan-type SpecieRetrieveParamsShape = array{
  *   regionCode: string,
- *   back?: int,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class SpecieRetrieveParams implements BaseModel

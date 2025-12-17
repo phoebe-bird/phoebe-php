@@ -16,7 +16,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Ref\Taxonomy\LocalesService::list()
  *
- * @phpstan-type LocaleListParamsShape = array{acceptLanguage?: string}
+ * @phpstan-type LocaleListParamsShape = array{acceptLanguage?: string|null}
  */
 final class LocaleListParams implements BaseModel
 {

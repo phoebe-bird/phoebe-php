@@ -10,8 +10,10 @@ use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Ob\ObsAux;
 
 /**
+ * @phpstan-import-type ObsAuxShape from \Phoebe\Product\Checklist\ChecklistViewResponse\Ob\ObsAux
+ *
  * @phpstan-type ObShape = array{
- *   obsAux?: list<ObsAux>|null,
+ *   obsAux?: list<ObsAuxShape>|null,
  *   obsDt?: string|null,
  *   obsID?: string|null,
  *   speciesCode?: string|null,
@@ -45,15 +47,7 @@ final class Ob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ObsAux|array{
-     *   auxCode?: string|null,
-     *   entryMethodCode?: string|null,
-     *   fieldName?: string|null,
-     *   obsID?: string|null,
-     *   speciesCode?: string|null,
-     *   subID?: string|null,
-     *   value?: string|null,
-     * }> $obsAux
+     * @param list<ObsAuxShape> $obsAux
      */
     public static function with(
         ?array $obsAux = null,
@@ -72,15 +66,7 @@ final class Ob implements BaseModel
     }
 
     /**
-     * @param list<ObsAux|array{
-     *   auxCode?: string|null,
-     *   entryMethodCode?: string|null,
-     *   fieldName?: string|null,
-     *   obsID?: string|null,
-     *   speciesCode?: string|null,
-     *   subID?: string|null,
-     *   value?: string|null,
-     * }> $obsAux
+     * @param list<ObsAuxShape> $obsAux
      */
     public function withObsAux(array $obsAux): self
     {

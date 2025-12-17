@@ -15,7 +15,7 @@ interface EbirdRawContract
     /**
      * @api
      *
-     * @param array<mixed>|EbirdRetrieveParams $params
+     * @param array<string,mixed>|EbirdRetrieveParams $params
      *
      * @return BaseResponse<list<EbirdGetResponseItem>>
      *

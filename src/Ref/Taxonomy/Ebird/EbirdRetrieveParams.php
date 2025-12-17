@@ -16,11 +16,11 @@ use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams\Fmt;
  * @see Phoebe\Services\Ref\Taxonomy\EbirdService::retrieve()
  *
  * @phpstan-type EbirdRetrieveParamsShape = array{
- *   cat?: string,
- *   fmt?: Fmt|value-of<Fmt>,
- *   locale?: string,
- *   species?: string,
- *   version?: string,
+ *   cat?: string|null,
+ *   fmt?: null|Fmt|value-of<Fmt>,
+ *   locale?: string|null,
+ *   species?: string|null,
+ *   version?: string|null,
  * }
  */
 final class EbirdRetrieveParams implements BaseModel

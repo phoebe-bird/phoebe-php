@@ -16,7 +16,7 @@ interface HistoricalRawContract
      * @api
      *
      * @param int $d path param: The day in the month
-     * @param array<mixed>|HistoricalRetrieveParams $params
+     * @param array<string,mixed>|HistoricalRetrieveParams $params
      *
      * @return BaseResponse<list<HistoricalGetResponseItem>>
      *

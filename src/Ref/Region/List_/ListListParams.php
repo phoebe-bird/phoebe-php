@@ -17,7 +17,7 @@ use Phoebe\Ref\Region\List_\ListListParams\Fmt;
  * @see Phoebe\Services\Ref\Region\ListService::list()
  *
  * @phpstan-type ListListParamsShape = array{
- *   regionType: string, fmt?: Fmt|value-of<Fmt>
+ *   regionType: string, fmt?: null|Fmt|value-of<Fmt>
  * }
  */
 final class ListListParams implements BaseModel

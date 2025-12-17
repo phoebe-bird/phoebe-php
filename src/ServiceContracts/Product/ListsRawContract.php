@@ -16,7 +16,7 @@ interface ListsRawContract
      * @api
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
-     * @param array<mixed>|ListRetrieveParams $params
+     * @param array<string,mixed>|ListRetrieveParams $params
      *
      * @return BaseResponse<list<ListGetResponseItem>>
      *

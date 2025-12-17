@@ -9,9 +9,11 @@ use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Product\Lists\ListGetResponseItem\Loc;
 use Phoebe\Product\Lists\ListGetResponseItem\Ob;
-use Phoebe\Product\Lists\ListGetResponseItem\Ob\ObsAux;
 
 /**
+ * @phpstan-import-type LocShape from \Phoebe\Product\Lists\ListGetResponseItem\Loc
+ * @phpstan-import-type ObShape from \Phoebe\Product\Lists\ListGetResponseItem\Ob
+ *
  * @phpstan-type ListGetResponseItemShape = array{
  *   allObsReported?: bool|null,
  *   checklistID?: string|null,
@@ -19,11 +21,11 @@ use Phoebe\Product\Lists\ListGetResponseItem\Ob\ObsAux;
  *   durationHrs?: float|null,
  *   isoObsDate?: string|null,
  *   lastEditedDt?: string|null,
- *   loc?: Loc|null,
+ *   loc?: null|Loc|LocShape,
  *   locID?: string|null,
  *   numObservers?: int|null,
  *   numSpecies?: int|null,
- *   obs?: list<Ob>|null,
+ *   obs?: list<ObShape>|null,
  *   obsDt?: string|null,
  *   obsTime?: string|null,
  *   obsTimeValid?: bool|null,
@@ -111,27 +113,8 @@ final class ListGetResponseItem implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Loc|array{
-     *   countryCode?: string|null,
-     *   countryName?: string|null,
-     *   hierarchicalName?: string|null,
-     *   isHotspot?: bool|null,
-     *   lat?: float|null,
-     *   latitude?: float|null,
-     *   lng?: float|null,
-     *   locID?: string|null,
-     *   locName?: string|null,
-     *   longitude?: float|null,
-     *   name?: string|null,
-     *   subnational1Code?: string|null,
-     *   subnational1Name?: string|null,
-     * } $loc
-     * @param list<Ob|array{
-     *   obsAux?: list<ObsAux>|null,
-     *   obsDt?: string|null,
-     *   obsID?: string|null,
-     *   speciesCode?: string|null,
-     * }> $obs
+     * @param LocShape $loc
+     * @param list<ObShape> $obs
      */
     public static function with(
         ?bool $allObsReported = null,
@@ -230,21 +213,7 @@ final class ListGetResponseItem implements BaseModel
     }
 
     /**
-     * @param Loc|array{
-     *   countryCode?: string|null,
-     *   countryName?: string|null,
-     *   hierarchicalName?: string|null,
-     *   isHotspot?: bool|null,
-     *   lat?: float|null,
-     *   latitude?: float|null,
-     *   lng?: float|null,
-     *   locID?: string|null,
-     *   locName?: string|null,
-     *   longitude?: float|null,
-     *   name?: string|null,
-     *   subnational1Code?: string|null,
-     *   subnational1Name?: string|null,
-     * } $loc
+     * @param LocShape $loc
      */
     public function withLoc(Loc|array $loc): self
     {
@@ -279,12 +248,7 @@ final class ListGetResponseItem implements BaseModel
     }
 
     /**
-     * @param list<Ob|array{
-     *   obsAux?: list<ObsAux>|null,
-     *   obsDt?: string|null,
-     *   obsID?: string|null,
-     *   speciesCode?: string|null,
-     * }> $obs
+     * @param list<ObShape> $obs
      */
     public function withObs(array $obs): self
     {

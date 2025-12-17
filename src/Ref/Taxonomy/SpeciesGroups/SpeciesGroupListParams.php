@@ -14,7 +14,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Ref\Taxonomy\SpeciesGroupsService::list()
  *
- * @phpstan-type SpeciesGroupListParamsShape = array{groupNameLocale?: string}
+ * @phpstan-type SpeciesGroupListParamsShape = array{groupNameLocale?: string|null}
  */
 final class SpeciesGroupListParams implements BaseModel
 {

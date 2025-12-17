@@ -17,13 +17,13 @@ use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
  * @see Phoebe\Services\Data\Observations\RecentService::list()
  *
  * @phpstan-type RecentListParamsShape = array{
- *   back?: int,
- *   cat?: Cat|value-of<Cat>,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class RecentListParams implements BaseModel

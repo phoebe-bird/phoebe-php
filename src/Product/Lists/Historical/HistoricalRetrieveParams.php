@@ -20,8 +20,8 @@ use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   maxResults?: int,
- *   sortKey?: SortKey|value-of<SortKey>,
+ *   maxResults?: int|null,
+ *   sortKey?: null|SortKey|value-of<SortKey>,
  * }
  */
 final class HistoricalRetrieveParams implements BaseModel

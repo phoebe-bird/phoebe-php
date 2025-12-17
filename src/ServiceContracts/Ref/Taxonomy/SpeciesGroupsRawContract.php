@@ -17,7 +17,7 @@ interface SpeciesGroupsRawContract
      * @api
      *
      * @param SpeciesGrouping|value-of<SpeciesGrouping> $speciesGrouping the order in which groups are returned
-     * @param array<mixed>|SpeciesGroupListParams $params
+     * @param array<string,mixed>|SpeciesGroupListParams $params
      *
      * @return BaseResponse<list<SpeciesGroupListResponseItem>>
      *

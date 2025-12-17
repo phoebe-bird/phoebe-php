@@ -10,8 +10,10 @@ use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Ref\Region\Info\InfoGetResponse\Bounds;
 
 /**
+ * @phpstan-import-type BoundsShape from \Phoebe\Ref\Region\Info\InfoGetResponse\Bounds
+ *
  * @phpstan-type InfoGetResponseShape = array{
- *   bounds?: Bounds|null, result?: string|null
+ *   bounds?: null|Bounds|BoundsShape, result?: string|null
  * }
  */
 final class InfoGetResponse implements BaseModel
@@ -35,9 +37,7 @@ final class InfoGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Bounds|array{
-     *   maxX?: float|null, maxY?: float|null, minX?: float|null, minY?: float|null
-     * } $bounds
+     * @param BoundsShape $bounds
      */
     public static function with(
         Bounds|array|null $bounds = null,
@@ -52,9 +52,7 @@ final class InfoGetResponse implements BaseModel
     }
 
     /**
-     * @param Bounds|array{
-     *   maxX?: float|null, maxY?: float|null, minX?: float|null, minY?: float|null
-     * } $bounds
+     * @param BoundsShape $bounds
      */
     public function withBounds(Bounds|array $bounds): self
     {

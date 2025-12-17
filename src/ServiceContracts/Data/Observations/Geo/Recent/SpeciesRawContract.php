@@ -16,7 +16,7 @@ interface SpeciesRawContract
      * @api
      *
      * @param string $speciesCode the eBird species code
-     * @param array<mixed>|SpecieListParams $params
+     * @param array<string,mixed>|SpecieListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

@@ -16,7 +16,7 @@ interface NotableRawContract
      * @api
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
-     * @param array<mixed>|NotableListParams $params
+     * @param array<string,mixed>|NotableListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

@@ -16,7 +16,7 @@ interface GeoSpeciesRawContract
      * @api
      *
      * @param string $speciesCode the eBird species code
-     * @param array<mixed>|GeoSpecieListParams $params
+     * @param array<string,mixed>|GeoSpecieListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *

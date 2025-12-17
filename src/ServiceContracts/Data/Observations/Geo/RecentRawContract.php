@@ -15,7 +15,7 @@ interface RecentRawContract
     /**
      * @api
      *
-     * @param array<mixed>|RecentListParams $params
+     * @param array<string,mixed>|RecentListParams $params
      *
      * @return BaseResponse<list<Observation>>
      *
