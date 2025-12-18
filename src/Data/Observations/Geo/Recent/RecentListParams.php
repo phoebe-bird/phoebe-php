@@ -120,8 +120,8 @@ final class RecentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param Sort|value-of<Sort> $sort
+     * @param Cat|value-of<Cat>|null $cat
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         float $lat,

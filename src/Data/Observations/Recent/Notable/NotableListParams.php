@@ -80,8 +80,8 @@ final class NotableListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Detail|value-of<Detail> $detail
-     * @param list<string> $r
+     * @param Detail|value-of<Detail>|null $detail
+     * @param list<string>|null $r
      */
     public static function with(
         ?int $back = null,

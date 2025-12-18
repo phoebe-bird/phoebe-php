@@ -77,7 +77,7 @@ final class HistoricalRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SortKey|value-of<SortKey> $sortKey
+     * @param SortKey|value-of<SortKey>|null $sortKey
      */
     public static function with(
         string $regionCode,

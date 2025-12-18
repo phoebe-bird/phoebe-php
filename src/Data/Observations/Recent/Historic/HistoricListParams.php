@@ -128,10 +128,10 @@ final class HistoricListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param Detail|value-of<Detail> $detail
-     * @param list<string> $r
-     * @param Rank|value-of<Rank> $rank
+     * @param Cat|value-of<Cat>|null $cat
+     * @param Detail|value-of<Detail>|null $detail
+     * @param list<string>|null $r
+     * @param Rank|value-of<Rank>|null $rank
      */
     public static function with(
         string $regionCode,

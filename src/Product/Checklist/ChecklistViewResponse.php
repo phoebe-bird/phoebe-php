@@ -113,8 +113,8 @@ final class ChecklistViewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LocShape $loc
-     * @param list<ObShape> $obs
+     * @param Loc|LocShape|null $loc
+     * @param list<ObShape>|null $obs
      */
     public static function with(
         ?bool $allObsReported = null,
@@ -213,7 +213,7 @@ final class ChecklistViewResponse implements BaseModel
     }
 
     /**
-     * @param LocShape $loc
+     * @param Loc|LocShape $loc
      */
     public function withLoc(Loc|array $loc): self
     {

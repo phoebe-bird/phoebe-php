@@ -37,7 +37,7 @@ final class InfoGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BoundsShape $bounds
+     * @param Bounds|BoundsShape|null $bounds
      */
     public static function with(
         Bounds|array|null $bounds = null,
@@ -52,7 +52,7 @@ final class InfoGetResponse implements BaseModel
     }
 
     /**
-     * @param BoundsShape $bounds
+     * @param Bounds|BoundsShape $bounds
      */
     public function withBounds(Bounds|array $bounds): self
     {

@@ -63,7 +63,7 @@ final class InfoRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RegionNameFormat|value-of<RegionNameFormat> $regionNameFormat
+     * @param RegionNameFormat|value-of<RegionNameFormat>|null $regionNameFormat
      */
     public static function with(
         ?string $delim = null,

@@ -89,7 +89,7 @@ final class Top100RetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RankedBy|value-of<RankedBy> $rankedBy
+     * @param RankedBy|value-of<RankedBy>|null $rankedBy
      */
     public static function with(
         string $regionCode,

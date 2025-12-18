@@ -78,9 +78,9 @@ final class EbirdGetResponseItem implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $bandingCodes
-     * @param list<string> $comNameCodes
-     * @param list<string> $sciNameCodes
+     * @param list<string>|null $bandingCodes
+     * @param list<string>|null $comNameCodes
+     * @param list<string>|null $sciNameCodes
      */
     public static function with(
         ?array $bandingCodes = null,
