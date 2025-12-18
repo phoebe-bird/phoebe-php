@@ -49,7 +49,7 @@ final class HotspotListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fmt|value-of<Fmt> $fmt
+     * @param Fmt|value-of<Fmt>|null $fmt
      */
     public static function with(?int $back = null, Fmt|string|null $fmt = null): self
     {

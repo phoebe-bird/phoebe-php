@@ -101,7 +101,7 @@ final class NotableListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Detail|value-of<Detail> $detail
+     * @param Detail|value-of<Detail>|null $detail
      */
     public static function with(
         float $lat,

@@ -47,7 +47,7 @@ final class Ob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ObsAuxShape> $obsAux
+     * @param list<ObsAuxShape>|null $obsAux
      */
     public static function with(
         ?array $obsAux = null,

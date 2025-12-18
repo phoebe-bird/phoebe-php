@@ -88,8 +88,8 @@ final class RecentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param list<string> $r
+     * @param Cat|value-of<Cat>|null $cat
+     * @param list<string>|null $r
      */
     public static function with(
         ?int $back = null,

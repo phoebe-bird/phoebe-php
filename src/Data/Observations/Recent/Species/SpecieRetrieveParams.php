@@ -103,7 +103,7 @@ final class SpecieRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $r
+     * @param list<string>|null $r
      */
     public static function with(
         string $regionCode,
