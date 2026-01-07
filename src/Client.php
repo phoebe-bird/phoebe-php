@@ -12,6 +12,10 @@ use Phoebe\Services\DataService;
 use Phoebe\Services\ProductService;
 use Phoebe\Services\RefService;
 
+/**
+ * @phpstan-import-type NormalizedRequest from \Phoebe\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 class Client extends BaseClient
 {
     public string $apiKey;
@@ -69,5 +73,33 @@ class Client extends BaseClient
     protected function authHeaders(): array
     {
         return $this->apiKey ? ['X-eBirdApiToken' => $this->apiKey] : [];
+    }
+
+    /**
+     * @internal
+     *
+     * @param string|list<string> $path
+     * @param array<string,mixed> $query
+     * @param array<string,string|int|list<string|int>|null> $headers
+     * @param RequestOpts|null $opts
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    protected function buildRequest(
+        string $method,
+        string|array $path,
+        array $query,
+        array $headers,
+        mixed $body,
+        RequestOptions|array|null $opts,
+    ): array {
+        return parent::buildRequest(
+            method: $method,
+            path: $path,
+            query: $query,
+            headers: [...$this->authHeaders(), ...$headers],
+            body: $body,
+            opts: $opts,
+        );
     }
 }

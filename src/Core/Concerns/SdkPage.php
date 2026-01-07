@@ -12,6 +12,8 @@ use Phoebe\Core\Exceptions\APIStatusException;
 use Phoebe\RequestOptions;
 
 /**
+ * @phpstan-import-type NormalizedRequest from \Phoebe\Core\BaseClient
+ *
  * @internal
  *
  * @template Item
@@ -94,7 +96,7 @@ trait SdkPage
     /**
      * @internal
      *
-     * @return array{normalized_request, RequestOptions}
+     * @return array{NormalizedRequest, RequestOptions}
      */
     abstract protected function nextRequest(): ?array;
 }
