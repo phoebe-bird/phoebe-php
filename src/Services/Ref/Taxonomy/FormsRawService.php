@@ -11,6 +11,9 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\FormsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class FormsRawService implements FormsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class FormsRawService implements FormsRawContract
      * For a species, get the list of subspecies recognised in the taxonomy. The results include the species that was passed in.
      *
      * @param string $speciesCode the eBird species code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<string>>
      *
@@ -32,7 +36,7 @@ final class FormsRawService implements FormsRawContract
      */
     public function list(
         string $speciesCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

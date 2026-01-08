@@ -13,6 +13,9 @@ use Phoebe\Data\Observations\Recent\Species\SpecieRetrieveParams;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\SpeciesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesRawService implements SpeciesRawContract
 {
     // @phpstan-ignore-next-line
@@ -43,6 +46,7 @@ final class SpeciesRawService implements SpeciesRawContract
      *   r?: list<string>,
      *   sppLocale?: string,
      * }|SpecieRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -51,7 +55,7 @@ final class SpeciesRawService implements SpeciesRawContract
     public function retrieve(
         string $speciesCode,
         array|SpecieRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SpecieRetrieveParams::parseRequest(
             $params,

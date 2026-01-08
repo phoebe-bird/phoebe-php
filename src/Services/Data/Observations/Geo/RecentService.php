@@ -15,6 +15,9 @@ use Phoebe\ServiceContracts\Data\Observations\Geo\RecentContract;
 use Phoebe\Services\Data\Observations\Geo\Recent\NotableService;
 use Phoebe\Services\Data\Observations\Geo\Recent\SpeciesService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class RecentService implements RecentContract
 {
     /**
@@ -50,13 +53,14 @@ final class RecentService implements RecentContract
      * of coordinates. Results include only the most recent observation for each species in the region specified.
      *
      * @param int $back the number of days back to fetch observations
-     * @param 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat $cat Only fetch observations from these taxonomic categories
+     * @param Cat|value-of<Cat> $cat Only fetch observations from these taxonomic categories
      * @param int $dist the search radius from the given position, in kilometers
      * @param bool $hotspot Only fetch observations from hotspots
      * @param bool $includeProvisional include observations which have not yet been reviewed
      * @param int $maxResults Only fetch this number of observations
-     * @param 'date'|'species'|Sort $sort sort observations by taxonomy or by date, most recent first
+     * @param Sort|value-of<Sort> $sort sort observations by taxonomy or by date, most recent first
      * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -66,14 +70,14 @@ final class RecentService implements RecentContract
         float $lat,
         float $lng,
         int $back = 14,
-        string|Cat|null $cat = null,
+        Cat|string|null $cat = null,
         int $dist = 25,
         bool $hotspot = false,
         bool $includeProvisional = false,
         int $maxResults = 10000,
-        string|Sort $sort = 'date',
+        Sort|string $sort = 'date',
         string $sppLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(
             [

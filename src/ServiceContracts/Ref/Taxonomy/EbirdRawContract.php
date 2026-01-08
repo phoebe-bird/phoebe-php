@@ -10,12 +10,16 @@ use Phoebe\Ref\Taxonomy\Ebird\EbirdGetResponseItem;
 use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface EbirdRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|EbirdRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<EbirdGetResponseItem>>
      *
@@ -23,6 +27,6 @@ interface EbirdRawContract
      */
     public function retrieve(
         array|EbirdRetrieveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

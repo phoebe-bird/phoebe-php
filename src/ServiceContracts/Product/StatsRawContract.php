@@ -10,6 +10,9 @@ use Phoebe\Product\Stats\StatGetResponse;
 use Phoebe\Product\Stats\StatRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface StatsRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface StatsRawContract
      *
      * @param int $d the day in the month
      * @param array<string,mixed>|StatRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<StatGetResponse>
      *
@@ -25,6 +29,6 @@ interface StatsRawContract
     public function retrieve(
         int $d,
         array|StatRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

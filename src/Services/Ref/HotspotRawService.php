@@ -14,6 +14,9 @@ use Phoebe\Ref\Hotspot\HotspotListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\HotspotRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class HotspotRawService implements HotspotRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,7 +31,8 @@ final class HotspotRawService implements HotspotRawContract
      * Hotspots in a region
      *
      * @param string $regionCode the country, subnational1 or subnational2 code
-     * @param array{back?: int, fmt?: 'csv'|'json'|Fmt}|HotspotListParams $params
+     * @param array{back?: int, fmt?: Fmt|value-of<Fmt>}|HotspotListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<HotspotListResponseItem>>
      *
@@ -37,7 +41,7 @@ final class HotspotRawService implements HotspotRawContract
     public function list(
         string $regionCode,
         array|HotspotListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = HotspotListParams::parseRequest(
             $params,

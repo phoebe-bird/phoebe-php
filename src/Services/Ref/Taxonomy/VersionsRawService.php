@@ -12,6 +12,9 @@ use Phoebe\Ref\Taxonomy\Versions\VersionListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\VersionsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class VersionsRawService implements VersionsRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,12 +28,15 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Returns a list of all versions of the taxonomy, with a flag indicating which is the latest.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<list<VersionListResponseItem>>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): BaseResponse
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',

@@ -13,7 +13,7 @@ use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem\Ob\ObsAux;
  * @phpstan-import-type ObsAuxShape from \Phoebe\Product\Lists\Historical\HistoricalGetResponseItem\Ob\ObsAux
  *
  * @phpstan-type ObShape = array{
- *   obsAux?: list<ObsAuxShape>|null,
+ *   obsAux?: list<ObsAux|ObsAuxShape>|null,
  *   obsDt?: string|null,
  *   obsID?: string|null,
  *   speciesCode?: string|null,
@@ -47,7 +47,7 @@ final class Ob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ObsAuxShape>|null $obsAux
+     * @param list<ObsAux|ObsAuxShape>|null $obsAux
      */
     public static function with(
         ?array $obsAux = null,
@@ -66,7 +66,7 @@ final class Ob implements BaseModel
     }
 
     /**
-     * @param list<ObsAuxShape> $obsAux
+     * @param list<ObsAux|ObsAuxShape> $obsAux
      */
     public function withObsAux(array $obsAux): self
     {

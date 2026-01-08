@@ -8,12 +8,16 @@ use Phoebe\Core\Contracts\BaseResponse;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface SpeciesListRawContract
 {
     /**
      * @api
      *
      * @param string $regionCode Any location, USFWS region, subnational2, subnational1, country, or custom region code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<string>>
      *
@@ -21,6 +25,6 @@ interface SpeciesListRawContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

@@ -13,6 +13,9 @@ use Phoebe\Product\Lists\ListRetrieveParams;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\ListsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListsRawService implements ListsRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,6 +31,7 @@ final class ListsRawService implements ListsRawContract
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param array{maxResults?: int}|ListRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ListGetResponseItem>>
      *
@@ -36,7 +40,7 @@ final class ListsRawService implements ListsRawContract
     public function retrieve(
         string $regionCode,
         array|ListRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ListRetrieveParams::parseRequest(
             $params,

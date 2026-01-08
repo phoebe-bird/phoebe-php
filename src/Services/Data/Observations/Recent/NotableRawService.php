@@ -14,6 +14,9 @@ use Phoebe\Data\Observations\Recent\Notable\NotableListParams\Detail;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\NotableRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class NotableRawService implements NotableRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,12 +33,13 @@ final class NotableRawService implements NotableRawContract
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param array{
      *   back?: int,
-     *   detail?: 'simple'|'full'|Detail,
+     *   detail?: Detail|value-of<Detail>,
      *   hotspot?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
      *   sppLocale?: string,
      * }|NotableListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -44,7 +48,7 @@ final class NotableRawService implements NotableRawContract
     public function list(
         string $regionCode,
         array|NotableListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotableListParams::parseRequest(
             $params,

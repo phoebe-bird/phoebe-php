@@ -10,6 +10,9 @@ use Phoebe\Ref\Region\List_\ListListParams;
 use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface ListRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface ListRawContract
      *
      * @param string $parentRegionCode path param: The country or subnational1 code, or 'world'
      * @param array<string,mixed>|ListListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ListListResponseItem>>
      *
@@ -25,6 +29,6 @@ interface ListRawContract
     public function list(
         string $parentRegionCode,
         array|ListListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

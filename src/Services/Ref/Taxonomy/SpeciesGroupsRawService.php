@@ -14,6 +14,9 @@ use Phoebe\Ref\Taxonomy\SpeciesGroups\SpeciesGroupListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\SpeciesGroupsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesGroupsRawService implements SpeciesGroupsRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,6 +32,7 @@ final class SpeciesGroupsRawService implements SpeciesGroupsRawContract
      *
      * @param SpeciesGrouping|value-of<SpeciesGrouping> $speciesGrouping the order in which groups are returned
      * @param array{groupNameLocale?: string}|SpeciesGroupListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<SpeciesGroupListResponseItem>>
      *
@@ -37,7 +41,7 @@ final class SpeciesGroupsRawService implements SpeciesGroupsRawContract
     public function list(
         SpeciesGrouping|string $speciesGrouping,
         array|SpeciesGroupListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = SpeciesGroupListParams::parseRequest(
             $params,

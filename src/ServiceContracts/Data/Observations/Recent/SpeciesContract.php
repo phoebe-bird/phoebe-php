@@ -8,6 +8,9 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface SpeciesContract
 {
     /**
@@ -21,6 +24,7 @@ interface SpeciesContract
      * @param int $maxResults Query param: Only fetch this number of observations
      * @param list<string> $r Query param: Fetch observations from up to 10 locations
      * @param string $sppLocale Query param: Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -35,6 +39,6 @@ interface SpeciesContract
         int $maxResults = 10000,
         ?array $r = null,
         string $sppLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

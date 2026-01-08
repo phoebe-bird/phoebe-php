@@ -15,6 +15,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\RecentRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class RecentRawService implements RecentRawContract
 {
     // @phpstan-ignore-next-line
@@ -34,14 +37,15 @@ final class RecentRawService implements RecentRawContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
+     *   cat?: Cat|value-of<Cat>,
      *   dist?: int,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
-     *   sort?: 'date'|'species'|Sort,
+     *   sort?: Sort|value-of<Sort>,
      *   sppLocale?: string,
      * }|RecentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -49,7 +53,7 @@ final class RecentRawService implements RecentRawContract
      */
     public function list(
         array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecentListParams::parseRequest(
             $params,

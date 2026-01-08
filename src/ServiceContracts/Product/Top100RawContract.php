@@ -10,6 +10,9 @@ use Phoebe\Product\Top100\Top100GetResponseItem;
 use Phoebe\Product\Top100\Top100RetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface Top100RawContract
 {
     /**
@@ -17,6 +20,7 @@ interface Top100RawContract
      *
      * @param int $d path param: The day in the month
      * @param array<string,mixed>|Top100RetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Top100GetResponseItem>>
      *
@@ -25,6 +29,6 @@ interface Top100RawContract
     public function retrieve(
         int $d,
         array|Top100RetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

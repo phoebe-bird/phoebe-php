@@ -14,6 +14,9 @@ use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListRawService implements ListRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,7 +31,8 @@ final class ListRawService implements ListRawContract
      * Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.
      *
      * @param string $parentRegionCode path param: The country or subnational1 code, or 'world'
-     * @param array{regionType: string, fmt?: 'csv'|'json'|Fmt}|ListListParams $params
+     * @param array{regionType: string, fmt?: Fmt|value-of<Fmt>}|ListListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ListListResponseItem>>
      *
@@ -37,7 +41,7 @@ final class ListRawService implements ListRawContract
     public function list(
         string $parentRegionCode,
         array|ListListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ListListParams::parseRequest(
             $params,

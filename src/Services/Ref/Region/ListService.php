@@ -12,6 +12,9 @@ use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListService implements ListContract
 {
     /**
@@ -34,7 +37,8 @@ final class ListService implements ListContract
      *
      * @param string $parentRegionCode path param: The country or subnational1 code, or 'world'
      * @param string $regionType path param: The region type: 'country', 'subnational1' or 'subnational2'
-     * @param 'csv'|'json'|Fmt $fmt query param: Fetch the records in CSV or JSON format
+     * @param Fmt|value-of<Fmt> $fmt query param: Fetch the records in CSV or JSON format
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ListListResponseItem>
      *
@@ -43,8 +47,8 @@ final class ListService implements ListContract
     public function list(
         string $parentRegionCode,
         string $regionType,
-        string|Fmt $fmt = 'json',
-        ?RequestOptions $requestOptions = null,
+        Fmt|string $fmt = 'json',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['regionType' => $regionType, 'fmt' => $fmt]);
 

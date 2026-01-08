@@ -14,6 +14,9 @@ use Phoebe\Product\Top100\Top100RetrieveParams\RankedBy;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\Top100RawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class Top100RawService implements Top100RawContract
 {
     // @phpstan-ignore-next-line
@@ -33,8 +36,9 @@ final class Top100RawService implements Top100RawContract
      *   y: int,
      *   m: int,
      *   maxResults?: int,
-     *   rankedBy?: 'spp'|'cl'|RankedBy,
+     *   rankedBy?: RankedBy|value-of<RankedBy>,
      * }|Top100RetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Top100GetResponseItem>>
      *
@@ -43,7 +47,7 @@ final class Top100RawService implements Top100RawContract
     public function retrieve(
         int $d,
         array|Top100RetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = Top100RetrieveParams::parseRequest(
             $params,

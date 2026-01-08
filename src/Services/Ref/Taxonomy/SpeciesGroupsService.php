@@ -12,6 +12,9 @@ use Phoebe\Ref\Taxonomy\SpeciesGroups\SpeciesGroupListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\SpeciesGroupsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesGroupsService implements SpeciesGroupsContract
 {
     /**
@@ -34,6 +37,7 @@ final class SpeciesGroupsService implements SpeciesGroupsContract
      *
      * @param SpeciesGrouping|value-of<SpeciesGrouping> $speciesGrouping the order in which groups are returned
      * @param string $groupNameLocale Locale for species group names. English names are returned for any non-listed locale or any non-translated group name.
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<SpeciesGroupListResponseItem>
      *
@@ -42,7 +46,7 @@ final class SpeciesGroupsService implements SpeciesGroupsContract
     public function list(
         SpeciesGrouping|string $speciesGrouping,
         string $groupNameLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['groupNameLocale' => $groupNameLocale]);
 

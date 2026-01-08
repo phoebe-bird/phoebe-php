@@ -10,6 +10,9 @@ use Phoebe\Ref\Taxonomy\Versions\VersionListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\VersionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class VersionsService implements VersionsContract
 {
     /**
@@ -30,12 +33,15 @@ final class VersionsService implements VersionsContract
      *
      * Returns a list of all versions of the taxonomy, with a flag indicating which is the latest.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return list<VersionListResponseItem>
      *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): array
-    {
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(requestOptions: $requestOptions);
 

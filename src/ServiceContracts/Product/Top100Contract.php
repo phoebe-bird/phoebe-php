@@ -9,6 +9,9 @@ use Phoebe\Product\Top100\Top100GetResponseItem;
 use Phoebe\Product\Top100\Top100RetrieveParams\RankedBy;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface Top100Contract
 {
     /**
@@ -19,7 +22,8 @@ interface Top100Contract
      * @param int $y path param: The year, from 1800 to the present
      * @param int $m path param: The month, from 1-12
      * @param int $maxResults query param: Only fetch this number of contributors
-     * @param 'spp'|'cl'|RankedBy $rankedBy query param: Order by number of complete checklists (cl) or by number of species seen (spp)
+     * @param RankedBy|value-of<RankedBy> $rankedBy query param: Order by number of complete checklists (cl) or by number of species seen (spp)
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Top100GetResponseItem>
      *
@@ -31,7 +35,7 @@ interface Top100Contract
         int $y,
         int $m,
         int $maxResults = 100,
-        string|RankedBy $rankedBy = 'spp',
-        ?RequestOptions $requestOptions = null,
+        RankedBy|string $rankedBy = 'spp',
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

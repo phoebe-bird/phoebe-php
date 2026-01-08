@@ -12,6 +12,9 @@ use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\EbirdContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class EbirdService implements EbirdContract
 {
     /**
@@ -33,10 +36,11 @@ final class EbirdService implements EbirdContract
      * Get the taxonomy used by eBird. #### Notes Each entry in the taxonomy contains a species code for example, barswa for Barn Swallow. You can download the taxonomy for selected species using the *species* query parameter with a comma separating each code. Otherwise the full taxonomy is downloaded.
      *
      * @param string $cat only fetch records from these taxonomic categories
-     * @param 'csv'|'json'|Fmt $fmt fetch the records in CSV or JSON format
+     * @param Fmt|value-of<Fmt> $fmt fetch the records in CSV or JSON format
      * @param string $locale use this language for common names
      * @param string $species only fetch records for these species
      * @param string $version fetch a specific version of the taxonomy
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<EbirdGetResponseItem>
      *
@@ -44,11 +48,11 @@ final class EbirdService implements EbirdContract
      */
     public function retrieve(
         ?string $cat = null,
-        string|Fmt $fmt = 'csv',
+        Fmt|string $fmt = 'csv',
         string $locale = 'en',
         ?string $species = null,
         string $version = 'latest',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(
             [

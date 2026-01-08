@@ -14,6 +14,9 @@ use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\RecentRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class RecentRawService implements RecentRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,13 +34,14 @@ final class RecentRawService implements RecentRawContract
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param array{
      *   back?: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
+     *   cat?: Cat|value-of<Cat>,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
      *   sppLocale?: string,
      * }|RecentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -46,7 +50,7 @@ final class RecentRawService implements RecentRawContract
     public function list(
         string $regionCode,
         array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = RecentListParams::parseRequest(
             $params,

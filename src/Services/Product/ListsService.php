@@ -12,6 +12,9 @@ use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\ListsContract;
 use Phoebe\Services\Product\Lists\HistoricalService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListsService implements ListsContract
 {
     /**
@@ -40,6 +43,7 @@ final class ListsService implements ListsContract
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param int $maxResults only fetch this number of checklists
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ListGetResponseItem>
      *
@@ -48,7 +52,7 @@ final class ListsService implements ListsContract
     public function retrieve(
         string $regionCode,
         int $maxResults = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['maxResults' => $maxResults]);
 

@@ -11,6 +11,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\SpeciesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesService implements SpeciesContract
 {
     /**
@@ -46,6 +49,7 @@ final class SpeciesService implements SpeciesContract
      * @param bool $includeProvisional include observations which have not yet been reviewed
      * @param int $maxResults Only fetch this number of observations
      * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -61,7 +65,7 @@ final class SpeciesService implements SpeciesContract
         bool $includeProvisional = false,
         int $maxResults = 10000,
         string $sppLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(
             [

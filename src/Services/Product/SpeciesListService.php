@@ -9,6 +9,9 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\SpeciesListContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesListService implements SpeciesListContract
 {
     /**
@@ -31,6 +34,7 @@ final class SpeciesListService implements SpeciesListContract
      * #### Notes The results are usually updated every 10 seconds for locations, every day for larger regions.
      *
      * @param string $regionCode Any location, USFWS region, subnational2, subnational1, country, or custom region code
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<string>
      *
@@ -38,7 +42,7 @@ final class SpeciesListService implements SpeciesListContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($regionCode, requestOptions: $requestOptions);

@@ -10,12 +10,16 @@ use Phoebe\Data\Observations\Geo\Recent\RecentListParams;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface RecentRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|RecentListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -23,6 +27,6 @@ interface RecentRawContract
      */
     public function list(
         array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

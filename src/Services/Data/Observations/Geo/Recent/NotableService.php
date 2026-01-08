@@ -12,6 +12,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\NotableContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class NotableService implements NotableContract
 {
     /**
@@ -33,11 +36,12 @@ final class NotableService implements NotableContract
      * Get the list of notable observations (up to 30 days ago) of birds seen at locations within a radius of up to 50 kilometers, from a given set of coordinates. Notable observations can be for locally or nationally rare species or are otherwise unusual, for example over-wintering birds in a species which is normally only a summer visitor.
      *
      * @param int $back the number of days back to fetch observations
-     * @param 'simple'|'full'|Detail $detail include a subset (simple), or all (full), of the fields available
+     * @param Detail|value-of<Detail> $detail include a subset (simple), or all (full), of the fields available
      * @param int $dist the search radius from the given position, in kilometers
      * @param bool $hotspot Only fetch observations from hotspots
      * @param int $maxResults Only fetch this number of observations
      * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -47,12 +51,12 @@ final class NotableService implements NotableContract
         float $lat,
         float $lng,
         int $back = 14,
-        string|Detail $detail = 'simple',
+        Detail|string $detail = 'simple',
         int $dist = 25,
         bool $hotspot = false,
         int $maxResults = 10000,
         string $sppLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(
             [

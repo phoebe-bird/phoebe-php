@@ -11,6 +11,9 @@ use Phoebe\Product\Checklist\ChecklistViewResponse;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\ChecklistRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ChecklistRawService implements ChecklistRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class ChecklistRawService implements ChecklistRawContract
      * #### Notes Do NOT use this to download large amounts of data. You will be banned if you do. In the fields for each observation, the following fields are duplicates or obsolete and will be removed at a future date: *howManyAtleast*, *howManyAtmost*, *hideFlags*, *projId*, *subId*, *subnational1Code* and *present*.
      *
      * @param string $subID the checklist identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChecklistViewResponse>
      *
@@ -33,7 +37,7 @@ final class ChecklistRawService implements ChecklistRawContract
      */
     public function view(
         string $subID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

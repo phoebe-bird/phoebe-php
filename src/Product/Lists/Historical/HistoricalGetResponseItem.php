@@ -25,7 +25,7 @@ use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem\Ob;
  *   locID?: string|null,
  *   numObservers?: int|null,
  *   numSpecies?: int|null,
- *   obs?: list<ObShape>|null,
+ *   obs?: list<Ob|ObShape>|null,
  *   obsDt?: string|null,
  *   obsTime?: string|null,
  *   obsTimeValid?: bool|null,
@@ -114,7 +114,7 @@ final class HistoricalGetResponseItem implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Loc|LocShape|null $loc
-     * @param list<ObShape>|null $obs
+     * @param list<Ob|ObShape>|null $obs
      */
     public static function with(
         ?bool $allObsReported = null,
@@ -248,7 +248,7 @@ final class HistoricalGetResponseItem implements BaseModel
     }
 
     /**
-     * @param list<ObShape> $obs
+     * @param list<Ob|ObShape> $obs
      */
     public function withObs(array $obs): self
     {
