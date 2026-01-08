@@ -14,6 +14,9 @@ use Phoebe\ServiceContracts\Ref\HotspotContract;
 use Phoebe\Services\Ref\Hotspot\GeoService;
 use Phoebe\Services\Ref\Hotspot\InfoService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class HotspotService implements HotspotContract
 {
     /**
@@ -48,7 +51,8 @@ final class HotspotService implements HotspotContract
      *
      * @param string $regionCode the country, subnational1 or subnational2 code
      * @param int $back the number of days back to fetch hotspots
-     * @param 'csv'|'json'|Fmt $fmt fetch the records in CSV or JSON format
+     * @param Fmt|value-of<Fmt> $fmt fetch the records in CSV or JSON format
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<HotspotListResponseItem>
      *
@@ -57,8 +61,8 @@ final class HotspotService implements HotspotContract
     public function list(
         string $regionCode,
         ?int $back = null,
-        string|Fmt $fmt = 'json',
-        ?RequestOptions $requestOptions = null,
+        Fmt|string $fmt = 'json',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['back' => $back, 'fmt' => $fmt]);
 

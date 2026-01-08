@@ -13,8 +13,8 @@ use Phoebe\Services\ProductService;
 use Phoebe\Services\RefService;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Phoebe\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Phoebe\Core\BaseClient
  */
 class Client extends BaseClient
 {

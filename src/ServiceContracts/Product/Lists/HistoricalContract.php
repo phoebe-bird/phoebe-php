@@ -9,6 +9,9 @@ use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface HistoricalContract
 {
     /**
@@ -19,7 +22,8 @@ interface HistoricalContract
      * @param int $y path param: The year, from 1800 to the present
      * @param int $m path param: The month, from 1-12
      * @param int $maxResults query param: Only fetch this number of checklists
-     * @param 'obs_dt'|'creation_dt'|SortKey $sortKey query param: Order the results by the date of the checklist or by the date it was submitted
+     * @param SortKey|value-of<SortKey> $sortKey query param: Order the results by the date of the checklist or by the date it was submitted
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<HistoricalGetResponseItem>
      *
@@ -31,7 +35,7 @@ interface HistoricalContract
         int $y,
         int $m,
         int $maxResults = 10,
-        string|SortKey $sortKey = 'obs_dt',
-        ?RequestOptions $requestOptions = null,
+        SortKey|string $sortKey = 'obs_dt',
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

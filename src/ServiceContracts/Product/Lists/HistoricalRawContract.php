@@ -10,6 +10,9 @@ use Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface HistoricalRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface HistoricalRawContract
      *
      * @param int $d path param: The day in the month
      * @param array<string,mixed>|HistoricalRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<HistoricalGetResponseItem>>
      *
@@ -25,6 +29,6 @@ interface HistoricalRawContract
     public function retrieve(
         int $d,
         array|HistoricalRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

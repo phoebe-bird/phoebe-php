@@ -8,6 +8,9 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Lists\ListGetResponseItem;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface ListsContract
 {
     /**
@@ -15,6 +18,7 @@ interface ListsContract
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param int $maxResults only fetch this number of checklists
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ListGetResponseItem>
      *
@@ -23,6 +27,6 @@ interface ListsContract
     public function retrieve(
         string $regionCode,
         int $maxResults = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

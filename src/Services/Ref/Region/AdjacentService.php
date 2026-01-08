@@ -10,6 +10,9 @@ use Phoebe\Ref\Region\Adjacent\AdjacentListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\AdjacentContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class AdjacentService implements AdjacentContract
 {
     /**
@@ -31,6 +34,7 @@ final class AdjacentService implements AdjacentContract
      * Get the list of countries or regions that share a border with this one. #### Notes Only subnational2 codes in the United States, New Zealand, or Mexico are currently supported
      *
      * @param string $regionCode the country, subnational1 or subnational2 code
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<AdjacentListResponseItem>
      *
@@ -38,7 +42,7 @@ final class AdjacentService implements AdjacentContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($regionCode, requestOptions: $requestOptions);

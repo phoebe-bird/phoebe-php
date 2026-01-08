@@ -10,6 +10,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Species\SpecieRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface SpeciesRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface SpeciesRawContract
      *
      * @param string $speciesCode path param: The eBird species code
      * @param array<string,mixed>|SpecieRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -25,6 +29,6 @@ interface SpeciesRawContract
     public function retrieve(
         string $speciesCode,
         array|SpecieRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

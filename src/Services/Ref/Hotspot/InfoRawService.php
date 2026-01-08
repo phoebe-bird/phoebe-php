@@ -11,6 +11,9 @@ use Phoebe\Ref\Hotspot\Info\InfoGetResponse;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\InfoRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class InfoRawService implements InfoRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,6 +28,7 @@ final class InfoRawService implements InfoRawContract
      * Get information on the location of a hotspot. #### Notes This API call only works for hotspots. If you pass the location code for a private location or an invalid location code then an HTTP 410 (Gone) error is returned.
      *
      * @param string $locID the location code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InfoGetResponse>
      *
@@ -32,7 +36,7 @@ final class InfoRawService implements InfoRawContract
      */
     public function retrieve(
         string $locID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

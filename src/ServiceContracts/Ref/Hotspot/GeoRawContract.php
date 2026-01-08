@@ -10,12 +10,16 @@ use Phoebe\Ref\Hotspot\Geo\GeoGetResponseItem;
 use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface GeoRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|GeoRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<GeoGetResponseItem>>
      *
@@ -23,6 +27,6 @@ interface GeoRawContract
      */
     public function retrieve(
         array|GeoRetrieveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

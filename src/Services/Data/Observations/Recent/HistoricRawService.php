@@ -16,6 +16,9 @@ use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Rank;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Recent\HistoricRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class HistoricRawService implements HistoricRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,15 +38,16 @@ final class HistoricRawService implements HistoricRawContract
      *   regionCode: string,
      *   y: int,
      *   m: int,
-     *   cat?: 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat,
-     *   detail?: 'simple'|'full'|Detail,
+     *   cat?: Cat|value-of<Cat>,
+     *   detail?: Detail|value-of<Detail>,
      *   hotspot?: bool,
      *   includeProvisional?: bool,
      *   maxResults?: int,
      *   r?: list<string>,
-     *   rank?: 'mrec'|'create'|Rank,
+     *   rank?: Rank|value-of<Rank>,
      *   sppLocale?: string,
      * }|HistoricListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -52,7 +56,7 @@ final class HistoricRawService implements HistoricRawContract
     public function list(
         int $d,
         array|HistoricListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = HistoricListParams::parseRequest(
             $params,

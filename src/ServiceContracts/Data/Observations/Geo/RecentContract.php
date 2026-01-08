@@ -10,19 +10,23 @@ use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface RecentContract
 {
     /**
      * @api
      *
      * @param int $back the number of days back to fetch observations
-     * @param 'species'|'slash'|'issf'|'spuh'|'hybrid'|'domestic'|'form'|'intergrade'|Cat $cat Only fetch observations from these taxonomic categories
+     * @param Cat|value-of<Cat> $cat Only fetch observations from these taxonomic categories
      * @param int $dist the search radius from the given position, in kilometers
      * @param bool $hotspot Only fetch observations from hotspots
      * @param bool $includeProvisional include observations which have not yet been reviewed
      * @param int $maxResults Only fetch this number of observations
-     * @param 'date'|'species'|Sort $sort sort observations by taxonomy or by date, most recent first
+     * @param Sort|value-of<Sort> $sort sort observations by taxonomy or by date, most recent first
      * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -32,13 +36,13 @@ interface RecentContract
         float $lat,
         float $lng,
         int $back = 14,
-        string|Cat|null $cat = null,
+        Cat|string|null $cat = null,
         int $dist = 25,
         bool $hotspot = false,
         bool $includeProvisional = false,
         int $maxResults = 10000,
-        string|Sort $sort = 'date',
+        Sort|string $sort = 'date',
         string $sppLocale = 'en',
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

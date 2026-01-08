@@ -14,6 +14,9 @@ use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\Lists\HistoricalRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class HistoricalRawService implements HistoricalRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,8 +36,9 @@ final class HistoricalRawService implements HistoricalRawContract
      *   y: int,
      *   m: int,
      *   maxResults?: int,
-     *   sortKey?: 'obs_dt'|'creation_dt'|SortKey,
+     *   sortKey?: SortKey|value-of<SortKey>,
      * }|HistoricalRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<HistoricalGetResponseItem>>
      *
@@ -43,7 +47,7 @@ final class HistoricalRawService implements HistoricalRawContract
     public function retrieve(
         int $d,
         array|HistoricalRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = HistoricalRetrieveParams::parseRequest(
             $params,

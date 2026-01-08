@@ -10,6 +10,9 @@ use Phoebe\Ref\Hotspot\HotspotListParams;
 use Phoebe\Ref\Hotspot\HotspotListResponseItem;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface HotspotRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface HotspotRawContract
      *
      * @param string $regionCode the country, subnational1 or subnational2 code
      * @param array<string,mixed>|HotspotListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<HotspotListResponseItem>>
      *
@@ -25,6 +29,6 @@ interface HotspotRawContract
     public function list(
         string $regionCode,
         array|HotspotListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

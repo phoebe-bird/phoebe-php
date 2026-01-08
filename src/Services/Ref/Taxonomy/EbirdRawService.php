@@ -14,6 +14,9 @@ use Phoebe\Ref\Taxonomy\Ebird\EbirdRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\EbirdRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class EbirdRawService implements EbirdRawContract
 {
     // @phpstan-ignore-next-line
@@ -29,11 +32,12 @@ final class EbirdRawService implements EbirdRawContract
      *
      * @param array{
      *   cat?: string,
-     *   fmt?: 'csv'|'json'|Fmt,
+     *   fmt?: Fmt|value-of<Fmt>,
      *   locale?: string,
      *   species?: string,
      *   version?: string,
      * }|EbirdRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<EbirdGetResponseItem>>
      *
@@ -41,7 +45,7 @@ final class EbirdRawService implements EbirdRawContract
      */
     public function retrieve(
         array|EbirdRetrieveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = EbirdRetrieveParams::parseRequest(
             $params,

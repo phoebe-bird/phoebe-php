@@ -10,6 +10,9 @@ use Phoebe\Data\Observations\Nearest\GeoSpecies\GeoSpecieListParams;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface GeoSpeciesRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface GeoSpeciesRawContract
      *
      * @param string $speciesCode the eBird species code
      * @param array<string,mixed>|GeoSpecieListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -25,6 +29,6 @@ interface GeoSpeciesRawContract
     public function list(
         string $speciesCode,
         array|GeoSpecieListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

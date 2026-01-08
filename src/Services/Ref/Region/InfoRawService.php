@@ -13,6 +13,9 @@ use Phoebe\Ref\Region\Info\InfoRetrieveParams\RegionNameFormat;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\InfoRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class InfoRawService implements InfoRawContract
 {
     // @phpstan-ignore-next-line
@@ -41,9 +44,9 @@ final class InfoRawService implements InfoRawContract
      *
      * @param string $regionCode The major region, country, subnational1 or subnational2 code, or locId
      * @param array{
-     *   delim?: string,
-     *   regionNameFormat?: 'detailed'|'detailednoqual'|'full'|'namequal'|'nameonly'|'revdetailed'|RegionNameFormat,
+     *   delim?: string, regionNameFormat?: RegionNameFormat|value-of<RegionNameFormat>
      * }|InfoRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InfoGetResponse>
      *
@@ -52,7 +55,7 @@ final class InfoRawService implements InfoRawContract
     public function retrieve(
         string $regionCode,
         array|InfoRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InfoRetrieveParams::parseRequest(
             $params,

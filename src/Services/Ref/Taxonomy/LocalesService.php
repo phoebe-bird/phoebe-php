@@ -11,6 +11,9 @@ use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class LocalesService implements LocalesContract
 {
     /**
@@ -33,13 +36,15 @@ final class LocalesService implements LocalesContract
      *
      * NOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return list<LocaleListResponseItem>
      *
      * @throws APIException
      */
     public function list(
         ?string $acceptLanguage = null,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['acceptLanguage' => $acceptLanguage]);
 

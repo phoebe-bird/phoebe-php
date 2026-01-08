@@ -11,6 +11,9 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\SpeciesListRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class SpeciesListRawService implements SpeciesListRawContract
 {
     // @phpstan-ignore-next-line
@@ -26,6 +29,7 @@ final class SpeciesListRawService implements SpeciesListRawContract
      * #### Notes The results are usually updated every 10 seconds for locations, every day for larger regions.
      *
      * @param string $regionCode Any location, USFWS region, subnational2, subnational1, country, or custom region code
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<string>>
      *
@@ -33,7 +37,7 @@ final class SpeciesListRawService implements SpeciesListRawContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

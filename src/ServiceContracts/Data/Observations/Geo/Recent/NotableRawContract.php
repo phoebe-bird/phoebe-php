@@ -10,12 +10,16 @@ use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface NotableRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|NotableListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -23,6 +27,6 @@ interface NotableRawContract
      */
     public function list(
         array|NotableListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

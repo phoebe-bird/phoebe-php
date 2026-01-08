@@ -10,6 +10,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Notable\NotableListParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface NotableRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface NotableRawContract
      *
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param array<string,mixed>|NotableListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -25,6 +29,6 @@ interface NotableRawContract
     public function list(
         string $regionCode,
         array|NotableListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

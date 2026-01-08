@@ -12,6 +12,9 @@ use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\GeoContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class GeoService implements GeoContract
 {
     /**
@@ -34,7 +37,8 @@ final class GeoService implements GeoContract
      *
      * @param int $back the number of days back to fetch hotspots
      * @param int $dist the search radius from the given position, in kilometers
-     * @param 'csv'|'json'|Fmt $fmt fetch the records in CSV or JSON format
+     * @param Fmt|value-of<Fmt> $fmt fetch the records in CSV or JSON format
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<GeoGetResponseItem>
      *
@@ -45,8 +49,8 @@ final class GeoService implements GeoContract
         float $lng,
         ?int $back = null,
         int $dist = 25,
-        string|Fmt $fmt = 'json',
-        ?RequestOptions $requestOptions = null,
+        Fmt|string $fmt = 'json',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(
             [

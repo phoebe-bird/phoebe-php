@@ -10,12 +10,16 @@ use Phoebe\Ref\Taxonomy\Locales\LocaleListParams;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface LocalesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|LocaleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<LocaleListResponseItem>>
      *
@@ -23,6 +27,6 @@ interface LocalesRawContract
      */
     public function list(
         array|LocaleListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

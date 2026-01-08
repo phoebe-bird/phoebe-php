@@ -10,6 +10,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\Data\Observations\Recent\Historic\HistoricListParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface HistoricRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface HistoricRawContract
      *
      * @param int $d Path param:
      * @param array<string,mixed>|HistoricListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -25,6 +29,6 @@ interface HistoricRawContract
     public function list(
         int $d,
         array|HistoricListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

@@ -13,6 +13,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Nearest\GeoSpeciesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class GeoSpeciesRawService implements GeoSpeciesRawContract
 {
     // @phpstan-ignore-next-line
@@ -37,6 +40,7 @@ final class GeoSpeciesRawService implements GeoSpeciesRawContract
      *   maxResults?: int,
      *   sppLocale?: string,
      * }|GeoSpecieListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -45,7 +49,7 @@ final class GeoSpeciesRawService implements GeoSpeciesRawContract
     public function list(
         string $speciesCode,
         array|GeoSpecieListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GeoSpecieListParams::parseRequest(
             $params,

@@ -14,6 +14,9 @@ use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\NotableRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class NotableRawService implements NotableRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,12 +34,13 @@ final class NotableRawService implements NotableRawContract
      *   lat: float,
      *   lng: float,
      *   back?: int,
-     *   detail?: 'simple'|'full'|Detail,
+     *   detail?: Detail|value-of<Detail>,
      *   dist?: int,
      *   hotspot?: bool,
      *   maxResults?: int,
      *   sppLocale?: string,
      * }|NotableListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<Observation>>
      *
@@ -44,7 +48,7 @@ final class NotableRawService implements NotableRawContract
      */
     public function list(
         array|NotableListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = NotableListParams::parseRequest(
             $params,

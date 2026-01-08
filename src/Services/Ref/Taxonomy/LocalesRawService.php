@@ -14,6 +14,9 @@ use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class LocalesRawService implements LocalesRawContract
 {
     // @phpstan-ignore-next-line
@@ -30,6 +33,7 @@ final class LocalesRawService implements LocalesRawContract
      * NOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.
      *
      * @param array{acceptLanguage?: string}|LocaleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<LocaleListResponseItem>>
      *
@@ -37,7 +41,7 @@ final class LocalesRawService implements LocalesRawContract
      */
     public function list(
         array|LocaleListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LocaleListParams::parseRequest(
             $params,

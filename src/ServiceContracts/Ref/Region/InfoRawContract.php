@@ -10,6 +10,9 @@ use Phoebe\Ref\Region\Info\InfoGetResponse;
 use Phoebe\Ref\Region\Info\InfoRetrieveParams;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface InfoRawContract
 {
     /**
@@ -17,6 +20,7 @@ interface InfoRawContract
      *
      * @param string $regionCode The major region, country, subnational1 or subnational2 code, or locId
      * @param array<string,mixed>|InfoRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InfoGetResponse>
      *
@@ -25,6 +29,6 @@ interface InfoRawContract
     public function retrieve(
         string $regionCode,
         array|InfoRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

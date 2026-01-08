@@ -7,12 +7,16 @@ namespace Phoebe\ServiceContracts\Product;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface SpeciesListContract
 {
     /**
      * @api
      *
      * @param string $regionCode Any location, USFWS region, subnational2, subnational1, country, or custom region code
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<string>
      *
@@ -20,6 +24,6 @@ interface SpeciesListContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 }

@@ -9,12 +9,16 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Product\Checklist\ChecklistViewResponse;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface ChecklistRawContract
 {
     /**
      * @api
      *
      * @param string $subID the checklist identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ChecklistViewResponse>
      *
@@ -22,6 +26,6 @@ interface ChecklistRawContract
      */
     public function view(
         string $subID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

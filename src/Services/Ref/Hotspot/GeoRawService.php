@@ -14,6 +14,9 @@ use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\GeoRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class GeoRawService implements GeoRawContract
 {
     // @phpstan-ignore-next-line
@@ -28,8 +31,9 @@ final class GeoRawService implements GeoRawContract
      * Get the list of hotspots, within a radius of up to 50 kilometers, from a given set of coordinates.
      *
      * @param array{
-     *   lat: float, lng: float, back?: int, dist?: int, fmt?: 'csv'|'json'|Fmt
+     *   lat: float, lng: float, back?: int, dist?: int, fmt?: Fmt|value-of<Fmt>
      * }|GeoRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<GeoGetResponseItem>>
      *
@@ -37,7 +41,7 @@ final class GeoRawService implements GeoRawContract
      */
     public function retrieve(
         array|GeoRetrieveParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = GeoRetrieveParams::parseRequest(
             $params,

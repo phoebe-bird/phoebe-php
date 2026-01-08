@@ -11,6 +11,9 @@ use Phoebe\Product\Stats\StatGetResponse;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\StatsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class StatsService implements StatsContract
 {
     /**
@@ -36,6 +39,7 @@ final class StatsService implements StatsContract
      * @param string $regionCode the country, subnational1, subnational2 or location code
      * @param int $y the year, from 1800 to the present
      * @param int $m the month, from 1-12
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -44,7 +48,7 @@ final class StatsService implements StatsContract
         string $regionCode,
         int $y,
         int $m,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): StatGetResponse {
         $params = Util::removeNulls(
             ['regionCode' => $regionCode, 'y' => $y, 'm' => $m]
