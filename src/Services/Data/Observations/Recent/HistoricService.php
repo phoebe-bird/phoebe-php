@@ -38,10 +38,10 @@ final class HistoricService implements HistoricContract
      * Get a list of all taxa seen in a country, region or location on a specific date, with the specific observations determined by the "rank" parameter (defaults to latest observation on the date).
      * #### Notes Responses may be cached for 30 minutes
      *
-     * @param int $d Path param:
+     * @param int $d Path param
      * @param string $regionCode path param: The country, subnational1, subnational2 or location code
-     * @param int $y Path param:
-     * @param int $m Path param:
+     * @param int $y Path param
+     * @param int $m Path param
      * @param Cat|value-of<Cat> $cat Query param: Only fetch observations from these taxonomic categories
      * @param Detail|value-of<Detail> $detail query param: Include a subset (simple), or all (full), of the fields available
      * @param bool $hotspot Query param: Only fetch observations from hotspots
