@@ -18,7 +18,7 @@ interface HistoricRawContract
     /**
      * @api
      *
-     * @param int $d Path param:
+     * @param int $d Path param
      * @param array<string,mixed>|HistoricListParams $params
      * @param RequestOpts|null $requestOptions
      *

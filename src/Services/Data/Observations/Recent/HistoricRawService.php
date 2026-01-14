@@ -33,7 +33,7 @@ final class HistoricRawService implements HistoricRawContract
      * Get a list of all taxa seen in a country, region or location on a specific date, with the specific observations determined by the "rank" parameter (defaults to latest observation on the date).
      * #### Notes Responses may be cached for 30 minutes
      *
-     * @param int $d Path param:
+     * @param int $d Path param
      * @param array{
      *   regionCode: string,
      *   y: int,
