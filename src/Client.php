@@ -43,9 +43,9 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->apiKey = (string) ($apiKey ?? getenv('EBIRD_API_KEY'));
+        $this->apiKey = (string) ($apiKey ?? Util::getenv('EBIRD_API_KEY'));
 
-        $baseUrl ??= getenv('PHOEBE_BASE_URL') ?: 'https://api.ebird.org/v2';
+        $baseUrl ??= Util::getenv('PHOEBE_BASE_URL') ?: 'https://api.ebird.org/v2';
 
         $options = RequestOptions::parse(
             RequestOptions::with(
