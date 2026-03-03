@@ -11,6 +11,8 @@ use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\AdjacentContract;
 
 /**
+ * With the ref/geo end-point you can find a country's or region's neighbours.
+ *
  * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
  */
 final class AdjacentService implements AdjacentContract

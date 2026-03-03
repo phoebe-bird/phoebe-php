@@ -13,6 +13,8 @@ use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListContract;
 
 /**
+ * The ref/region end-points return information on regions.
+ *
  * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
  */
 final class ListService implements ListContract

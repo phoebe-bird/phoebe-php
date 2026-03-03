@@ -15,6 +15,8 @@ use Phoebe\Services\Ref\Hotspot\GeoService;
 use Phoebe\Services\Ref\Hotspot\InfoService;
 
 /**
+ * With the ref/hotspot end-points you can find the hotspots for a given country or region or nearby hotspots.
+ *
  * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
  */
 final class HotspotService implements HotspotContract

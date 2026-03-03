@@ -12,6 +12,8 @@ use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\InfoRawContract;
 
 /**
+ * With the ref/hotspot end-points you can find the hotspots for a given country or region or nearby hotspots.
+ *
  * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
  */
 final class InfoRawService implements InfoRawContract
