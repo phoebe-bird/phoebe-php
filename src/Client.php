@@ -7,6 +7,7 @@ namespace Phoebe;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Phoebe\Core\BaseClient;
+use Phoebe\Core\Implementation\StreamingHttpClient;
 use Phoebe\Core\Util;
 use Phoebe\Services\DataService;
 use Phoebe\Services\ProductService;
@@ -56,6 +57,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
