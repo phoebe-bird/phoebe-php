@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 (2026-05-14)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/phoebe-bird/phoebe-php/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* initial stlc build ([77a8c65](https://github.com/phoebe-bird/phoebe-php/commit/77a8c6588ebc7c61791bf5d787e03847f2773103))
+
+
+### Chores
+
+* enable release-please ([9bd7564](https://github.com/phoebe-bird/phoebe-php/commit/9bd7564860eb709af4a6ae6cadac7a14a910e281))
+* regenerate from phoebe-config[#2](https://github.com/phoebe-bird/phoebe-php/issues/2) ([82e1393](https://github.com/phoebe-bird/phoebe-php/commit/82e13937cd770c68ed34527076dd542025a3a145))
+
 ## 0.1.0 (2026-05-13)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/phoebe-bird/phoebe-php/compare/v0.0.1...v0.1.0)
