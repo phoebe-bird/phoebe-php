@@ -5,17 +5,28 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Geo;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Data\Observations\Geo\Recent\RecentListParams;
+use Phoebe\Core\Util;
+use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Cat;
+use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\RecentContract;
 use Phoebe\Services\Data\Observations\Geo\Recent\NotableService;
 use Phoebe\Services\Data\Observations\Geo\Recent\SpeciesService;
 
+/**
+ * The data/obs end-points are used to fetch observations submitted to eBird in checklists. There are two categories of end-point: 1. Fetch observations for a specific country, region or location. 2. Fetch observations for nearby locations - up to a distance of 50km. Each end-point supports optional query parameters which allow you to filter the list of observations returned.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class RecentService implements RecentContract
 {
+    /**
+     * @api
+     */
+    public RecentRawService $raw;
+
     /**
      * @api
      */
@@ -31,6 +42,7 @@ final class RecentService implements RecentContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RecentRawService($client);
         $this->species = new SpeciesService($client);
         $this->notable = new NotableService($client);
     }
@@ -42,39 +54,51 @@ final class RecentService implements RecentContract
      * at locations within a radius of up to 50 kilometers, from a given set
      * of coordinates. Results include only the most recent observation for each species in the region specified.
      *
-     * @param array{
-     *   lat: float,
-     *   lng: float,
-     *   back?: int,
-     *   cat?: "species"|"slash"|"issf"|"spuh"|"hybrid"|"domestic"|"form"|"intergrade",
-     *   dist?: int,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   sort?: "date"|"species",
-     *   sppLocale?: string,
-     * }|RecentListParams $params
+     * @param int $back the number of days back to fetch observations
+     * @param Cat|value-of<Cat> $cat Only fetch observations from these taxonomic categories
+     * @param int $dist the search radius from the given position, in kilometers
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch this number of observations
+     * @param Sort|value-of<Sort> $sort sort observations by taxonomy or by date, most recent first
+     * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
      * @throws APIException
      */
     public function list(
-        array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null
+        float $lat,
+        float $lng,
+        int $back = 14,
+        Cat|string|null $cat = null,
+        int $dist = 25,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        Sort|string $sort = 'date',
+        string $sppLocale = 'en',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = RecentListParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'back' => $back,
+                'cat' => $cat,
+                'dist' => $dist,
+                'hotspot' => $hotspot,
+                'includeProvisional' => $includeProvisional,
+                'maxResults' => $maxResults,
+                'sort' => $sort,
+                'sppLocale' => $sppLocale,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'data/obs/geo/recent',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

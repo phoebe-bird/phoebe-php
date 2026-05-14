@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Recent\Historic;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -22,14 +23,14 @@ use Phoebe\Data\Observations\Recent\Historic\HistoricListParams\Rank;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   cat?: Cat|value-of<Cat>,
- *   detail?: Detail|value-of<Detail>,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   rank?: Rank|value-of<Rank>,
- *   sppLocale?: string,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   detail?: null|Detail|value-of<Detail>,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   rank?: null|Rank|value-of<Rank>,
+ *   sppLocale?: string|null,
  * }
  */
 final class HistoricListParams implements BaseModel
@@ -38,13 +39,13 @@ final class HistoricListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
@@ -52,7 +53,7 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Cat>|null $cat
      */
-    #[Api(enum: Cat::class, optional: true)]
+    #[Optional(enum: Cat::class)]
     public ?string $cat;
 
     /**
@@ -60,25 +61,25 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Detail>|null $detail
      */
-    #[Api(enum: Detail::class, optional: true)]
+    #[Optional(enum: Detail::class)]
     public ?string $detail;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -86,7 +87,7 @@ final class HistoricListParams implements BaseModel
      *
      * @var list<string>|null $r
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $r;
 
     /**
@@ -94,13 +95,13 @@ final class HistoricListParams implements BaseModel
      *
      * @var value-of<Rank>|null $rank
      */
-    #[Api(enum: Rank::class, optional: true)]
+    #[Optional(enum: Rank::class)]
     public ?string $rank;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**
@@ -127,10 +128,10 @@ final class HistoricListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param Detail|value-of<Detail> $detail
-     * @param list<string> $r
-     * @param Rank|value-of<Rank> $rank
+     * @param Cat|value-of<Cat>|null $cat
+     * @param Detail|value-of<Detail>|null $detail
+     * @param list<string>|null $r
+     * @param Rank|value-of<Rank>|null $rank
      */
     public static function with(
         string $regionCode,
@@ -145,46 +146,46 @@ final class HistoricListParams implements BaseModel
         Rank|string|null $rank = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $detail && $obj['detail'] = $detail;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $r && $obj->r = $r;
-        null !== $rank && $obj['rank'] = $rank;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $rank && $self['rank'] = $rank;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj->y = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj->m = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +195,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withCat(Cat|string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +208,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withDetail(Detail|string $detail): self
     {
-        $obj = clone $this;
-        $obj['detail'] = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +219,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +230,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,10 +241,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,10 +254,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj->r = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +267,10 @@ final class HistoricListParams implements BaseModel
      */
     public function withRank(Rank|string $rank): self
     {
-        $obj = clone $this;
-        $obj['rank'] = $rank;
+        $self = clone $this;
+        $self['rank'] = $rank;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -277,9 +278,9 @@ final class HistoricListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

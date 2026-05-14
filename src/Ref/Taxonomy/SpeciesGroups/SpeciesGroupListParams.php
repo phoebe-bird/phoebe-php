@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\SpeciesGroups;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Ref\Taxonomy\SpeciesGroupsService::list()
  *
- * @phpstan-type SpeciesGroupListParamsShape = array{groupNameLocale?: string}
+ * @phpstan-type SpeciesGroupListParamsShape = array{groupNameLocale?: string|null}
  */
 final class SpeciesGroupListParams implements BaseModel
 {
@@ -25,7 +25,7 @@ final class SpeciesGroupListParams implements BaseModel
     /**
      * Locale for species group names. English names are returned for any non-listed locale or any non-translated group name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $groupNameLocale;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class SpeciesGroupListParams implements BaseModel
      */
     public static function with(?string $groupNameLocale = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $groupNameLocale && $obj->groupNameLocale = $groupNameLocale;
+        null !== $groupNameLocale && $self['groupNameLocale'] = $groupNameLocale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class SpeciesGroupListParams implements BaseModel
      */
     public function withGroupNameLocale(string $groupNameLocale): self
     {
-        $obj = clone $this;
-        $obj->groupNameLocale = $groupNameLocale;
+        $self = clone $this;
+        $self['groupNameLocale'] = $groupNameLocale;
 
-        return $obj;
+        return $self;
     }
 }

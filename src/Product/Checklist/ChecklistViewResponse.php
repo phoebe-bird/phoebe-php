@@ -4,104 +4,103 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Checklist;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Loc;
 use Phoebe\Product\Checklist\ChecklistViewResponse\Ob;
 
 /**
+ * @phpstan-import-type LocShape from \Phoebe\Product\Checklist\ChecklistViewResponse\Loc
+ * @phpstan-import-type ObShape from \Phoebe\Product\Checklist\ChecklistViewResponse\Ob
+ *
  * @phpstan-type ChecklistViewResponseShape = array{
  *   allObsReported?: bool|null,
- *   checklistId?: string|null,
+ *   checklistID?: string|null,
  *   creationDt?: string|null,
  *   durationHrs?: float|null,
  *   isoObsDate?: string|null,
  *   lastEditedDt?: string|null,
- *   loc?: Loc|null,
- *   locId?: string|null,
+ *   loc?: null|Loc|LocShape,
+ *   locID?: string|null,
  *   numObservers?: int|null,
  *   numSpecies?: int|null,
- *   obs?: list<Ob>|null,
+ *   obs?: list<Ob|ObShape>|null,
  *   obsDt?: string|null,
  *   obsTime?: string|null,
  *   obsTimeValid?: bool|null,
- *   projId?: string|null,
- *   protocolId?: string|null,
- *   subId?: string|null,
+ *   projID?: string|null,
+ *   protocolID?: string|null,
+ *   subID?: string|null,
  *   submissionMethodCode?: string|null,
  *   subnational1Code?: string|null,
  *   userDisplayName?: string|null,
  * }
  */
-final class ChecklistViewResponse implements BaseModel, ResponseConverter
+final class ChecklistViewResponse implements BaseModel
 {
     /** @use SdkModel<ChecklistViewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $allObsReported;
 
-    #[Api(optional: true)]
-    public ?string $checklistId;
+    #[Optional('checklistId')]
+    public ?string $checklistID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $creationDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $durationHrs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $isoObsDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastEditedDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Loc $loc;
 
-    #[Api(optional: true)]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numObservers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpecies;
 
     /** @var list<Ob>|null $obs */
-    #[Api(list: Ob::class, optional: true)]
+    #[Optional(list: Ob::class)]
     public ?array $obs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsTime;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsTimeValid;
 
-    #[Api(optional: true)]
-    public ?string $projId;
+    #[Optional('projId')]
+    public ?string $projID;
 
-    #[Api(optional: true)]
-    public ?string $protocolId;
+    #[Optional('protocolId')]
+    public ?string $protocolID;
 
-    #[Api(optional: true)]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $submissionMethodCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational1Code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $userDisplayName;
 
     public function __construct()
@@ -114,216 +113,220 @@ final class ChecklistViewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Ob> $obs
+     * @param Loc|LocShape|null $loc
+     * @param list<Ob|ObShape>|null $obs
      */
     public static function with(
         ?bool $allObsReported = null,
-        ?string $checklistId = null,
+        ?string $checklistID = null,
         ?string $creationDt = null,
         ?float $durationHrs = null,
         ?string $isoObsDate = null,
         ?string $lastEditedDt = null,
-        ?Loc $loc = null,
-        ?string $locId = null,
+        Loc|array|null $loc = null,
+        ?string $locID = null,
         ?int $numObservers = null,
         ?int $numSpecies = null,
         ?array $obs = null,
         ?string $obsDt = null,
         ?string $obsTime = null,
         ?bool $obsTimeValid = null,
-        ?string $projId = null,
-        ?string $protocolId = null,
-        ?string $subId = null,
+        ?string $projID = null,
+        ?string $protocolID = null,
+        ?string $subID = null,
         ?string $submissionMethodCode = null,
         ?string $subnational1Code = null,
         ?string $userDisplayName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $allObsReported && $obj->allObsReported = $allObsReported;
-        null !== $checklistId && $obj->checklistId = $checklistId;
-        null !== $creationDt && $obj->creationDt = $creationDt;
-        null !== $durationHrs && $obj->durationHrs = $durationHrs;
-        null !== $isoObsDate && $obj->isoObsDate = $isoObsDate;
-        null !== $lastEditedDt && $obj->lastEditedDt = $lastEditedDt;
-        null !== $loc && $obj->loc = $loc;
-        null !== $locId && $obj->locId = $locId;
-        null !== $numObservers && $obj->numObservers = $numObservers;
-        null !== $numSpecies && $obj->numSpecies = $numSpecies;
-        null !== $obs && $obj->obs = $obs;
-        null !== $obsDt && $obj->obsDt = $obsDt;
-        null !== $obsTime && $obj->obsTime = $obsTime;
-        null !== $obsTimeValid && $obj->obsTimeValid = $obsTimeValid;
-        null !== $projId && $obj->projId = $projId;
-        null !== $protocolId && $obj->protocolId = $protocolId;
-        null !== $subId && $obj->subId = $subId;
-        null !== $submissionMethodCode && $obj->submissionMethodCode = $submissionMethodCode;
-        null !== $subnational1Code && $obj->subnational1Code = $subnational1Code;
-        null !== $userDisplayName && $obj->userDisplayName = $userDisplayName;
+        null !== $allObsReported && $self['allObsReported'] = $allObsReported;
+        null !== $checklistID && $self['checklistID'] = $checklistID;
+        null !== $creationDt && $self['creationDt'] = $creationDt;
+        null !== $durationHrs && $self['durationHrs'] = $durationHrs;
+        null !== $isoObsDate && $self['isoObsDate'] = $isoObsDate;
+        null !== $lastEditedDt && $self['lastEditedDt'] = $lastEditedDt;
+        null !== $loc && $self['loc'] = $loc;
+        null !== $locID && $self['locID'] = $locID;
+        null !== $numObservers && $self['numObservers'] = $numObservers;
+        null !== $numSpecies && $self['numSpecies'] = $numSpecies;
+        null !== $obs && $self['obs'] = $obs;
+        null !== $obsDt && $self['obsDt'] = $obsDt;
+        null !== $obsTime && $self['obsTime'] = $obsTime;
+        null !== $obsTimeValid && $self['obsTimeValid'] = $obsTimeValid;
+        null !== $projID && $self['projID'] = $projID;
+        null !== $protocolID && $self['protocolID'] = $protocolID;
+        null !== $subID && $self['subID'] = $subID;
+        null !== $submissionMethodCode && $self['submissionMethodCode'] = $submissionMethodCode;
+        null !== $subnational1Code && $self['subnational1Code'] = $subnational1Code;
+        null !== $userDisplayName && $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     public function withAllObsReported(bool $allObsReported): self
     {
-        $obj = clone $this;
-        $obj->allObsReported = $allObsReported;
+        $self = clone $this;
+        $self['allObsReported'] = $allObsReported;
 
-        return $obj;
+        return $self;
     }
 
     public function withChecklistID(string $checklistID): self
     {
-        $obj = clone $this;
-        $obj->checklistId = $checklistID;
+        $self = clone $this;
+        $self['checklistID'] = $checklistID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreationDt(string $creationDt): self
     {
-        $obj = clone $this;
-        $obj->creationDt = $creationDt;
+        $self = clone $this;
+        $self['creationDt'] = $creationDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDurationHrs(float $durationHrs): self
     {
-        $obj = clone $this;
-        $obj->durationHrs = $durationHrs;
+        $self = clone $this;
+        $self['durationHrs'] = $durationHrs;
 
-        return $obj;
+        return $self;
     }
 
     public function withISOObsDate(string $isoObsDate): self
     {
-        $obj = clone $this;
-        $obj->isoObsDate = $isoObsDate;
+        $self = clone $this;
+        $self['isoObsDate'] = $isoObsDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastEditedDt(string $lastEditedDt): self
     {
-        $obj = clone $this;
-        $obj->lastEditedDt = $lastEditedDt;
+        $self = clone $this;
+        $self['lastEditedDt'] = $lastEditedDt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withLoc(Loc $loc): self
+    /**
+     * @param Loc|LocShape $loc
+     */
+    public function withLoc(Loc|array $loc): self
     {
-        $obj = clone $this;
-        $obj->loc = $loc;
+        $self = clone $this;
+        $self['loc'] = $loc;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocID(string $locID): self
     {
-        $obj = clone $this;
-        $obj->locId = $locID;
+        $self = clone $this;
+        $self['locID'] = $locID;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumObservers(int $numObservers): self
     {
-        $obj = clone $this;
-        $obj->numObservers = $numObservers;
+        $self = clone $this;
+        $self['numObservers'] = $numObservers;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpecies(int $numSpecies): self
     {
-        $obj = clone $this;
-        $obj->numSpecies = $numSpecies;
+        $self = clone $this;
+        $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Ob> $obs
+     * @param list<Ob|ObShape> $obs
      */
     public function withObs(array $obs): self
     {
-        $obj = clone $this;
-        $obj->obs = $obs;
+        $self = clone $this;
+        $self['obs'] = $obs;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsDt(string $obsDt): self
     {
-        $obj = clone $this;
-        $obj->obsDt = $obsDt;
+        $self = clone $this;
+        $self['obsDt'] = $obsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsTime(string $obsTime): self
     {
-        $obj = clone $this;
-        $obj->obsTime = $obsTime;
+        $self = clone $this;
+        $self['obsTime'] = $obsTime;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsTimeValid(bool $obsTimeValid): self
     {
-        $obj = clone $this;
-        $obj->obsTimeValid = $obsTimeValid;
+        $self = clone $this;
+        $self['obsTimeValid'] = $obsTimeValid;
 
-        return $obj;
+        return $self;
     }
 
     public function withProjID(string $projID): self
     {
-        $obj = clone $this;
-        $obj->projId = $projID;
+        $self = clone $this;
+        $self['projID'] = $projID;
 
-        return $obj;
+        return $self;
     }
 
     public function withProtocolID(string $protocolID): self
     {
-        $obj = clone $this;
-        $obj->protocolId = $protocolID;
+        $self = clone $this;
+        $self['protocolID'] = $protocolID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubID(string $subID): self
     {
-        $obj = clone $this;
-        $obj->subId = $subID;
+        $self = clone $this;
+        $self['subID'] = $subID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubmissionMethodCode(string $submissionMethodCode): self
     {
-        $obj = clone $this;
-        $obj->submissionMethodCode = $submissionMethodCode;
+        $self = clone $this;
+        $self['submissionMethodCode'] = $submissionMethodCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational1Code(string $subnational1Code): self
     {
-        $obj = clone $this;
-        $obj->subnational1Code = $subnational1Code;
+        $self = clone $this;
+        $self['subnational1Code'] = $subnational1Code;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserDisplayName(string $userDisplayName): self
     {
-        $obj = clone $this;
-        $obj->userDisplayName = $userDisplayName;
+        $self = clone $this;
+        $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Hotspot\Geo;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -16,7 +17,11 @@ use Phoebe\Ref\Hotspot\Geo\GeoRetrieveParams\Fmt;
  * @see Phoebe\Services\Ref\Hotspot\GeoService::retrieve()
  *
  * @phpstan-type GeoRetrieveParamsShape = array{
- *   lat: float, lng: float, back?: int, dist?: int, fmt?: Fmt|value-of<Fmt>
+ *   lat: float,
+ *   lng: float,
+ *   back?: int|null,
+ *   dist?: int|null,
+ *   fmt?: null|Fmt|value-of<Fmt>,
  * }
  */
 final class GeoRetrieveParams implements BaseModel
@@ -25,22 +30,22 @@ final class GeoRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public float $lat;
 
-    #[Api]
+    #[Required]
     public float $lng;
 
     /**
      * The number of days back to fetch hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
      * The search radius from the given position, in kilometers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $dist;
 
     /**
@@ -48,7 +53,7 @@ final class GeoRetrieveParams implements BaseModel
      *
      * @var value-of<Fmt>|null $fmt
      */
-    #[Api(enum: Fmt::class, optional: true)]
+    #[Optional(enum: Fmt::class)]
     public ?string $fmt;
 
     /**
@@ -75,7 +80,7 @@ final class GeoRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fmt|value-of<Fmt> $fmt
+     * @param Fmt|value-of<Fmt>|null $fmt
      */
     public static function with(
         float $lat,
@@ -84,32 +89,32 @@ final class GeoRetrieveParams implements BaseModel
         ?int $dist = null,
         Fmt|string|null $fmt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->lat = $lat;
-        $obj->lng = $lng;
+        $self['lat'] = $lat;
+        $self['lng'] = $lng;
 
-        null !== $back && $obj->back = $back;
-        null !== $dist && $obj->dist = $dist;
-        null !== $fmt && $obj['fmt'] = $fmt;
+        null !== $back && $self['back'] = $back;
+        null !== $dist && $self['dist'] = $dist;
+        null !== $fmt && $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj->lat = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj->lng = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +122,10 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +133,10 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withDist(int $dist): self
     {
-        $obj = clone $this;
-        $obj->dist = $dist;
+        $self = clone $this;
+        $self['dist'] = $dist;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +146,9 @@ final class GeoRetrieveParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,35 +5,45 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Nearest;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Data\Observations\Nearest\GeoSpecies\GeoSpecieListParams;
+use Phoebe\Core\Util;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Nearest\GeoSpeciesContract;
 
+/**
+ * The data/obs end-points are used to fetch observations submitted to eBird in checklists. There are two categories of end-point: 1. Fetch observations for a specific country, region or location. 2. Fetch observations for nearby locations - up to a distance of 50km. Each end-point supports optional query parameters which allow you to filter the list of observations returned.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class GeoSpeciesService implements GeoSpeciesContract
 {
     /**
+     * @api
+     */
+    public GeoSpeciesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GeoSpeciesRawService($client);
+    }
 
     /**
      * @api
      *
      * Find the nearest locations where a species has been seen recently. #### Notes The species code is typically a 6-letter code, e.g. barswa for Barn Swallow. You can get complete set of species code from the GET eBird Taxonomy end-point.
      *
-     * @param array{
-     *   lat: float,
-     *   lng: float,
-     *   back?: int,
-     *   dist?: int,
-     *   hotspot?: bool,
-     *   includeProvisional?: bool,
-     *   maxResults?: int,
-     *   sppLocale?: string,
-     * }|GeoSpecieListParams $params
+     * @param string $speciesCode the eBird species code
+     * @param int $back the number of days back to fetch observations
+     * @param int $dist Only fetch observations within this distance of the provided lat/lng
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch up to this number of observations
+     * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -41,21 +51,32 @@ final class GeoSpeciesService implements GeoSpeciesContract
      */
     public function list(
         string $speciesCode,
-        array|GeoSpecieListParams $params,
-        ?RequestOptions $requestOptions = null,
+        float $lat,
+        float $lng,
+        int $back = 14,
+        int $dist = 50,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 3000,
+        string $sppLocale = 'en',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = GeoSpecieListParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'back' => $back,
+                'dist' => $dist,
+                'hotspot' => $hotspot,
+                'includeProvisional' => $includeProvisional,
+                'maxResults' => $maxResults,
+                'sppLocale' => $sppLocale,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['data/nearest/geo/recent/%1$s', $speciesCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($speciesCode, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Recent;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -17,13 +17,13 @@ use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
  * @see Phoebe\Services\Data\Observations\RecentService::list()
  *
  * @phpstan-type RecentListParamsShape = array{
- *   back?: int,
- *   cat?: Cat|value-of<Cat>,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class RecentListParams implements BaseModel
@@ -35,7 +35,7 @@ final class RecentListParams implements BaseModel
     /**
      * The number of days back to fetch observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
@@ -43,25 +43,25 @@ final class RecentListParams implements BaseModel
      *
      * @var value-of<Cat>|null $cat
      */
-    #[Api(enum: Cat::class, optional: true)]
+    #[Optional(enum: Cat::class)]
     public ?string $cat;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -69,13 +69,13 @@ final class RecentListParams implements BaseModel
      *
      * @var list<string>|null $r
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $r;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     public function __construct()
@@ -88,8 +88,8 @@ final class RecentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param list<string> $r
+     * @param Cat|value-of<Cat>|null $cat
+     * @param list<string>|null $r
      */
     public static function with(
         ?int $back = null,
@@ -100,17 +100,17 @@ final class RecentListParams implements BaseModel
         ?array $r = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $back && $obj->back = $back;
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $r && $obj->r = $r;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class RecentListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class RecentListParams implements BaseModel
      */
     public function withCat(Cat|string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class RecentListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class RecentListParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class RecentListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class RecentListParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj->r = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,9 +188,9 @@ final class RecentListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

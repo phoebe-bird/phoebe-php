@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Top100;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -31,8 +32,8 @@ use Phoebe\Product\Top100\Top100RetrieveParams\RankedBy;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   maxResults?: int,
- *   rankedBy?: RankedBy|value-of<RankedBy>,
+ *   maxResults?: int|null,
+ *   rankedBy?: null|RankedBy|value-of<RankedBy>,
  * }
  */
 final class Top100RetrieveParams implements BaseModel
@@ -41,19 +42,19 @@ final class Top100RetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
      * Only fetch this number of contributors.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -61,7 +62,7 @@ final class Top100RetrieveParams implements BaseModel
      *
      * @var value-of<RankedBy>|null $rankedBy
      */
-    #[Api(enum: RankedBy::class, optional: true)]
+    #[Optional(enum: RankedBy::class)]
     public ?string $rankedBy;
 
     /**
@@ -88,7 +89,7 @@ final class Top100RetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RankedBy|value-of<RankedBy> $rankedBy
+     * @param RankedBy|value-of<RankedBy>|null $rankedBy
      */
     public static function with(
         string $regionCode,
@@ -97,40 +98,40 @@ final class Top100RetrieveParams implements BaseModel
         ?int $maxResults = null,
         RankedBy|string|null $rankedBy = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $rankedBy && $obj['rankedBy'] = $rankedBy;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $rankedBy && $self['rankedBy'] = $rankedBy;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj->y = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj->m = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +139,10 @@ final class Top100RetrieveParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,9 +152,9 @@ final class Top100RetrieveParams implements BaseModel
      */
     public function withRankedBy(RankedBy|string $rankedBy): self
     {
-        $obj = clone $this;
-        $obj['rankedBy'] = $rankedBy;
+        $self = clone $this;
+        $self['rankedBy'] = $rankedBy;
 
-        return $obj;
+        return $self;
     }
 }

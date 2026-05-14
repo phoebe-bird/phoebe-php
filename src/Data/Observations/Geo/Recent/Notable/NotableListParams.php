@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Geo\Recent\Notable;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -18,12 +19,12 @@ use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams\Detail;
  * @phpstan-type NotableListParamsShape = array{
  *   lat: float,
  *   lng: float,
- *   back?: int,
- *   detail?: Detail|value-of<Detail>,
- *   dist?: int,
- *   hotspot?: bool,
- *   maxResults?: int,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   detail?: null|Detail|value-of<Detail>,
+ *   dist?: int|null,
+ *   hotspot?: bool|null,
+ *   maxResults?: int|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class NotableListParams implements BaseModel
@@ -32,16 +33,16 @@ final class NotableListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public float $lat;
 
-    #[Api]
+    #[Required]
     public float $lng;
 
     /**
      * The number of days back to fetch observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
@@ -49,31 +50,31 @@ final class NotableListParams implements BaseModel
      *
      * @var value-of<Detail>|null $detail
      */
-    #[Api(enum: Detail::class, optional: true)]
+    #[Optional(enum: Detail::class)]
     public ?string $detail;
 
     /**
      * The search radius from the given position, in kilometers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $dist;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**
@@ -100,7 +101,7 @@ final class NotableListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Detail|value-of<Detail> $detail
+     * @param Detail|value-of<Detail>|null $detail
      */
     public static function with(
         float $lat,
@@ -112,35 +113,35 @@ final class NotableListParams implements BaseModel
         ?int $maxResults = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->lat = $lat;
-        $obj->lng = $lng;
+        $self['lat'] = $lat;
+        $self['lng'] = $lng;
 
-        null !== $back && $obj->back = $back;
-        null !== $detail && $obj['detail'] = $detail;
-        null !== $dist && $obj->dist = $dist;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $dist && $self['dist'] = $dist;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj->lat = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj->lng = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +149,10 @@ final class NotableListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +162,10 @@ final class NotableListParams implements BaseModel
      */
     public function withDetail(Detail|string $detail): self
     {
-        $obj = clone $this;
-        $obj['detail'] = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +173,10 @@ final class NotableListParams implements BaseModel
      */
     public function withDist(int $dist): self
     {
-        $obj = clone $this;
-        $obj->dist = $dist;
+        $self = clone $this;
+        $self['dist'] = $dist;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +184,10 @@ final class NotableListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +195,10 @@ final class NotableListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,9 +206,9 @@ final class NotableListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

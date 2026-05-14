@@ -8,10 +8,16 @@ use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Ref\Region\Adjacent\AdjacentListResponseItem;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface AdjacentContract
 {
     /**
      * @api
+     *
+     * @param string $regionCode the country, subnational1 or subnational2 code
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<AdjacentListResponseItem>
      *
@@ -19,6 +25,6 @@ interface AdjacentContract
      */
     public function list(
         string $regionCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 }

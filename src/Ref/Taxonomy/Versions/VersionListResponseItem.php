@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\Versions;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,10 +18,10 @@ final class VersionListResponseItem implements BaseModel
     /** @use SdkModel<VersionListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $authorityVer;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $latest;
 
     public function __construct()
@@ -38,27 +38,27 @@ final class VersionListResponseItem implements BaseModel
         ?float $authorityVer = null,
         ?bool $latest = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorityVer && $obj->authorityVer = $authorityVer;
-        null !== $latest && $obj->latest = $latest;
+        null !== $authorityVer && $self['authorityVer'] = $authorityVer;
+        null !== $latest && $self['latest'] = $latest;
 
-        return $obj;
+        return $self;
     }
 
     public function withAuthorityVer(float $authorityVer): self
     {
-        $obj = clone $this;
-        $obj->authorityVer = $authorityVer;
+        $self = clone $this;
+        $self['authorityVer'] = $authorityVer;
 
-        return $obj;
+        return $self;
     }
 
     public function withLatest(bool $latest): self
     {
-        $obj = clone $this;
-        $obj->latest = $latest;
+        $self = clone $this;
+        $self['latest'] = $latest;
 
-        return $obj;
+        return $self;
     }
 }

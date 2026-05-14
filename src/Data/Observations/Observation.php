@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,14 +18,14 @@ use Phoebe\Core\Contracts\BaseModel;
  *   lat?: float|null,
  *   lng?: float|null,
  *   locationPrivate?: bool|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   locName?: string|null,
  *   obsDt?: string|null,
  *   obsReviewed?: bool|null,
  *   obsValid?: bool|null,
  *   sciName?: string|null,
  *   speciesCode?: string|null,
- *   subId?: string|null,
+ *   subID?: string|null,
  * }
  */
 final class Observation implements BaseModel
@@ -33,53 +33,53 @@ final class Observation implements BaseModel
     /** @use SdkModel<ObservationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $comName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $firstname;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $howMany;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lastname;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lat;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lng;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $locationPrivate;
 
-    #[Api(optional: true)]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsReviewed;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $obsValid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sciName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
-    #[Api(optional: true)]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
     public function __construct()
     {
@@ -100,162 +100,162 @@ final class Observation implements BaseModel
         ?float $lat = null,
         ?float $lng = null,
         ?bool $locationPrivate = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?string $locName = null,
         ?string $obsDt = null,
         ?bool $obsReviewed = null,
         ?bool $obsValid = null,
         ?string $sciName = null,
         ?string $speciesCode = null,
-        ?string $subId = null,
+        ?string $subID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $comName && $obj->comName = $comName;
-        null !== $firstname && $obj->firstname = $firstname;
-        null !== $howMany && $obj->howMany = $howMany;
-        null !== $lastname && $obj->lastname = $lastname;
-        null !== $lat && $obj->lat = $lat;
-        null !== $lng && $obj->lng = $lng;
-        null !== $locationPrivate && $obj->locationPrivate = $locationPrivate;
-        null !== $locId && $obj->locId = $locId;
-        null !== $locName && $obj->locName = $locName;
-        null !== $obsDt && $obj->obsDt = $obsDt;
-        null !== $obsReviewed && $obj->obsReviewed = $obsReviewed;
-        null !== $obsValid && $obj->obsValid = $obsValid;
-        null !== $sciName && $obj->sciName = $sciName;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
-        null !== $subId && $obj->subId = $subId;
+        null !== $id && $self['id'] = $id;
+        null !== $comName && $self['comName'] = $comName;
+        null !== $firstname && $self['firstname'] = $firstname;
+        null !== $howMany && $self['howMany'] = $howMany;
+        null !== $lastname && $self['lastname'] = $lastname;
+        null !== $lat && $self['lat'] = $lat;
+        null !== $lng && $self['lng'] = $lng;
+        null !== $locationPrivate && $self['locationPrivate'] = $locationPrivate;
+        null !== $locID && $self['locID'] = $locID;
+        null !== $locName && $self['locName'] = $locName;
+        null !== $obsDt && $self['obsDt'] = $obsDt;
+        null !== $obsReviewed && $self['obsReviewed'] = $obsReviewed;
+        null !== $obsValid && $self['obsValid'] = $obsValid;
+        null !== $sciName && $self['sciName'] = $sciName;
+        null !== $speciesCode && $self['speciesCode'] = $speciesCode;
+        null !== $subID && $self['subID'] = $subID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(int $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withComName(string $comName): self
     {
-        $obj = clone $this;
-        $obj->comName = $comName;
+        $self = clone $this;
+        $self['comName'] = $comName;
 
-        return $obj;
+        return $self;
     }
 
     public function withFirstname(string $firstname): self
     {
-        $obj = clone $this;
-        $obj->firstname = $firstname;
+        $self = clone $this;
+        $self['firstname'] = $firstname;
 
-        return $obj;
+        return $self;
     }
 
     public function withHowMany(int $howMany): self
     {
-        $obj = clone $this;
-        $obj->howMany = $howMany;
+        $self = clone $this;
+        $self['howMany'] = $howMany;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastname(string $lastname): self
     {
-        $obj = clone $this;
-        $obj->lastname = $lastname;
+        $self = clone $this;
+        $self['lastname'] = $lastname;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj->lat = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj->lng = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocationPrivate(bool $locationPrivate): self
     {
-        $obj = clone $this;
-        $obj->locationPrivate = $locationPrivate;
+        $self = clone $this;
+        $self['locationPrivate'] = $locationPrivate;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocID(string $locID): self
     {
-        $obj = clone $this;
-        $obj->locId = $locID;
+        $self = clone $this;
+        $self['locID'] = $locID;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocName(string $locName): self
     {
-        $obj = clone $this;
-        $obj->locName = $locName;
+        $self = clone $this;
+        $self['locName'] = $locName;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsDt(string $obsDt): self
     {
-        $obj = clone $this;
-        $obj->obsDt = $obsDt;
+        $self = clone $this;
+        $self['obsDt'] = $obsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsReviewed(bool $obsReviewed): self
     {
-        $obj = clone $this;
-        $obj->obsReviewed = $obsReviewed;
+        $self = clone $this;
+        $self['obsReviewed'] = $obsReviewed;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsValid(bool $obsValid): self
     {
-        $obj = clone $this;
-        $obj->obsValid = $obsValid;
+        $self = clone $this;
+        $self['obsValid'] = $obsValid;
 
-        return $obj;
+        return $self;
     }
 
     public function withSciName(string $sciName): self
     {
-        $obj = clone $this;
-        $obj->sciName = $sciName;
+        $self = clone $this;
+        $self['sciName'] = $sciName;
 
-        return $obj;
+        return $self;
     }
 
     public function withSpeciesCode(string $speciesCode): self
     {
-        $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $self = clone $this;
+        $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubID(string $subID): self
     {
-        $obj = clone $this;
-        $obj->subId = $subID;
+        $self = clone $this;
+        $self['subID'] = $subID;
 
-        return $obj;
+        return $self;
     }
 }

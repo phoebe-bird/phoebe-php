@@ -3,6 +3,7 @@
 namespace Tests\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
+use Phoebe\Core\Util;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,7 @@ final class SpeciesTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
@@ -30,10 +31,11 @@ final class SpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->recent->species->retrieve(
             'speciesCode',
-            ['regionCode' => 'regionCode']
+            regionCode: 'regionCode'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -41,9 +43,16 @@ final class SpeciesTest extends TestCase
     {
         $result = $this->client->data->observations->recent->species->retrieve(
             'speciesCode',
-            ['regionCode' => 'regionCode']
+            regionCode: 'regionCode',
+            back: 1,
+            hotspot: true,
+            includeProvisional: true,
+            maxResults: 1,
+            r: ['string'],
+            sppLocale: 'sppLocale',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

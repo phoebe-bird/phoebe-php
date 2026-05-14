@@ -15,6 +15,11 @@ final class ObservationsService implements ObservationsContract
     /**
      * @api
      */
+    public ObservationsRawService $raw;
+
+    /**
+     * @api
+     */
     public RecentService $recent;
 
     /**
@@ -32,6 +37,7 @@ final class ObservationsService implements ObservationsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ObservationsRawService($client);
         $this->recent = new RecentService($client);
         $this->geo = new GeoService($client);
         $this->nearest = new NearestService($client);

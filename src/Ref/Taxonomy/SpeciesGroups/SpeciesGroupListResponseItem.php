@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\SpeciesGroups;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Core\Conversion\ListOf;
@@ -21,14 +21,14 @@ final class SpeciesGroupListResponseItem implements BaseModel
     /** @use SdkModel<SpeciesGroupListResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $groupName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $groupOrder;
 
     /** @var list<list<float>>|null $taxonOrderBounds */
-    #[Api(list: new ListOf('float'), optional: true)]
+    #[Optional(list: new ListOf('float'))]
     public ?array $taxonOrderBounds;
 
     public function __construct()
@@ -41,36 +41,36 @@ final class SpeciesGroupListResponseItem implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<list<float>> $taxonOrderBounds
+     * @param list<list<float>>|null $taxonOrderBounds
      */
     public static function with(
         ?string $groupName = null,
         ?int $groupOrder = null,
         ?array $taxonOrderBounds = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $groupName && $obj->groupName = $groupName;
-        null !== $groupOrder && $obj->groupOrder = $groupOrder;
-        null !== $taxonOrderBounds && $obj->taxonOrderBounds = $taxonOrderBounds;
+        null !== $groupName && $self['groupName'] = $groupName;
+        null !== $groupOrder && $self['groupOrder'] = $groupOrder;
+        null !== $taxonOrderBounds && $self['taxonOrderBounds'] = $taxonOrderBounds;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroupName(string $groupName): self
     {
-        $obj = clone $this;
-        $obj->groupName = $groupName;
+        $self = clone $this;
+        $self['groupName'] = $groupName;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroupOrder(int $groupOrder): self
     {
-        $obj = clone $this;
-        $obj->groupOrder = $groupOrder;
+        $self = clone $this;
+        $self['groupOrder'] = $groupOrder;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class SpeciesGroupListResponseItem implements BaseModel
      */
     public function withTaxonOrderBounds(array $taxonOrderBounds): self
     {
-        $obj = clone $this;
-        $obj->taxonOrderBounds = $taxonOrderBounds;
+        $self = clone $this;
+        $self['taxonOrderBounds'] = $taxonOrderBounds;
 
-        return $obj;
+        return $self;
     }
 }

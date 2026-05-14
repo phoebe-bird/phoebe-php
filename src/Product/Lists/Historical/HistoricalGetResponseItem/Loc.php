@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\Historical\HistoricalGetResponseItem;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -17,7 +17,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *   lat?: float|null,
  *   latitude?: float|null,
  *   lng?: float|null,
- *   locId?: string|null,
+ *   locID?: string|null,
  *   locName?: string|null,
  *   longitude?: float|null,
  *   name?: string|null,
@@ -30,43 +30,43 @@ final class Loc implements BaseModel
     /** @use SdkModel<LocShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $countryCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $countryName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $hierarchicalName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isHotspot;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lat;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $latitude;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $lng;
 
-    #[Api(optional: true)]
-    public ?string $locId;
+    #[Optional('locId')]
+    public ?string $locID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $longitude;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational1Code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subnational1Name;
 
     public function __construct()
@@ -87,133 +87,133 @@ final class Loc implements BaseModel
         ?float $lat = null,
         ?float $latitude = null,
         ?float $lng = null,
-        ?string $locId = null,
+        ?string $locID = null,
         ?string $locName = null,
         ?float $longitude = null,
         ?string $name = null,
         ?string $subnational1Code = null,
         ?string $subnational1Name = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $countryName && $obj->countryName = $countryName;
-        null !== $hierarchicalName && $obj->hierarchicalName = $hierarchicalName;
-        null !== $isHotspot && $obj->isHotspot = $isHotspot;
-        null !== $lat && $obj->lat = $lat;
-        null !== $latitude && $obj->latitude = $latitude;
-        null !== $lng && $obj->lng = $lng;
-        null !== $locId && $obj->locId = $locId;
-        null !== $locName && $obj->locName = $locName;
-        null !== $longitude && $obj->longitude = $longitude;
-        null !== $name && $obj->name = $name;
-        null !== $subnational1Code && $obj->subnational1Code = $subnational1Code;
-        null !== $subnational1Name && $obj->subnational1Name = $subnational1Name;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $countryName && $self['countryName'] = $countryName;
+        null !== $hierarchicalName && $self['hierarchicalName'] = $hierarchicalName;
+        null !== $isHotspot && $self['isHotspot'] = $isHotspot;
+        null !== $lat && $self['lat'] = $lat;
+        null !== $latitude && $self['latitude'] = $latitude;
+        null !== $lng && $self['lng'] = $lng;
+        null !== $locID && $self['locID'] = $locID;
+        null !== $locName && $self['locName'] = $locName;
+        null !== $longitude && $self['longitude'] = $longitude;
+        null !== $name && $self['name'] = $name;
+        null !== $subnational1Code && $self['subnational1Code'] = $subnational1Code;
+        null !== $subnational1Name && $self['subnational1Name'] = $subnational1Name;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryName(string $countryName): self
     {
-        $obj = clone $this;
-        $obj->countryName = $countryName;
+        $self = clone $this;
+        $self['countryName'] = $countryName;
 
-        return $obj;
+        return $self;
     }
 
     public function withHierarchicalName(string $hierarchicalName): self
     {
-        $obj = clone $this;
-        $obj->hierarchicalName = $hierarchicalName;
+        $self = clone $this;
+        $self['hierarchicalName'] = $hierarchicalName;
 
-        return $obj;
+        return $self;
     }
 
     public function withIsHotspot(bool $isHotspot): self
     {
-        $obj = clone $this;
-        $obj->isHotspot = $isHotspot;
+        $self = clone $this;
+        $self['isHotspot'] = $isHotspot;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj->lat = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLatitude(float $latitude): self
     {
-        $obj = clone $this;
-        $obj->latitude = $latitude;
+        $self = clone $this;
+        $self['latitude'] = $latitude;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj->lng = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocID(string $locID): self
     {
-        $obj = clone $this;
-        $obj->locId = $locID;
+        $self = clone $this;
+        $self['locID'] = $locID;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocName(string $locName): self
     {
-        $obj = clone $this;
-        $obj->locName = $locName;
+        $self = clone $this;
+        $self['locName'] = $locName;
 
-        return $obj;
+        return $self;
     }
 
     public function withLongitude(float $longitude): self
     {
-        $obj = clone $this;
-        $obj->longitude = $longitude;
+        $self = clone $this;
+        $self['longitude'] = $longitude;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational1Code(string $subnational1Code): self
     {
-        $obj = clone $this;
-        $obj->subnational1Code = $subnational1Code;
+        $self = clone $this;
+        $self['subnational1Code'] = $subnational1Code;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubnational1Name(string $subnational1Name): self
     {
-        $obj = clone $this;
-        $obj->subnational1Name = $subnational1Name;
+        $self = clone $this;
+        $self['subnational1Name'] = $subnational1Name;
 
-        return $obj;
+        return $self;
     }
 }

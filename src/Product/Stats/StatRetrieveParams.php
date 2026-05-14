@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Stats;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class StatRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
@@ -60,36 +60,36 @@ final class StatRetrieveParams implements BaseModel
      */
     public static function with(string $regionCode, int $y, int $m): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj->y = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj->m = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 }

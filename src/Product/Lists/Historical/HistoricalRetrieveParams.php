@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\Historical;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -19,8 +20,8 @@ use Phoebe\Product\Lists\Historical\HistoricalRetrieveParams\SortKey;
  *   regionCode: string,
  *   y: int,
  *   m: int,
- *   maxResults?: int,
- *   sortKey?: SortKey|value-of<SortKey>,
+ *   maxResults?: int|null,
+ *   sortKey?: null|SortKey|value-of<SortKey>,
  * }
  */
 final class HistoricalRetrieveParams implements BaseModel
@@ -29,19 +30,19 @@ final class HistoricalRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
-    #[Api]
+    #[Required]
     public int $y;
 
-    #[Api]
+    #[Required]
     public int $m;
 
     /**
      * Only fetch this number of checklists.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -49,7 +50,7 @@ final class HistoricalRetrieveParams implements BaseModel
      *
      * @var value-of<SortKey>|null $sortKey
      */
-    #[Api(enum: SortKey::class, optional: true)]
+    #[Optional(enum: SortKey::class)]
     public ?string $sortKey;
 
     /**
@@ -76,7 +77,7 @@ final class HistoricalRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SortKey|value-of<SortKey> $sortKey
+     * @param SortKey|value-of<SortKey>|null $sortKey
      */
     public static function with(
         string $regionCode,
@@ -85,40 +86,40 @@ final class HistoricalRetrieveParams implements BaseModel
         ?int $maxResults = null,
         SortKey|string|null $sortKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionCode = $regionCode;
-        $obj->y = $y;
-        $obj->m = $m;
+        $self['regionCode'] = $regionCode;
+        $self['y'] = $y;
+        $self['m'] = $m;
 
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $sortKey && $obj['sortKey'] = $sortKey;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $sortKey && $self['sortKey'] = $sortKey;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withY(int $y): self
     {
-        $obj = clone $this;
-        $obj->y = $y;
+        $self = clone $this;
+        $self['y'] = $y;
 
-        return $obj;
+        return $self;
     }
 
     public function withM(int $m): self
     {
-        $obj = clone $this;
-        $obj->m = $m;
+        $self = clone $this;
+        $self['m'] = $m;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +127,10 @@ final class HistoricalRetrieveParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,9 +140,9 @@ final class HistoricalRetrieveParams implements BaseModel
      */
     public function withSortKey(SortKey|string $sortKey): self
     {
-        $obj = clone $this;
-        $obj['sortKey'] = $sortKey;
+        $self = clone $this;
+        $self['sortKey'] = $sortKey;
 
-        return $obj;
+        return $self;
     }
 }

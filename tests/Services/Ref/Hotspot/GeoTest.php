@@ -3,6 +3,7 @@
 namespace Tests\Services\Ref\Hotspot;
 
 use Phoebe\Client;
+use Phoebe\Core\Util;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,7 @@ final class GeoTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
@@ -28,20 +29,24 @@ final class GeoTest extends TestCase
     #[Test]
     public function testRetrieve(): void
     {
-        $result = $this->client->ref->hotspot->geo->retrieve([
-            'lat' => -90, 'lng' => -180,
-        ]);
+        $result = $this->client->ref->hotspot->geo->retrieve(lat: -90, lng: -180);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
     public function testRetrieveWithOptionalParams(): void
     {
-        $result = $this->client->ref->hotspot->geo->retrieve([
-            'lat' => -90, 'lng' => -180,
-        ]);
+        $result = $this->client->ref->hotspot->geo->retrieve(
+            lat: -90,
+            lng: -180,
+            back: 1,
+            dist: 0,
+            fmt: 'csv'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

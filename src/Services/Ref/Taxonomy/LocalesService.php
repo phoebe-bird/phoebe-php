@@ -5,19 +5,29 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Taxonomy;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Ref\Taxonomy\Locales\LocaleListParams;
+use Phoebe\Core\Util;
 use Phoebe\Ref\Taxonomy\Locales\LocaleListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Taxonomy\LocalesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class LocalesService implements LocalesContract
 {
     /**
+     * @api
+     */
+    public LocalesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LocalesRawService($client);
+    }
 
     /**
      * @api
@@ -26,28 +36,21 @@ final class LocalesService implements LocalesContract
      *
      * NOTE: The locale codes and names are stable but the other fields in this result are not yet finalized and should be used with caution.
      *
-     * @param array{Accept_Language?: string}|LocaleListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<LocaleListResponseItem>
      *
      * @throws APIException
      */
     public function list(
-        array|LocaleListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $acceptLanguage = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = LocaleListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['acceptLanguage' => $acceptLanguage]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ref/taxa-locales/ebird',
-            headers: $parsed,
-            options: $options,
-            convert: new ListOf(LocaleListResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

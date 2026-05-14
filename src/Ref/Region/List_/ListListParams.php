@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phoebe\Ref\Region\List;
+namespace Phoebe\Ref\Region\List_;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Ref\Region\List\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
 
 /**
  * Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.
@@ -16,7 +17,7 @@ use Phoebe\Ref\Region\List\ListListParams\Fmt;
  * @see Phoebe\Services\Ref\Region\ListService::list()
  *
  * @phpstan-type ListListParamsShape = array{
- *   regionType: string, fmt?: Fmt|value-of<Fmt>
+ *   regionType: string, fmt?: null|Fmt|value-of<Fmt>
  * }
  */
 final class ListListParams implements BaseModel
@@ -25,7 +26,7 @@ final class ListListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionType;
 
     /**
@@ -33,7 +34,7 @@ final class ListListParams implements BaseModel
      *
      * @var value-of<Fmt>|null $fmt
      */
-    #[Api(enum: Fmt::class, optional: true)]
+    #[Optional(enum: Fmt::class)]
     public ?string $fmt;
 
     /**
@@ -60,27 +61,27 @@ final class ListListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fmt|value-of<Fmt> $fmt
+     * @param Fmt|value-of<Fmt>|null $fmt
      */
     public static function with(
         string $regionType,
         Fmt|string|null $fmt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionType = $regionType;
+        $self['regionType'] = $regionType;
 
-        null !== $fmt && $obj['fmt'] = $fmt;
+        null !== $fmt && $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionType(string $regionType): self
     {
-        $obj = clone $this;
-        $obj->regionType = $regionType;
+        $self = clone $this;
+        $self['regionType'] = $regionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,9 +91,9 @@ final class ListListParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 }

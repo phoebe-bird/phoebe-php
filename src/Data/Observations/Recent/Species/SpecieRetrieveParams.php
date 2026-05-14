@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Recent\Species;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -23,12 +24,12 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @phpstan-type SpecieRetrieveParamsShape = array{
  *   regionCode: string,
- *   back?: int,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   r?: list<string>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   r?: list<string>|null,
+ *   sppLocale?: string|null,
  * }
  */
 final class SpecieRetrieveParams implements BaseModel
@@ -37,31 +38,31 @@ final class SpecieRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $regionCode;
 
     /**
      * The number of days back to fetch observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -69,13 +70,13 @@ final class SpecieRetrieveParams implements BaseModel
      *
      * @var list<string>|null $r
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $r;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**
@@ -102,7 +103,7 @@ final class SpecieRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $r
+     * @param list<string>|null $r
      */
     public static function with(
         string $regionCode,
@@ -113,26 +114,26 @@ final class SpecieRetrieveParams implements BaseModel
         ?array $r = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->regionCode = $regionCode;
+        $self['regionCode'] = $regionCode;
 
-        null !== $back && $obj->back = $back;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $r && $obj->r = $r;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $r && $self['r'] = $r;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +141,10 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +152,10 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +163,10 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +174,10 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +187,10 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withR(array $r): self
     {
-        $obj = clone $this;
-        $obj->r = $r;
+        $self = clone $this;
+        $self['r'] = $r;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,9 +198,9 @@ final class SpecieRetrieveParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

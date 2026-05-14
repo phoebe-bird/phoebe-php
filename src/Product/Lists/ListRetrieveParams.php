@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -14,7 +14,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Product\ListsService::retrieve()
  *
- * @phpstan-type ListRetrieveParamsShape = array{maxResults?: int}
+ * @phpstan-type ListRetrieveParamsShape = array{maxResults?: int|null}
  */
 final class ListRetrieveParams implements BaseModel
 {
@@ -25,7 +25,7 @@ final class ListRetrieveParams implements BaseModel
     /**
      * Only fetch this number of checklists.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class ListRetrieveParams implements BaseModel
      */
     public static function with(?int $maxResults = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $maxResults && $obj->maxResults = $maxResults;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class ListRetrieveParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 }

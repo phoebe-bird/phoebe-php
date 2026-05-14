@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Top100;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -15,7 +15,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *   profileHandle?: string|null,
  *   rowNum?: int|null,
  *   userDisplayName?: string|null,
- *   userId?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Top100GetResponseItem implements BaseModel
@@ -23,23 +23,23 @@ final class Top100GetResponseItem implements BaseModel
     /** @use SdkModel<Top100GetResponseItemShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numCompleteChecklists;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $numSpecies;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profileHandle;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $rowNum;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $userDisplayName;
 
-    #[Api(optional: true)]
-    public ?string $userId;
+    #[Optional('userId')]
+    public ?string $userID;
 
     public function __construct()
     {
@@ -57,65 +57,65 @@ final class Top100GetResponseItem implements BaseModel
         ?string $profileHandle = null,
         ?int $rowNum = null,
         ?string $userDisplayName = null,
-        ?string $userId = null,
+        ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numCompleteChecklists && $obj->numCompleteChecklists = $numCompleteChecklists;
-        null !== $numSpecies && $obj->numSpecies = $numSpecies;
-        null !== $profileHandle && $obj->profileHandle = $profileHandle;
-        null !== $rowNum && $obj->rowNum = $rowNum;
-        null !== $userDisplayName && $obj->userDisplayName = $userDisplayName;
-        null !== $userId && $obj->userId = $userId;
+        null !== $numCompleteChecklists && $self['numCompleteChecklists'] = $numCompleteChecklists;
+        null !== $numSpecies && $self['numSpecies'] = $numSpecies;
+        null !== $profileHandle && $self['profileHandle'] = $profileHandle;
+        null !== $rowNum && $self['rowNum'] = $rowNum;
+        null !== $userDisplayName && $self['userDisplayName'] = $userDisplayName;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumCompleteChecklists(int $numCompleteChecklists): self
     {
-        $obj = clone $this;
-        $obj->numCompleteChecklists = $numCompleteChecklists;
+        $self = clone $this;
+        $self['numCompleteChecklists'] = $numCompleteChecklists;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumSpecies(int $numSpecies): self
     {
-        $obj = clone $this;
-        $obj->numSpecies = $numSpecies;
+        $self = clone $this;
+        $self['numSpecies'] = $numSpecies;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileHandle(string $profileHandle): self
     {
-        $obj = clone $this;
-        $obj->profileHandle = $profileHandle;
+        $self = clone $this;
+        $self['profileHandle'] = $profileHandle;
 
-        return $obj;
+        return $self;
     }
 
     public function withRowNum(int $rowNum): self
     {
-        $obj = clone $this;
-        $obj->rowNum = $rowNum;
+        $self = clone $this;
+        $self['rowNum'] = $rowNum;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserDisplayName(string $userDisplayName): self
     {
-        $obj = clone $this;
-        $obj->userDisplayName = $userDisplayName;
+        $self = clone $this;
+        $self['userDisplayName'] = $userDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userId = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -10,30 +10,43 @@ use Phoebe\Ref\Hotspot\Info\InfoGetResponse;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Hotspot\InfoContract;
 
+/**
+ * With the ref/hotspot end-points you can find the hotspots for a given country or region or nearby hotspots.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class InfoService implements InfoContract
 {
     /**
+     * @api
+     */
+    public InfoRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InfoRawService($client);
+    }
 
     /**
      * @api
      *
      * Get information on the location of a hotspot. #### Notes This API call only works for hotspots. If you pass the location code for a private location or an invalid location code then an HTTP 410 (Gone) error is returned.
      *
+     * @param string $locID the location code
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $locID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InfoGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ref/hotspot/info/%1$s', $locID],
-            options: $requestOptions,
-            convert: InfoGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($locID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,29 +4,27 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
-use Phoebe\Core\Concerns\SdkResponse;
 use Phoebe\Core\Contracts\BaseModel;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 use Phoebe\Ref\Region\Info\InfoGetResponse\Bounds;
 
 /**
+ * @phpstan-import-type BoundsShape from \Phoebe\Ref\Region\Info\InfoGetResponse\Bounds
+ *
  * @phpstan-type InfoGetResponseShape = array{
- *   bounds?: Bounds|null, result?: string|null
+ *   bounds?: null|Bounds|BoundsShape, result?: string|null
  * }
  */
-final class InfoGetResponse implements BaseModel, ResponseConverter
+final class InfoGetResponse implements BaseModel
 {
     /** @use SdkModel<InfoGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Bounds $bounds;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()
@@ -38,32 +36,37 @@ final class InfoGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Bounds|BoundsShape|null $bounds
      */
     public static function with(
-        ?Bounds $bounds = null,
+        Bounds|array|null $bounds = null,
         ?string $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bounds && $obj->bounds = $bounds;
-        null !== $result && $obj->result = $result;
+        null !== $bounds && $self['bounds'] = $bounds;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
-    public function withBounds(Bounds $bounds): self
+    /**
+     * @param Bounds|BoundsShape $bounds
+     */
+    public function withBounds(Bounds|array $bounds): self
     {
-        $obj = clone $this;
-        $obj->bounds = $bounds;
+        $self = clone $this;
+        $self['bounds'] = $bounds;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

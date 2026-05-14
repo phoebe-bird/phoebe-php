@@ -5,26 +5,42 @@ declare(strict_types=1);
 namespace Phoebe\Services\Ref\Region;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Ref\Region\List\ListListParams;
-use Phoebe\Ref\Region\List\ListListResponseItem;
+use Phoebe\Core\Util;
+use Phoebe\Ref\Region\List_\ListListParams\Fmt;
+use Phoebe\Ref\Region\List_\ListListResponseItem;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Ref\Region\ListContract;
 
+/**
+ * The ref/region end-points return information on regions.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListService implements ListContract
 {
     /**
+     * @api
+     */
+    public ListRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ListRawService($client);
+    }
 
     /**
      * @api
      *
      * Get the list of sub-regions for a given country or region. #### Notes Not all combinations of region type and region code are valid. You can fetch all the subnational1 or subnational2 regions for a country however you can only specify a region type of 'country' when using 'world' as a region code.
      *
-     * @param array{regionType: string, fmt?: "csv"|"json"}|ListListParams $params
+     * @param string $parentRegionCode path param: The country or subnational1 code, or 'world'
+     * @param string $regionType path param: The region type: 'country', 'subnational1' or 'subnational2'
+     * @param Fmt|value-of<Fmt> $fmt query param: Fetch the records in CSV or JSON format
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ListListResponseItem>
      *
@@ -32,23 +48,15 @@ final class ListService implements ListContract
      */
     public function list(
         string $parentRegionCode,
-        array|ListListParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $regionType,
+        Fmt|string $fmt = 'json',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = ListListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $regionType = $parsed['regionType'];
-        unset($parsed['regionType']);
+        $params = Util::removeNulls(['regionType' => $regionType, 'fmt' => $fmt]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ref/region/list/%1$s/%2$s', $regionType, $parentRegionCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(ListListResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($parentRegionCode, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

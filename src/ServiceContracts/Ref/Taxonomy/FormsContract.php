@@ -7,10 +7,16 @@ namespace Phoebe\ServiceContracts\Ref\Taxonomy;
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface FormsContract
 {
     /**
      * @api
+     *
+     * @param string $speciesCode the eBird species code
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<string>
      *
@@ -18,6 +24,6 @@ interface FormsContract
      */
     public function list(
         string $speciesCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array;
 }

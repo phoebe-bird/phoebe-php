@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Taxonomy\Locales;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -16,7 +16,7 @@ use Phoebe\Core\Contracts\BaseModel;
  *
  * @see Phoebe\Services\Ref\Taxonomy\LocalesService::list()
  *
- * @phpstan-type LocaleListParamsShape = array{Accept_Language?: string}
+ * @phpstan-type LocaleListParamsShape = array{acceptLanguage?: string|null}
  */
 final class LocaleListParams implements BaseModel
 {
@@ -24,8 +24,8 @@ final class LocaleListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
-    public ?string $Accept_Language;
+    #[Optional]
+    public ?string $acceptLanguage;
 
     public function __construct()
     {
@@ -37,20 +37,20 @@ final class LocaleListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $Accept_Language = null): self
+    public static function with(?string $acceptLanguage = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $Accept_Language && $obj->Accept_Language = $Accept_Language;
+        null !== $acceptLanguage && $self['acceptLanguage'] = $acceptLanguage;
 
-        return $obj;
+        return $self;
     }
 
     public function withAcceptLanguage(string $acceptLanguage): self
     {
-        $obj = clone $this;
-        $obj->Accept_Language = $acceptLanguage;
+        $self = clone $this;
+        $self['acceptLanguage'] = $acceptLanguage;
 
-        return $obj;
+        return $self;
     }
 }

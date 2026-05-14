@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Hotspot;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -16,7 +16,7 @@ use Phoebe\Ref\Hotspot\HotspotListParams\Fmt;
  * @see Phoebe\Services\Ref\HotspotService::list()
  *
  * @phpstan-type HotspotListParamsShape = array{
- *   back?: int, fmt?: Fmt|value-of<Fmt>
+ *   back?: int|null, fmt?: null|Fmt|value-of<Fmt>
  * }
  */
 final class HotspotListParams implements BaseModel
@@ -28,7 +28,7 @@ final class HotspotListParams implements BaseModel
     /**
      * The number of days back to fetch hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
@@ -36,7 +36,7 @@ final class HotspotListParams implements BaseModel
      *
      * @var value-of<Fmt>|null $fmt
      */
-    #[Api(enum: Fmt::class, optional: true)]
+    #[Optional(enum: Fmt::class)]
     public ?string $fmt;
 
     public function __construct()
@@ -49,16 +49,16 @@ final class HotspotListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Fmt|value-of<Fmt> $fmt
+     * @param Fmt|value-of<Fmt>|null $fmt
      */
     public static function with(?int $back = null, Fmt|string|null $fmt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $back && $obj->back = $back;
-        null !== $fmt && $obj['fmt'] = $fmt;
+        null !== $back && $self['back'] = $back;
+        null !== $fmt && $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +66,10 @@ final class HotspotListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,9 +79,9 @@ final class HotspotListParams implements BaseModel
      */
     public function withFmt(Fmt|string $fmt): self
     {
-        $obj = clone $this;
-        $obj['fmt'] = $fmt;
+        $self = clone $this;
+        $self['fmt'] = $fmt;
 
-        return $obj;
+        return $self;
     }
 }

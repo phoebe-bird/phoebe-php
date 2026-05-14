@@ -5,56 +5,77 @@ declare(strict_types=1);
 namespace Phoebe\Services\Data\Observations\Geo\Recent;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
-use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams;
+use Phoebe\Core\Util;
+use Phoebe\Data\Observations\Geo\Recent\Notable\NotableListParams\Detail;
 use Phoebe\Data\Observations\Observation;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Data\Observations\Geo\Recent\NotableContract;
 
+/**
+ * The data/obs end-points are used to fetch observations submitted to eBird in checklists. There are two categories of end-point: 1. Fetch observations for a specific country, region or location. 2. Fetch observations for nearby locations - up to a distance of 50km. Each end-point supports optional query parameters which allow you to filter the list of observations returned.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class NotableService implements NotableContract
 {
     /**
+     * @api
+     */
+    public NotableRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NotableRawService($client);
+    }
 
     /**
      * @api
      *
      * Get the list of notable observations (up to 30 days ago) of birds seen at locations within a radius of up to 50 kilometers, from a given set of coordinates. Notable observations can be for locally or nationally rare species or are otherwise unusual, for example over-wintering birds in a species which is normally only a summer visitor.
      *
-     * @param array{
-     *   lat: float,
-     *   lng: float,
-     *   back?: int,
-     *   detail?: "simple"|"full",
-     *   dist?: int,
-     *   hotspot?: bool,
-     *   maxResults?: int,
-     *   sppLocale?: string,
-     * }|NotableListParams $params
+     * @param int $back the number of days back to fetch observations
+     * @param Detail|value-of<Detail> $detail include a subset (simple), or all (full), of the fields available
+     * @param int $dist the search radius from the given position, in kilometers
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param int $maxResults Only fetch this number of observations
+     * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
      * @throws APIException
      */
     public function list(
-        array|NotableListParams $params,
-        ?RequestOptions $requestOptions = null
+        float $lat,
+        float $lng,
+        int $back = 14,
+        Detail|string $detail = 'simple',
+        int $dist = 25,
+        bool $hotspot = false,
+        int $maxResults = 10000,
+        string $sppLocale = 'en',
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = NotableListParams::parseRequest(
-            $params,
-            $requestOptions,
+        $params = Util::removeNulls(
+            [
+                'lat' => $lat,
+                'lng' => $lng,
+                'back' => $back,
+                'detail' => $detail,
+                'dist' => $dist,
+                'hotspot' => $hotspot,
+                'maxResults' => $maxResults,
+                'sppLocale' => $sppLocale,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'data/obs/geo/recent/notable',
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(Observation::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

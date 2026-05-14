@@ -3,6 +3,7 @@
 namespace Tests\Services\Data\Observations\Recent;
 
 use Phoebe\Client;
+use Phoebe\Core\Util;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,7 @@ final class NotableTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
@@ -29,10 +30,10 @@ final class NotableTest extends TestCase
     public function testList(): void
     {
         $result = $this->client->data->observations->recent->notable->list(
-            'regionCode',
-            []
+            'regionCode'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 }

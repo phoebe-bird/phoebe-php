@@ -6,15 +6,26 @@ namespace Phoebe\ServiceContracts\Data\Observations;
 
 use Phoebe\Core\Exceptions\APIException;
 use Phoebe\Data\Observations\Observation;
-use Phoebe\Data\Observations\Recent\RecentListParams;
+use Phoebe\Data\Observations\Recent\RecentListParams\Cat;
 use Phoebe\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 interface RecentContract
 {
     /**
      * @api
      *
-     * @param array<mixed>|RecentListParams $params
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $back the number of days back to fetch observations
+     * @param Cat|value-of<Cat> $cat Only fetch observations from these taxonomic categories
+     * @param bool $hotspot Only fetch observations from hotspots
+     * @param bool $includeProvisional Include observations which have not yet been reviewed
+     * @param int $maxResults Only fetch this number of observations
+     * @param list<string> $r Fetch observations from up to 10 locations
+     * @param string $sppLocale Use this language for species common names
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<Observation>
      *
@@ -22,7 +33,13 @@ interface RecentContract
      */
     public function list(
         string $regionCode,
-        array|RecentListParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $back = 14,
+        Cat|string|null $cat = null,
+        bool $hotspot = false,
+        bool $includeProvisional = false,
+        int $maxResults = 10000,
+        ?array $r = null,
+        string $sppLocale = 'en',
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 }

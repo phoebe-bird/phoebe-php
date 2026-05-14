@@ -5,16 +5,25 @@ declare(strict_types=1);
 namespace Phoebe\Services\Product;
 
 use Phoebe\Client;
-use Phoebe\Core\Conversion\ListOf;
 use Phoebe\Core\Exceptions\APIException;
+use Phoebe\Core\Util;
 use Phoebe\Product\Lists\ListGetResponseItem;
-use Phoebe\Product\Lists\ListRetrieveParams;
 use Phoebe\RequestOptions;
 use Phoebe\ServiceContracts\Product\ListsContract;
 use Phoebe\Services\Product\Lists\HistoricalService;
 
+/**
+ * The data/obs end-points are used to fetch observations submitted to eBird in checklists. There are two categories of end-point: 1. Fetch observations for a specific country, region or location. 2. Fetch observations for nearby locations - up to a distance of 50km. Each end-point supports optional query parameters which allow you to filter the list of observations returned.
+ *
+ * @phpstan-import-type RequestOpts from \Phoebe\RequestOptions
+ */
 final class ListsService implements ListsContract
 {
+    /**
+     * @api
+     */
+    public ListsRawService $raw;
+
     /**
      * @api
      */
@@ -25,6 +34,7 @@ final class ListsService implements ListsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ListsRawService($client);
         $this->historical = new HistoricalService($client);
     }
 
@@ -33,7 +43,9 @@ final class ListsService implements ListsContract
      *
      * Get information on the most recently submitted checklists for a region.
      *
-     * @param array{maxResults?: int}|ListRetrieveParams $params
+     * @param string $regionCode the country, subnational1, subnational2 or location code
+     * @param int $maxResults only fetch this number of checklists
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<ListGetResponseItem>
      *
@@ -41,21 +53,14 @@ final class ListsService implements ListsContract
      */
     public function retrieve(
         string $regionCode,
-        array|ListRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        int $maxResults = 10,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
-        [$parsed, $options] = ListRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = Util::removeNulls(['maxResults' => $maxResults]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['product/lists/%1$s', $regionCode],
-            query: $parsed,
-            options: $options,
-            convert: new ListOf(ListGetResponseItem::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($regionCode, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

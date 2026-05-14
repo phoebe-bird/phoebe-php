@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Phoebe\Data\Observations\Geo\Recent;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
+use Phoebe\Core\Attributes\Required;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -21,14 +22,14 @@ use Phoebe\Data\Observations\Geo\Recent\RecentListParams\Sort;
  * @phpstan-type RecentListParamsShape = array{
  *   lat: float,
  *   lng: float,
- *   back?: int,
- *   cat?: Cat|value-of<Cat>,
- *   dist?: int,
- *   hotspot?: bool,
- *   includeProvisional?: bool,
- *   maxResults?: int,
- *   sort?: Sort|value-of<Sort>,
- *   sppLocale?: string,
+ *   back?: int|null,
+ *   cat?: null|Cat|value-of<Cat>,
+ *   dist?: int|null,
+ *   hotspot?: bool|null,
+ *   includeProvisional?: bool|null,
+ *   maxResults?: int|null,
+ *   sort?: null|Sort|value-of<Sort>,
+ *   sppLocale?: string|null,
  * }
  */
 final class RecentListParams implements BaseModel
@@ -37,16 +38,16 @@ final class RecentListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public float $lat;
 
-    #[Api]
+    #[Required]
     public float $lng;
 
     /**
      * The number of days back to fetch observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $back;
 
     /**
@@ -54,31 +55,31 @@ final class RecentListParams implements BaseModel
      *
      * @var value-of<Cat>|null $cat
      */
-    #[Api(enum: Cat::class, optional: true)]
+    #[Optional(enum: Cat::class)]
     public ?string $cat;
 
     /**
      * The search radius from the given position, in kilometers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $dist;
 
     /**
      * Only fetch observations from hotspots.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $hotspot;
 
     /**
      * Include observations which have not yet been reviewed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeProvisional;
 
     /**
      * Only fetch this number of observations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $maxResults;
 
     /**
@@ -86,13 +87,13 @@ final class RecentListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     /**
      * Use this language for species common names.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sppLocale;
 
     /**
@@ -119,8 +120,8 @@ final class RecentListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cat|value-of<Cat> $cat
-     * @param Sort|value-of<Sort> $sort
+     * @param Cat|value-of<Cat>|null $cat
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         float $lat,
@@ -134,37 +135,37 @@ final class RecentListParams implements BaseModel
         Sort|string|null $sort = null,
         ?string $sppLocale = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->lat = $lat;
-        $obj->lng = $lng;
+        $self['lat'] = $lat;
+        $self['lng'] = $lng;
 
-        null !== $back && $obj->back = $back;
-        null !== $cat && $obj['cat'] = $cat;
-        null !== $dist && $obj->dist = $dist;
-        null !== $hotspot && $obj->hotspot = $hotspot;
-        null !== $includeProvisional && $obj->includeProvisional = $includeProvisional;
-        null !== $maxResults && $obj->maxResults = $maxResults;
-        null !== $sort && $obj['sort'] = $sort;
-        null !== $sppLocale && $obj->sppLocale = $sppLocale;
+        null !== $back && $self['back'] = $back;
+        null !== $cat && $self['cat'] = $cat;
+        null !== $dist && $self['dist'] = $dist;
+        null !== $hotspot && $self['hotspot'] = $hotspot;
+        null !== $includeProvisional && $self['includeProvisional'] = $includeProvisional;
+        null !== $maxResults && $self['maxResults'] = $maxResults;
+        null !== $sort && $self['sort'] = $sort;
+        null !== $sppLocale && $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 
     public function withLat(float $lat): self
     {
-        $obj = clone $this;
-        $obj->lat = $lat;
+        $self = clone $this;
+        $self['lat'] = $lat;
 
-        return $obj;
+        return $self;
     }
 
     public function withLng(float $lng): self
     {
-        $obj = clone $this;
-        $obj->lng = $lng;
+        $self = clone $this;
+        $self['lng'] = $lng;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +173,10 @@ final class RecentListParams implements BaseModel
      */
     public function withBack(int $back): self
     {
-        $obj = clone $this;
-        $obj->back = $back;
+        $self = clone $this;
+        $self['back'] = $back;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +186,10 @@ final class RecentListParams implements BaseModel
      */
     public function withCat(Cat|string $cat): self
     {
-        $obj = clone $this;
-        $obj['cat'] = $cat;
+        $self = clone $this;
+        $self['cat'] = $cat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +197,10 @@ final class RecentListParams implements BaseModel
      */
     public function withDist(int $dist): self
     {
-        $obj = clone $this;
-        $obj->dist = $dist;
+        $self = clone $this;
+        $self['dist'] = $dist;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +208,10 @@ final class RecentListParams implements BaseModel
      */
     public function withHotspot(bool $hotspot): self
     {
-        $obj = clone $this;
-        $obj->hotspot = $hotspot;
+        $self = clone $this;
+        $self['hotspot'] = $hotspot;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +219,10 @@ final class RecentListParams implements BaseModel
      */
     public function withIncludeProvisional(bool $includeProvisional): self
     {
-        $obj = clone $this;
-        $obj->includeProvisional = $includeProvisional;
+        $self = clone $this;
+        $self['includeProvisional'] = $includeProvisional;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +230,10 @@ final class RecentListParams implements BaseModel
      */
     public function withMaxResults(int $maxResults): self
     {
-        $obj = clone $this;
-        $obj->maxResults = $maxResults;
+        $self = clone $this;
+        $self['maxResults'] = $maxResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -242,10 +243,10 @@ final class RecentListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -253,9 +254,9 @@ final class RecentListParams implements BaseModel
      */
     public function withSppLocale(string $sppLocale): self
     {
-        $obj = clone $this;
-        $obj->sppLocale = $sppLocale;
+        $self = clone $this;
+        $self['sppLocale'] = $sppLocale;
 
-        return $obj;
+        return $self;
     }
 }

@@ -14,13 +14,16 @@ use Phoebe\Core\Conversion\MapOf;
  * @internal
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class Api
+class Required
 {
     /** @var class-string<ConverterSource>|Converter|string|null */
     public readonly Converter|string|null $type;
 
-    /** @var array<string,Converter> */
-    private static array $enumConverters = [];
+    public readonly ?string $apiName;
+
+    public bool $optional;
+
+    public readonly bool $nullable;
 
     /**
      * @param class-string<ConverterSource>|Converter|string|null $type
@@ -30,14 +33,13 @@ final class Api
      * @param class-string<ConverterSource>|Converter|string|null $map
      */
     public function __construct(
-        public readonly ?string $apiName = null,
+        ?string $apiName = null,
         Converter|string|null $type = null,
         Converter|string|null $enum = null,
         Converter|string|null $union = null,
         Converter|string|null $list = null,
         Converter|string|null $map = null,
-        public readonly bool $nullable = false,
-        public readonly bool $optional = false,
+        bool $nullable = false,
     ) {
         $type ??= $union;
         if (null !== $list) {
@@ -47,20 +49,12 @@ final class Api
             $type ??= new MapOf($map);
         }
         if (null !== $enum) {
-            $type ??= $enum instanceof Converter ? $enum : $this->getEnumConverter($enum);
+            $type ??= $enum instanceof Converter ? $enum : EnumOf::fromBackedEnum($enum);
         }
 
+        $this->apiName = $apiName;
         $this->type = $type;
-    }
-
-    /** @property class-string<\BackedEnum> $enum */
-    private function getEnumConverter(string $enum): Converter
-    {
-        if (!isset(self::$enumConverters[$enum])) {
-            $converter = new EnumOf(array_column($enum::cases(), 'value')); // @phpstan-ignore-line
-            self::$enumConverters[$enum] = $converter;
-        }
-
-        return self::$enumConverters[$enum];
+        $this->optional = false;
+        $this->nullable = $nullable;
     }
 }

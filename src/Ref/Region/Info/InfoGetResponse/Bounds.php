@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info\InfoGetResponse;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -18,16 +18,16 @@ final class Bounds implements BaseModel
     /** @use SdkModel<BoundsShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $maxX;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $maxY;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $minX;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $minY;
 
     public function __construct()
@@ -46,45 +46,45 @@ final class Bounds implements BaseModel
         ?float $minX = null,
         ?float $minY = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $maxX && $obj->maxX = $maxX;
-        null !== $maxY && $obj->maxY = $maxY;
-        null !== $minX && $obj->minX = $minX;
-        null !== $minY && $obj->minY = $minY;
+        null !== $maxX && $self['maxX'] = $maxX;
+        null !== $maxY && $self['maxY'] = $maxY;
+        null !== $minX && $self['minX'] = $minX;
+        null !== $minY && $self['minY'] = $minY;
 
-        return $obj;
+        return $self;
     }
 
     public function withMaxX(float $maxX): self
     {
-        $obj = clone $this;
-        $obj->maxX = $maxX;
+        $self = clone $this;
+        $self['maxX'] = $maxX;
 
-        return $obj;
+        return $self;
     }
 
     public function withMaxY(float $maxY): self
     {
-        $obj = clone $this;
-        $obj->maxY = $maxY;
+        $self = clone $this;
+        $self['maxY'] = $maxY;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinX(float $minX): self
     {
-        $obj = clone $this;
-        $obj->minX = $minX;
+        $self = clone $this;
+        $self['minX'] = $minX;
 
-        return $obj;
+        return $self;
     }
 
     public function withMinY(float $minY): self
     {
-        $obj = clone $this;
-        $obj->minY = $minY;
+        $self = clone $this;
+        $self['minY'] = $minY;
 
-        return $obj;
+        return $self;
     }
 }

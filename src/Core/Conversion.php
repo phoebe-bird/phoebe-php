@@ -7,9 +7,8 @@ namespace Phoebe\Core;
 use Phoebe\Core\Conversion\CoerceState;
 use Phoebe\Core\Conversion\Contracts\Converter;
 use Phoebe\Core\Conversion\Contracts\ConverterSource;
-use Phoebe\Core\Conversion\Contracts\ResponseConverter;
 use Phoebe\Core\Conversion\DumpState;
-use Psr\Http\Message\ResponseInterface;
+use Phoebe\Core\Conversion\EnumOf;
 
 /**
  * @internal
@@ -23,12 +22,20 @@ final class Conversion
         }
 
         if (is_object($value)) {
+            if ($value instanceof FileParam) {
+                return $value;
+            }
+
             if (is_a($value, class: ConverterSource::class)) {
                 return $value::converter()->dump($value, state: $state);
             }
 
+            if (is_a($value, class: \BackedEnum::class)) {
+                return $value->value;
+            }
+
             if (is_a($value, class: \DateTimeInterface::class)) {
-                return $value->format(format: \DateTimeInterface::RFC3339);
+                return date_format($value, format: \DateTimeInterface::RFC3339);
             }
 
             if (is_a($value, class: \JsonSerializable::class)) {
@@ -41,15 +48,6 @@ final class Conversion
         }
 
         return $value;
-    }
-
-    public static function coerceResponse(Converter|ConverterSource|string $target, ResponseInterface $response): mixed
-    {
-        if (is_a($target, ResponseConverter::class, allow_string: true)) {
-            return $target::fromResponse($response);
-        }
-
-        return self::coerce($target, Util::decodeContent($response));
     }
 
     public static function coerce(Converter|ConverterSource|string $target, mixed $value, CoerceState $state = new CoerceState): mixed
@@ -68,6 +66,40 @@ final class Conversion
             return $target->coerce($value, state: $state);
         }
 
+        // BackedEnum class-name targets: wrap in EnumOf so enum values are scored
+        // against the enum's cases. Without this, tryConvert's default case scores
+        // any class-name target as `no`, even when the value is a valid enum member.
+        if (is_a($target, class: \BackedEnum::class, allow_string: true)) {
+            return EnumOf::fromBackedEnum($target)->coerce($value, state: $state);
+        }
+
+        return self::tryConvert($target, value: $value, state: $state);
+    }
+
+    public static function dump(Converter|ConverterSource|string $target, mixed $value, DumpState $state = new DumpState): mixed
+    {
+        if ($target instanceof Converter) {
+            return $target->dump($value, state: $state);
+        }
+
+        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
+            return $target::converter()->dump($value, state: $state);
+        }
+
+        // BackedEnum class-name targets: wrap in EnumOf so enum values are scored
+        // against the enum's cases. Without this, tryConvert's default case scores
+        // any class-name target as `no`, even when the value is a valid enum member.
+        if (is_a($target, class: \BackedEnum::class, allow_string: true)) {
+            return EnumOf::fromBackedEnum($target)->dump($value, state: $state);
+        }
+
+        self::tryConvert($target, value: $value, state: $state);
+
+        return self::dump_unknown($value, state: $state);
+    }
+
+    private static function tryConvert(Converter|ConverterSource|string $target, mixed $value, CoerceState|DumpState $state): mixed
+    {
         switch ($target) {
             case 'mixed':
                 ++$state->yes;
@@ -157,23 +189,41 @@ final class Conversion
 
                 return $value;
 
+            case 'DateTimeInterface':
+            case 'DateTimeImmutable':
+                if (is_string($value)) {
+                    try {
+                        ++$state->maybe;
+
+                        return new \DateTimeImmutable($value);
+                    } catch (\Exception) {
+                        --$state->maybe;
+                    }
+                }
+
+                ++$state->no;
+
+                return $value;
+
+            case 'DateTime':
+                if (is_string($value)) {
+                    try {
+                        ++$state->maybe;
+
+                        return new \DateTime($value);
+                    } catch (\Exception) {
+                        --$state->maybe;
+                    }
+                }
+
+                ++$state->no;
+
+                return $value;
+
             default:
                 ++$state->no;
 
                 return $value;
         }
-    }
-
-    public static function dump(Converter|ConverterSource|string $target, mixed $value, DumpState $state = new DumpState): mixed
-    {
-        if ($target instanceof Converter) {
-            return $target->dump($value, state: $state);
-        }
-
-        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
-            return $target::converter()->dump($value, state: $state);
-        }
-
-        return self::dump_unknown($value, state: $state);
     }
 }

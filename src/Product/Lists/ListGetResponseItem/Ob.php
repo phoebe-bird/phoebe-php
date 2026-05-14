@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\ListGetResponseItem;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 use Phoebe\Product\Lists\ListGetResponseItem\Ob\ObsAux;
 
 /**
+ * @phpstan-import-type ObsAuxShape from \Phoebe\Product\Lists\ListGetResponseItem\Ob\ObsAux
+ *
  * @phpstan-type ObShape = array{
- *   obsAux?: list<ObsAux>|null,
+ *   obsAux?: list<ObsAux|ObsAuxShape>|null,
  *   obsDt?: string|null,
- *   obsId?: string|null,
+ *   obsID?: string|null,
  *   speciesCode?: string|null,
  * }
  */
@@ -23,16 +25,16 @@ final class Ob implements BaseModel
     use SdkModel;
 
     /** @var list<ObsAux>|null $obsAux */
-    #[Api(list: ObsAux::class, optional: true)]
+    #[Optional(list: ObsAux::class)]
     public ?array $obsAux;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $obsDt;
 
-    #[Api(optional: true)]
-    public ?string $obsId;
+    #[Optional('obsId')]
+    public ?string $obsID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
     public function __construct()
@@ -45,56 +47,56 @@ final class Ob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ObsAux> $obsAux
+     * @param list<ObsAux|ObsAuxShape>|null $obsAux
      */
     public static function with(
         ?array $obsAux = null,
         ?string $obsDt = null,
-        ?string $obsId = null,
+        ?string $obsID = null,
         ?string $speciesCode = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $obsAux && $obj->obsAux = $obsAux;
-        null !== $obsDt && $obj->obsDt = $obsDt;
-        null !== $obsId && $obj->obsId = $obsId;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
+        null !== $obsAux && $self['obsAux'] = $obsAux;
+        null !== $obsDt && $self['obsDt'] = $obsDt;
+        null !== $obsID && $self['obsID'] = $obsID;
+        null !== $speciesCode && $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<ObsAux> $obsAux
+     * @param list<ObsAux|ObsAuxShape> $obsAux
      */
     public function withObsAux(array $obsAux): self
     {
-        $obj = clone $this;
-        $obj->obsAux = $obsAux;
+        $self = clone $this;
+        $self['obsAux'] = $obsAux;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsDt(string $obsDt): self
     {
-        $obj = clone $this;
-        $obj->obsDt = $obsDt;
+        $self = clone $this;
+        $self['obsDt'] = $obsDt;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsID(string $obsID): self
     {
-        $obj = clone $this;
-        $obj->obsId = $obsID;
+        $self = clone $this;
+        $self['obsID'] = $obsID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSpeciesCode(string $speciesCode): self
     {
-        $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $self = clone $this;
+        $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 }

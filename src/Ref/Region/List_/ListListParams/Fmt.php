@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phoebe\Ref\Region\List\ListListParams;
+namespace Phoebe\Ref\Region\List_\ListListParams;
 
 /**
  * Fetch the records in CSV or JSON format.

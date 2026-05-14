@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace Phoebe\Core\Contracts;
 
-use Phoebe\Client;
-use Phoebe\Core\Conversion\Contracts\Converter;
-use Phoebe\Core\Conversion\Contracts\ConverterSource;
-use Phoebe\RequestOptions;
-use Psr\Http\Message\ResponseInterface;
-
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \Phoebe\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \Phoebe\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
@@ -21,19 +15,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 interface BasePage extends \IteratorAggregate
 {
-    /**
-     * @internal
-     *
-     * @param normalized_request $request
-     */
-    public function __construct(
-        Converter|ConverterSource|string $convert,
-        Client $client,
-        array $request,
-        RequestOptions $options,
-        ResponseInterface $response,
-    );
-
     public function hasNextPage(): bool;
 
     /**

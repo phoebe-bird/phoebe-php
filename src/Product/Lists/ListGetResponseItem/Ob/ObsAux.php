@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Product\Lists\ListGetResponseItem\Ob;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Contracts\BaseModel;
 
@@ -13,9 +13,9 @@ use Phoebe\Core\Contracts\BaseModel;
  *   auxCode?: string|null,
  *   entryMethodCode?: string|null,
  *   fieldName?: string|null,
- *   obsId?: string|null,
+ *   obsID?: string|null,
  *   speciesCode?: string|null,
- *   subId?: string|null,
+ *   subID?: string|null,
  *   value?: string|null,
  * }
  */
@@ -24,25 +24,25 @@ final class ObsAux implements BaseModel
     /** @use SdkModel<ObsAuxShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $auxCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $entryMethodCode;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fieldName;
 
-    #[Api(optional: true)]
-    public ?string $obsId;
+    #[Optional('obsId')]
+    public ?string $obsID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $speciesCode;
 
-    #[Api(optional: true)]
-    public ?string $subId;
+    #[Optional('subId')]
+    public ?string $subID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()
@@ -59,77 +59,77 @@ final class ObsAux implements BaseModel
         ?string $auxCode = null,
         ?string $entryMethodCode = null,
         ?string $fieldName = null,
-        ?string $obsId = null,
+        ?string $obsID = null,
         ?string $speciesCode = null,
-        ?string $subId = null,
+        ?string $subID = null,
         ?string $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $auxCode && $obj->auxCode = $auxCode;
-        null !== $entryMethodCode && $obj->entryMethodCode = $entryMethodCode;
-        null !== $fieldName && $obj->fieldName = $fieldName;
-        null !== $obsId && $obj->obsId = $obsId;
-        null !== $speciesCode && $obj->speciesCode = $speciesCode;
-        null !== $subId && $obj->subId = $subId;
-        null !== $value && $obj->value = $value;
+        null !== $auxCode && $self['auxCode'] = $auxCode;
+        null !== $entryMethodCode && $self['entryMethodCode'] = $entryMethodCode;
+        null !== $fieldName && $self['fieldName'] = $fieldName;
+        null !== $obsID && $self['obsID'] = $obsID;
+        null !== $speciesCode && $self['speciesCode'] = $speciesCode;
+        null !== $subID && $self['subID'] = $subID;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withAuxCode(string $auxCode): self
     {
-        $obj = clone $this;
-        $obj->auxCode = $auxCode;
+        $self = clone $this;
+        $self['auxCode'] = $auxCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withEntryMethodCode(string $entryMethodCode): self
     {
-        $obj = clone $this;
-        $obj->entryMethodCode = $entryMethodCode;
+        $self = clone $this;
+        $self['entryMethodCode'] = $entryMethodCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldName(string $fieldName): self
     {
-        $obj = clone $this;
-        $obj->fieldName = $fieldName;
+        $self = clone $this;
+        $self['fieldName'] = $fieldName;
 
-        return $obj;
+        return $self;
     }
 
     public function withObsID(string $obsID): self
     {
-        $obj = clone $this;
-        $obj->obsId = $obsID;
+        $self = clone $this;
+        $self['obsID'] = $obsID;
 
-        return $obj;
+        return $self;
     }
 
     public function withSpeciesCode(string $speciesCode): self
     {
-        $obj = clone $this;
-        $obj->speciesCode = $speciesCode;
+        $self = clone $this;
+        $self['speciesCode'] = $speciesCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSubID(string $subID): self
     {
-        $obj = clone $this;
-        $obj->subId = $subID;
+        $self = clone $this;
+        $self['subID'] = $subID;
 
-        return $obj;
+        return $self;
     }
 
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

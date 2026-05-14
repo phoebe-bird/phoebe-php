@@ -3,6 +3,8 @@
 namespace Tests\Services\Ref\Hotspot;
 
 use Phoebe\Client;
+use Phoebe\Core\Util;
+use Phoebe\Ref\Hotspot\Info\InfoGetResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +21,7 @@ final class InfoTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
@@ -30,6 +32,7 @@ final class InfoTest extends TestCase
     {
         $result = $this->client->ref->hotspot->info->retrieve('locId');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InfoGetResponse::class, $result);
     }
 }

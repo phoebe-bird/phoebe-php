@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phoebe\Ref\Region\Info;
 
-use Phoebe\Core\Attributes\Api;
+use Phoebe\Core\Attributes\Optional;
 use Phoebe\Core\Concerns\SdkModel;
 use Phoebe\Core\Concerns\SdkParams;
 use Phoebe\Core\Contracts\BaseModel;
@@ -29,7 +29,8 @@ use Phoebe\Ref\Region\Info\InfoRetrieveParams\RegionNameFormat;
  * @see Phoebe\Services\Ref\Region\InfoService::retrieve()
  *
  * @phpstan-type InfoRetrieveParamsShape = array{
- *   delim?: string, regionNameFormat?: RegionNameFormat|value-of<RegionNameFormat>
+ *   delim?: string|null,
+ *   regionNameFormat?: null|RegionNameFormat|value-of<RegionNameFormat>,
  * }
  */
 final class InfoRetrieveParams implements BaseModel
@@ -41,7 +42,7 @@ final class InfoRetrieveParams implements BaseModel
     /**
      * The characters used to separate elements in the name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delim;
 
     /**
@@ -49,7 +50,7 @@ final class InfoRetrieveParams implements BaseModel
      *
      * @var value-of<RegionNameFormat>|null $regionNameFormat
      */
-    #[Api(enum: RegionNameFormat::class, optional: true)]
+    #[Optional(enum: RegionNameFormat::class)]
     public ?string $regionNameFormat;
 
     public function __construct()
@@ -62,18 +63,18 @@ final class InfoRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RegionNameFormat|value-of<RegionNameFormat> $regionNameFormat
+     * @param RegionNameFormat|value-of<RegionNameFormat>|null $regionNameFormat
      */
     public static function with(
         ?string $delim = null,
         RegionNameFormat|string|null $regionNameFormat = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $delim && $obj->delim = $delim;
-        null !== $regionNameFormat && $obj['regionNameFormat'] = $regionNameFormat;
+        null !== $delim && $self['delim'] = $delim;
+        null !== $regionNameFormat && $self['regionNameFormat'] = $regionNameFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +82,10 @@ final class InfoRetrieveParams implements BaseModel
      */
     public function withDelim(string $delim): self
     {
-        $obj = clone $this;
-        $obj->delim = $delim;
+        $self = clone $this;
+        $self['delim'] = $delim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +96,9 @@ final class InfoRetrieveParams implements BaseModel
     public function withRegionNameFormat(
         RegionNameFormat|string $regionNameFormat
     ): self {
-        $obj = clone $this;
-        $obj['regionNameFormat'] = $regionNameFormat;
+        $self = clone $this;
+        $self['regionNameFormat'] = $regionNameFormat;
 
-        return $obj;
+        return $self;
     }
 }
